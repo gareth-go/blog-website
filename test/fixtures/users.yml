@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id       :bigint           not null, primary key
+#  username :string
+#  password :string
+#  email    :string
+#  role     :integer
+#  status   :integer
+#
+
+one:
+  username: MyString
+  password: MyString
+  email: MyString
+  role: 1
+  status: 1
+
+two:
+  username: MyString
+  password: MyString
+  email: MyString
+  role: 1
+  status: 1

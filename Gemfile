@@ -5,7 +5,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.8'
 
-gem 'annotate', group: 'development'
+group :development do
+  gem 'annotate'
+end
+
 gem 'pundit', '~> 2.3', '>= 2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.4'

@@ -1,0 +1,13 @@
+# == Schema Information
+#
+# Table name: tags
+#
+#  id   :bigint           not null, primary key
+#  name :string
+#
+
+one:
+  name: MyString
+
+two:
+  name: MyString
