@@ -1,0 +1,27 @@
+= render "shared/navbar"
+
+.d-flex.justify-content-center.mt-4
+  .d-flex.flex-column.justify-content-center.bg-white.p-5.shadow-sm.rounded-2[style="width: 35%"]
+    div
+      h2.fw-bold.text-center.p-3
+        | Welcome to LNNV Community
+    div
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .field
+          = f.label :email
+          br
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100 p-1 form-control my-2"
+        .field
+          = f.label :password
+          br
+          = f.password_field :password, autocomplete: "current-password", class: "w-100 p-1 form-control my-2"
+        - if flash[:alert]
+          small.text-danger = flash[:alert]
+        - if devise_mapping.rememberable?
+          .field.mt-2.mb-2
+            = f.check_box :remember_me, class: "form-check-input"
+            = f.label :remember_me
+        .actions
+          = f.submit "Log in", class: "btn btn-primary w-100 mb-2"
+    .text-center
+      = render "devise/shared/links"
