@@ -4,7 +4,7 @@
   .alert.alert-success.alert-dismissible.fade.show role="alert" style="position: absolute; left: 0; bottom: 0; width: fit-content"
     button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
     = flash[:notice] 
-  javascript: 
+  javascript:
     $(document).ready(function() {
       setTimeout(function() {
         $('.alert').alert('close');
