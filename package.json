@@ -2,6 +2,7 @@
   "name": "blog-website",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-methods": "^7.15.4",
     "@hotwired/stimulus": "^3.2.2",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
@@ -9,13 +10,16 @@
     "@rails/webpacker": "5.4.4",
     "bootstrap": "^5.3.1",
     "jquery": "^3.7.0",
+    "jquery-ujs": "^1.2.3",
     "popper.js": "^1.16.1",
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "@popperjs/core": "^2.11.0"
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "webpack-dev-server": "^3"
   }
 }

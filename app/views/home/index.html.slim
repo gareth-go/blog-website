@@ -1,0 +1,16 @@
+= render "shared/navbar"
+
+- if flash[:notice]
+  .alert.alert-success.alert-dismissible.fade.show role="alert" style="position: absolute; left: 0; bottom: 0; width: fit-content"
+    button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+    = flash[:notice] 
+  javascript:
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('.alert').alert('close');
+      }, 2000)
+    })
+    
+
+h1 
+  | Coming soon
