@@ -17,5 +17,5 @@ class Post < ApplicationRecord
   has_many :reactions
   has_many :comments, as: :commentable
 
-  enum status: %i[pending accepted deleted], _default: 'pending'
+  enum status: { pending: 0, accepted: 1, rejected: 2, deleted: 3 }, _default: 'pending'
 end

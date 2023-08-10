@@ -22,8 +22,8 @@ class User < ApplicationRecord
   has_many :comments
   has_many :notifications
 
-  enum role: %i[normal_user admin], _default: 'normal_user'
-  enum status: %i[baned active], _default: 'active'
+  enum role: { normal_user: 0, admin: 1 }, _default: 'normal_user'
+  enum status: { baned: 0, active: 1 }, _default: 'active'
 
   validates :username, presence: { message: 'Please enter username!' }, uniqueness: { message: 'User name have been used!' }
 end

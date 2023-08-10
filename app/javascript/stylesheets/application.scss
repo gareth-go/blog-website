@@ -1,0 +1,9 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/dist/css/bootstrap";
+
+$body-bg: whitesmoke;
+
+body {
+  font-family: Sans-Serif;
+  background: $body-bg;
+}
