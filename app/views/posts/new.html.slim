@@ -14,7 +14,7 @@
         = f.file_field :cover_image, class: "d-none"
         div.btn.text-danger.mx-2 id="cover-img-review" Remove
         br
-        = image_tag "", alt: "", style: "width: 400px; height: 200px; padding-top: 10px; object-fit: fill" 
+        = image_tag "", size: "400x200", alt: "", class: "pt-1 object-fit-fill"
 
       .row.form__content__top__title 
         = f.text_area :title, class: "fs-1 fw-bold", style: "border: none; resize: none; outline: none", placeholder: "New post title here..."

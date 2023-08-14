@@ -17,9 +17,9 @@ ActiveStorage.start()
 
 import "bootstrap"
 import "../stylesheets/application.scss"
-import "../stylesheets/create-post.scss"
+import "../stylesheets/create_post.scss"
 import "select2" 
-import "./create-post"
+import "./create_post"
 require("trix")
 require("@rails/actiontext")
 
