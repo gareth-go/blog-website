@@ -2,7 +2,8 @@
 
 .d-flex.justify-content-center.my-3
   .w-50.shadow-sm.bg-white.rounded-bottom
-    = image_tag @post.cover_image, class: "w-100 rounded-top shadow-sm"
+    - if @post.cover_image.attached?
+      = image_tag @post.cover_image, class: "w-100 rounded-top shadow-sm"
     .py-3.px-5
       h4.fw-bold
         = @post.user.username

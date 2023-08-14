@@ -5,26 +5,26 @@ $(document).on('turbolinks:load', function() {
     minimumResultsForSearch: 1,
     maximumSelectionLength: 4
   })
-  document.getElementsByClassName("d-none")[0].addEventListener('change', previewFile)
-  document.getElementById("cover-img-review").addEventListener('click', removeFile)
+  $('.form__content__top__cover_image_input').on('change', previewFile)
+  $('#cover-img-review-wrapper').on('click', removeFile)
 });
 
 function previewFile() {
-  var preview = document.querySelector('img');
-  var file    = document.querySelector('input[type=file]').files[0];
+  var preview = $('#cover-img-review')
+  var file    = $('.form__content__top__cover_image_input')[0].files[0]
   var reader  = new FileReader();
 
   reader.onloadend = function () {
-    preview.src = reader.result;
+    preview.attr('src', reader.result)
   }
 
   if (file) {
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file)
   } else {
-    preview.src = '';
+    preview.attr('src', '')
   }
 }
 function removeFile() {
-  document.querySelector('input[type=file]').value=null;
-  document.querySelector('img').src = ''
+  $('.form__content__top__cover_image_input').val(null)
+  $('#cover-img-review').attr('src', '')
 }
