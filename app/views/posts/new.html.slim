@@ -1,0 +1,30 @@
+= form_with model: @post, class: "w-50 mx-auto" do |f|
+  .row.form__header 
+    nav.navbar.navbar-expand-lg.navbar-light.py-2.px-4
+      = link_to "LNNV", home_index_path, class: "navbar-brand fw-bold"
+      
+      .collapse.navbar-collapse.justify-content-end
+        .btn Edit 
+        .btn View
+
+  .row.bg-white.p-4.rounded.shadow-sm.gap-4.form__content
+    .row.form__content__top
+      .mb-2.form__content__top__cover-image
+        = f.label :cover_image, class: "btn btn-outline-secondary"
+        = f.file_field :cover_image, class: "d-none"
+        div.btn.text-danger.mx-2 id="cover-img-review" Remove
+        br
+        = image_tag "", alt: "", style: "width: 400px; height: 200px; padding-top: 10px; object-fit: fill" 
+
+      .row.form__content__top__title 
+        = f.text_area :title, class: "fs-1 fw-bold", style: "border: none; resize: none; outline: none", placeholder: "New post title here..."
+
+      .row.form__content__top__tags
+        = f.select :tags, options_from_collection_for_select(Tag.all, :id, :name), {}, class: "form-control form__content__top__tags__selector", multiple: true 
+
+    .row.form__content__body
+      = f.rich_text_area :content, class: "fs-5", style: "border:none; outline: none", placeholder: "Write your post content here..."
+
+  .mt-4.form__footer
+    = f.submit "Publish", class: "btn btn-primary mx-2 px-3"
+    = link_to "Cancel", :back, class: "btn btn-danger px-3"
