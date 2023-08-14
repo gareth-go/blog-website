@@ -8,10 +8,18 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import "bootstrap"
-import "../stylesheets/application.scss"
-import "jquery"
+
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+
+import "bootstrap"
+import "../stylesheets/application.scss"
+import "../stylesheets/create_post.scss"
+import "select2" 
+import "./create_post"
+require("trix")
+require("@rails/actiontext")
+

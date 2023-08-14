@@ -1,0 +1,25 @@
+= render "shared/navbar"
+
+.d-flex.justify-content-center.my-3
+  .w-50.shadow-sm.bg-white.rounded-bottom
+    - if @post.cover_image.attached?
+      = image_tag @post.cover_image, class: "w-100 rounded-top shadow-sm"
+    .py-3.px-5
+      h4.fw-bold
+        = @post.user.username
+    .px-5
+      h1.fw-bold 
+        = @post.title
+    .px-5
+      - @post.tags.each do |tag|
+        span.pe-3.text-secondary style="cursor: pointer;"
+          = tag.name
+    .py-3.px-5
+        = @post.content
+
+
+
+
+
+
+

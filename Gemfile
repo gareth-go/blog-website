@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 5.1.3'
 gem 'bullet', group: 'development'
+gem 'image_processing', '~> 1.0'
 gem 'slim'
 gem 'stimulus-rails'
 
