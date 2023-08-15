@@ -1,8 +1,6 @@
 $(document).on('turbolinks:load', function() {
   $('.form__content__top__tags__selector').select2({
-    allowClear: true,
     placeholder: 'Select a least ont tag...',
-    minimumResultsForSearch: 1,
     maximumSelectionLength: 4
   })
   $('.form__content__top__cover_image_input').on('change', previewFile)

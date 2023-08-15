@@ -1,8 +1,11 @@
 nav.navbar.navbar-expand-lg.navbar-light.shadow-sm.bg-white.py-2.px-4
-  = link_to "LNNV", home_index_path, class: "navbar-brand fw-bold"
+  = link_to "LNNV", home_index_path, class: "navbar-brand fw-bold text-white bg-dark px-2 rounded"
   .collapse.navbar-collapse.justify-content-end
     - if current_user 
-      = link_to "Create Post", new_post_path, class: "btn btn-outline-primary mx-3"
+      small.me-3 
+        = current_user.username
+      = link_to "Create Post", new_post_path, class: "btn btn-outline-primary me-3"
+      = link_to "Posts", posts_path, class: "btn btn-outline-primary me-3"
       = link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-primary"
     - else
       = link_to "Log in", new_user_session_path, class: "btn btn-outline-primary mx-3"

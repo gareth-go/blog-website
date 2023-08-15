@@ -20,6 +20,7 @@ import "../stylesheets/application.scss"
 import "../stylesheets/create_post.scss"
 import "select2" 
 import "./create_post"
+import "./edit_post"
 require("trix")
 require("@rails/actiontext")
 

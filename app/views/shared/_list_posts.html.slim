@@ -1,0 +1,17 @@
+- posts.each do |post|
+  .p-2.mb-2.bg-white.border.rounded.shadow-sm
+    - if post.pending?
+      .px-4.text-warning
+        | Pending 
+    - if post.rejected?
+      .px-4.text-danger
+        | Rejected
+    .py-2.px-4
+      .fs-6.text-secondary
+        = render partial: "shared/post_username_link", locals: {post: post}
+      small.text-secondary
+        = post.created_at.to_date.to_s(:long)
+    .py-2.px-4
+      = link_to post.title, post, class: "fs-2 text-black fw-bold text-decoration-none"
+    .pb-2.px-4
+      = render partial: "shared/post_tags_link", locals: {post: post}
