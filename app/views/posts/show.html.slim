@@ -16,9 +16,9 @@
     .py-3.px-5
       span.fs-4.fw-bold
         = render partial: "shared/post_username_link", locals: {post: @post}
-      -if @post.user == current_user || current_user.admin?
+      - if @post.user == current_user || current_user.admin?
         = link_to "Delete", @post, method: :delete, class: "btn btn-outline-secondary float-end"
-      -if @post.user == current_user
+      - if @post.user == current_user
         = link_to "Edit", edit_post_path(@post), class: "btn btn-outline-secondary float-end mx-2"
       
       br
