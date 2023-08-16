@@ -1,21 +1,46 @@
 = render "shared/navbar"
 
-.d-flex.justify-content-center.my-3
-  .w-50.shadow-sm.bg-white.rounded-bottom
+.w-50.mx-auto.my-3
+  - if @post.pending? && (@post.user == current_user || current_user.admin?)
+    .bg-warning.text-white.p-2.mb-2.rounded
+      | Pending...
+
+  - if @post.rejected?
+    .bg-danger.text-white.p-2.mb-2.rounded
+      | This post was rejected!
+
+  .shadow-sm.bg-white.border.rounded
     - if @post.cover_image.attached?
       = image_tag @post.cover_image, class: "w-100 rounded-top shadow-sm"
+
     .py-3.px-5
-      h4.fw-bold
-        = @post.user.username
+      span.fs-4.fw-bold
+        = render partial: "shared/post_username_link", locals: {post: @post}
+      - if @post.user == current_user || current_user.admin?
+        = link_to "Delete", @post, method: :delete, class: "btn btn-outline-secondary float-end"
+      - if @post.user == current_user
+        = link_to "Edit", edit_post_path(@post), class: "btn btn-outline-secondary float-end mx-2"
+      
+      br
+      small.text-secondary
+        | Post on 
+        = @post.created_at.to_date.to_s(:long)
+
     .px-5
       h1.fw-bold 
         = @post.title
+
     .px-5
-      - @post.tags.each do |tag|
-        span.pe-3.text-secondary style="cursor: pointer;"
-          = tag.name
+      = render partial: "shared/post_tags_link", locals: {post: @post}
+
     .py-3.px-5
-        = @post.content
+      = @post.content
+      
+  - if @post.pending? && current_user.admin?
+    .mt-4
+      = link_to "Accept", accept_post_path(@post), method: :put, class: "btn btn-primary mx-2 px-3"
+      = link_to "Reject", reject_post_path(@post), method: :put, class: "btn btn-danger px-3"
+    
 
 
 
