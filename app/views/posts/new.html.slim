@@ -8,7 +8,7 @@
     .row.form__content__top
       .mb-2.form__content__top__cover-image
         = f.label :cover_image, class: "btn btn-outline-secondary"
-        = f.file_field :cover_image, class: "d-none form__content__top__cover_image_input"
+        = f.file_field :cover_image, class: "d-none form__content__top__cover__image__input"
         div.btn.text-danger.mx-2 id="cover-img-review-wrapper" Remove
         br
         = image_tag "", size: "400x200", alt: "", class: "pt-1 object-fit-fill", id: "cover-img-review"

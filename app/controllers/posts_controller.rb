@@ -50,7 +50,7 @@ class PostsController < ApplicationController
     if @post.update(values)
       redirect_to @post
     else
-      render 'new'
+      render 'edit'
     end
   end
 

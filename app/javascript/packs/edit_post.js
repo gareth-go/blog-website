@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
   $('#cover-img-review-wrapper').on('click', function() {
-    $('#post_remove_cover_image').prop('checked', true)
+    $('.form__content__top__cover__image__checkbox').prop('checked', true)
   })
 })
