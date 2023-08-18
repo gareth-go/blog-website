@@ -6,8 +6,7 @@
     - if post.rejected?
       .px-4.pt-2.text-danger
         | Rejected
-    - if page.present? && page == 1 && post == posts.first && post.cover_image.attached?
-      = image_tag post.cover_image, class: "w-100 rounded-top shadow-sm"
+    = cover_image_if_first_post(page, post, posts.first)
     .py-2.px-4
       .fs-6.text-secondary
         = render partial: "shared/post_username_link", locals: {post: post}

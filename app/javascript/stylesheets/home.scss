@@ -7,16 +7,15 @@ $link-hover-bg: #e2e3f3;
   ul {
     list-style-type: none;
   }
-}
-
-.home-page__sidebar {
-  a {
-    color: $link-color;
-  }
-
-  a:hover {
-    color: $link-hover-color;
-    background: $link-hover-bg;
-    text-decoration: underline;
+  &__sidebar {
+    a {
+      color: $link-color;
+    }
+  
+    a:hover {
+      color: $link-hover-color;
+      background: $link-hover-bg;
+      text-decoration: underline;
+    }
   }
 }
