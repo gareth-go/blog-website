@@ -30,7 +30,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 5.1.3'
 gem 'bullet', group: 'development'
+gem 'font-awesome-sass', '~> 6.4.2'
 gem 'image_processing', '~> 1.0'
+gem 'pagy', '~> 6.0' # omit patch digit
 gem 'slim'
 gem 'stimulus-rails'
 
@@ -43,6 +45,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'faker'
 end
 
 group :development do

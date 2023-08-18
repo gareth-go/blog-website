@@ -4,8 +4,25 @@
 @import "~trix/dist/trix";
 
 $body-bg: whitesmoke;
+$secondary-alter-hover-bg: #3B49DF;
+$link-hover-color: #2F3AB2;
+$link-hover-bg: #e2e3f3;
 
 body {
   font-family: Sans-Serif;
   background: $body-bg;
 }
+
+.btn-secondary-alter {
+  color: $secondary;
+}
+
+.btn-secondary-alter:hover {
+  color: $secondary-alter-hover-bg;
+  background: white;
+}
+
+.active {
+  font-weight: bold;
+}
+

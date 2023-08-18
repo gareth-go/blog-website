@@ -14,13 +14,18 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-
+// require.context('@../images', true);
+// import "../images/home-icon"
 import "bootstrap"
 import "../stylesheets/application.scss"
 import "../stylesheets/create_post.scss"
+import "../stylesheets/home.scss"
+import "@fortawesome/fontawesome-free/js/all";
+import "@fortawesome/fontawesome-free/css/all";
 import "select2" 
 import "./create_post"
 import "./edit_post"
+import "./home"
 require("trix")
 require("@rails/actiontext")
 

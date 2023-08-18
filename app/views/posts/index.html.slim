@@ -2,21 +2,21 @@
 
 .w-50.mx-auto.my-3
   nav.navbar.navbar-expand-lg.navbar-light.py-2.px-4
-    = link_to "All", posts_path, class: "text-decoration-none btn btn-outline-secondary border-0 me-1"
+    = link_to "All", posts_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
 
-    = link_to_unless_current "Accepted", posts_path(status: :accepted), class: "text-decoration-none btn btn-outline-secondary border-0 me-1" do 
-      = link_to "Accepted", posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary border-0 me-1"
+    = link_to_unless_current "Accepted", posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
+      = link_to "Accepted", posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
 
-    = link_to_unless_current "Pending", posts_path(status: :pending), class: "text-decoration-none btn btn-outline-secondary border-0 me-1" do 
-      = link_to "Pending", posts_path(status: :pending), class: "text-decoration-none btn btn-secondary border-0 me-1"
+    = link_to_unless_current "Pending", posts_path(status: :pending), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
+      = link_to "Pending", posts_path(status: :pending), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
       
-    = link_to_unless_current "Rejected", posts_path(status: :rejected), class: "text-decoration-none btn btn-outline-secondary border-0 me-1" do 
-      = link_to "Rejected", posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary border-0 me-1"
+    = link_to_unless_current "Rejected", posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
+      = link_to "Rejected", posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
 
   - if @posts.empty? && !params.key?(:status)
     .p-4.mb-2.bg-white.rounded.shadow-sm
       h2
         | You haven't created a post yet. Try to create one.
 
-  = render partial: "shared/list_posts", locals: {posts: @posts}
+  = render partial: "shared/list_posts", locals: {posts: @posts, page: nil}
     
