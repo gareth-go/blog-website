@@ -1,4 +1,4 @@
-- posts.each do |post|
+- posts.each_with_index do |post, index |
   .mb-2.bg-white.border.rounded.shadow-sm
     - if post.pending?
       .px-4.pt-2.text-warning
@@ -6,7 +6,7 @@
     - if post.rejected?
       .px-4.pt-2.text-danger
         | Rejected
-    = cover_image_if_first_post(page, post, posts.first)
+    = cover_image_if_first_post(page, post, index == 0)
     .py-2.px-4
       .fs-6.text-secondary
         = render partial: "shared/post_username_link", locals: {post: post}

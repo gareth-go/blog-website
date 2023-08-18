@@ -4,12 +4,6 @@
   .alert.alert-success.alert-dismissible.fade.show.position-absolute.start-0.bottom-0.d-inline-block role="alert"
     button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
     = flash[:notice] 
-  javascript:
-    $(document).ready(function() {
-      setTimeout(function() {
-        $('.alert').alert('close');
-      }, 2000)
-    })
 
 .container
   .row.home-page.w-75.mx-auto.justify-content-center.mt-3
