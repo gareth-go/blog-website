@@ -12,5 +12,5 @@ class Reaction < ApplicationRecord
   belongs_to :user
   belongs_to :post
 
-  enum reaction_type: %i[like love laugh wow sad angry]
+  enum reaction_type: { like: 0, unicorn: 1, exploding_head: 2, raised_hand: 3, fire: 4 }
 end

@@ -6,6 +6,8 @@ class PostsController < ApplicationController
   before_action :require_owner, only: %i[edit create]
   before_action :require_owner_or_admin, only: %i[destroy]
 
+  before_action :authenticate_user!, except: %i[show]
+
   def index
     @posts = if current_user.admin?
                Post.all.order(created_at: :desc).includes(%i[user tags])
@@ -17,7 +19,10 @@ class PostsController < ApplicationController
                                                                      Post.statuses.include?(params[:status])
   end
 
-  def show; end
+  def show
+    @reaction = Reaction.find_by(user: current_user, post_id: params[:id])
+    @reactions = Reaction.where(post: @post)
+  end
 
   def new
     @post = Post.new

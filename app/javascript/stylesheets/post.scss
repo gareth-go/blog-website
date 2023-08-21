@@ -1,0 +1,15 @@
+$reaction-bg: #f5f5f5;
+$reaction-active-border: #d4d4d4;
+
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
+  border: none;
+}
+
+.reaction-active {
+  background: $reaction-bg;
+  border: 1px solid $reaction-active-border;
+}
+
+.post__option__reation__menu__item:hover {
+  background: $reaction-bg;
+}
