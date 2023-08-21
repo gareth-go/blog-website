@@ -1,0 +1,19 @@
+- if reaction && reaction.reaction_type == type
+  li class="text-center d-flex flex-column post__option__reation__menu__item rounded-4 reaction-active"
+    = link_to post_reaction_path(post, reaction), method: :delete, class: "post__option__reation__menu__item__link text-decoration-none text-reset p-2" do
+      = image_pack_tag icon_src, size: "32x32", ariaHidden: "true"
+      span
+        = count
+- else 
+  li class="text-center d-flex flex-column post__option__reation__menu__item rounded-4"
+    - if reaction
+      = link_to post_reaction_path(post, reaction, reaction_type: type), method: :put, class: "post__option__reation__menu__item__link text-decoration-none text-reset p-2" do 
+        = image_pack_tag icon_src, size: "32x32", ariaHidden: "true"
+        span
+          = count
+    - else 
+      = link_to post_reactions_path(post, reaction_type: type), method: :post, class: "post__option__reation__menu__item__link text-decoration-none text-reset p-2" do 
+        = image_pack_tag icon_src, size: "32x32", ariaHidden: "true"
+        span
+          = count
+    

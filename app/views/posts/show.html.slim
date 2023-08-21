@@ -3,9 +3,9 @@
 .container
   .post.row.mx-auto.justify-content-center.my-3.gx-1
     .post__option.col-1.text-center.d-flex.flex-column.align-items-center.gap-4.gy-5 id="post__option"
-      = render partial: "post_reactions", locals: { reactions: @reactions, reaction: @reaction }
+      = render partial: "reactions/post_reactions", locals: { post: @post, reactions: @reactions, reaction: @reaction }
       div
-        = image_tag "jump-to-cmt.svg", class: "mx-auto mb-2"
+        = image_pack_tag "media/images/jump-to-cmt.svg", class: "mx-auto mb-2"
         br
         span
           | 0

@@ -30,4 +30,5 @@ import "./post"
 import "./home"
 require("trix")
 require("@rails/actiontext")
+const images = require.context('../images', true)
 

@@ -10,11 +10,11 @@
     ul.col-2.home-page__sidebar
       li.home-page__sidebar__home
         = link_to root_path, class: "btn border-0 w-100 text-start mb-1" do
-          = image_tag "home-icon.svg", class: "pe-2" 
+          = image_pack_tag "media/images/home-icon.svg", class: "pe-2" 
           | Home
       li.home-page__sidebar__tag
         = link_to root_path, class: "btn border-0 w-100 text-start mb-1" do
-          = image_tag "tags-icon.svg", class: "pe-2"
+          = image_pack_tag "media/images/tags-icon.svg", class: "pe-2"
           | Tags
         ul 
           - @tags.each do |tag|
@@ -28,7 +28,7 @@
               | more
         li.home-page__sidebar__tag
           = link_to root_path, class: "btn border-0 w-100 text-start mb-1" do
-            = image_tag "contact-icon.svg", class: "pe-2"
+            = image_pack_tag "media/images/contact-icon.svg", class: "pe-2"
             | Contact
     .col-6.home-page__main id="#home-page__main"
       nav.navbar.navbar-expand-lg.navbar-light.py-1

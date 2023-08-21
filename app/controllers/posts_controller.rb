@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_new_post, only: %i[create]
-  before_action :set_post, only: %i[show edit update accept reject destroy add_reaction]
-  before_action :set_reaction, only: %i[change_reaction remove_reaction show]
+  before_action :set_post, only: %i[show edit update accept reject destroy]
 
   before_action :require_admin, only: %i[accept reject]
   before_action :require_owner, only: %i[edit create]
@@ -21,6 +20,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @reaction = Reaction.find_by(user: current_user, post_id: params[:id])
     @reactions = Reaction.where(post: @post)
   end
 
@@ -72,33 +72,6 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
-  def add_reaction
-    if Reaction.reaction_types.include?(params[:reaction_type]) &&
-       @post.reactions.create(user: current_user, reaction_type: params[:reaction_type])
-      @reactions = Reaction.where(post: @post)
-      @reaction = set_reaction
-    else
-      render 'show'
-    end
-  end
-
-  def change_reaction
-    if Reaction.reaction_types.include?(params[:reaction_type]) &&
-       @reaction.update(reaction_type: params[:reaction_type])
-      @reactions = Reaction.where(post_id: params[:id])
-      @reaction = set_reaction
-    else
-      render 'show'
-    end
-  end
-
-  def remove_reaction
-    @reaction.delete
-    @reaction = set_reaction
-
-    @reactions = Reaction.where(post_id: params[:id])
-  end
-
   private
 
   def set_new_post
@@ -109,10 +82,6 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
-  end
-
-  def set_reaction
-    @reaction = Reaction.find_by(user: current_user, post_id: params[:id])
   end
 
   def post_params
