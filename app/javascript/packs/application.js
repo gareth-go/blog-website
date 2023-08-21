@@ -26,7 +26,6 @@ import "@fortawesome/fontawesome-free/css/all";
 import "select2" 
 import "./create_post"
 import "./edit_post"
-import "./post"
 import "./home"
 require("trix")
 require("@rails/actiontext")
