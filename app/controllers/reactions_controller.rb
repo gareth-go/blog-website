@@ -5,8 +5,10 @@ class ReactionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    if Reaction.reaction_types.include?(params[:reaction_type])
+    if Reaction.reaction_types.include?(params[:reaction_type]) 
       @reaction = @post.reactions.build(user: current_user, reaction_type: params[:reaction_type])
+    else
+      redirect_to @post
     end
 
     if @reaction.save
