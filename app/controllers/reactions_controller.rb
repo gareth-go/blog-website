@@ -5,14 +5,14 @@ class ReactionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    if Reaction.reaction_types.include?(params[:reaction_type]) 
+    if Reaction.reaction_types.include?(params[:reaction_type])
       @reaction = @post.reactions.build(user: current_user, reaction_type: params[:reaction_type])
     else
       redirect_to @post
     end
 
     if @reaction.save
-      @reactions = Reaction.where(post: @post)
+      set_reactions
     else
       redirect_to @post
     end
@@ -21,18 +21,16 @@ class ReactionsController < ApplicationController
   def update
     if Reaction.reaction_types.include?(params[:reaction_type]) &&
        @reaction.update(reaction_type: params[:reaction_type])
-      @reactions = Reaction.where(post_id: params[:post_id])
-      @reaction = set_reaction
+      set_reactions
     else
       redirect_to @post
     end
   end
 
   def destroy
-    @reaction.delete
-    @reaction = nil
+    @reaction = @reaction.delete.persisted?
 
-    @reactions = Reaction.where(post_id: params[:post_id])
+    set_reactions
   end
 
   private
@@ -43,5 +41,9 @@ class ReactionsController < ApplicationController
 
   def set_reaction
     @reaction = Reaction.find(params[:id])
+  end
+
+  def set_reactions
+    @reactions = Reaction.where(post_id: params[:post_id])
   end
 end
