@@ -31,8 +31,6 @@ $(document).on('turbolinks:load', function() {
           success: function (data) {
             if (data.errors) {
               console.log('error')
-            } else {
-              $('#home-page__main__posts').append(data)
             }
           },
           error: function(xhr, textStatus, errorThrown) {

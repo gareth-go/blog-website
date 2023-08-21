@@ -1,0 +1,10 @@
+- if reaction && reaction.reaction_type == type
+  li class="text-center d-flex flex-column post__option__reation__menu__item rounded-4 reaction-active p-2" id=type
+    = image_tag icon_src, size: "32x32", ariaHidden: "true"
+    span
+      = count
+- else 
+  li class="text-center d-flex flex-column post__option__reation__menu__item rounded-4 p-2" id=type
+    = image_tag icon_src, size: "32x32", ariaHidden: "true"
+    span
+      = count

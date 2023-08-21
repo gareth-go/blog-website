@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     member do
       put 'accept'
       put 'reject'
+      post 'add-reaction'
+      put 'change-reaction'
+      delete 'remove-reaction'
     end
   end
   devise_for :users, controllers: { sessions: 'users/sessions' }

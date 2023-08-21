@@ -20,11 +20,13 @@ import "bootstrap"
 import "../stylesheets/application.scss"
 import "../stylesheets/create_post.scss"
 import "../stylesheets/home.scss"
+import "../stylesheets/post.scss"
 import "@fortawesome/fontawesome-free/js/all";
 import "@fortawesome/fontawesome-free/css/all";
 import "select2" 
 import "./create_post"
 import "./edit_post"
+import "./post"
 import "./home"
 require("trix")
 require("@rails/actiontext")
