@@ -1,5 +1,12 @@
 $reaction-bg: #f5f5f5;
 $reaction-active-border: #d4d4d4;
+$text-area-focus-border: #3B49DF;
+
+@media (max-width: 768px) {
+  #post__option {
+    display: none;
+  }
+}
 
 .btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
   border: none;
@@ -12,4 +19,30 @@ $reaction-active-border: #d4d4d4;
 
 .post__option__reation__menu__item:hover {
   background: $reaction-bg;
+}
+
+.comment__form {
+  textarea {
+    resize: none;
+    border-radius: 0.375rem;
+    border: 2px solid #dee2e6;
+  }
+  
+  textarea:focus {
+    outline: 0;
+    border-color: $text-area-focus-border;
+  }
+}
+
+.post__main__comments__list__edit-form {
+  textarea {
+    border-color: $text-area-focus-border;
+  }
+}
+.reply__option__show-replies {
+  color: $text-area-focus-border;
+}
+
+.reply__option__show-replies:hover {
+  text-decoration: underline;
 }

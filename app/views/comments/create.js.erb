@@ -1,0 +1,3 @@
+$(".post__main__comments__list").replaceWith("<%= j render 'list_comments', comments: @comments %>")
+$(".post__option__comment__count").replaceWith("<span class='post__option__comment__count'><%= @post.comments.size %></span>")
+$(".post__main__comments__form textarea").val("")

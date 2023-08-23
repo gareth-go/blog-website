@@ -22,6 +22,9 @@ class PostsController < ApplicationController
   def show
     @reaction = Reaction.find_by(user: current_user, post_id: params[:id])
     @reactions = Reaction.where(post: @post)
+
+    @new_comment = Comment.new
+    @comments = Comment.where(post: @post, parent_comment: nil).order(created_at: :desc).includes(%i[user])
   end
 
   def new

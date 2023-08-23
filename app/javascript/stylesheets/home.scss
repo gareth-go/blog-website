@@ -1,21 +1,5 @@
-$secondary-alter-hover-bg: #3B49DF;
-$link-color: #6c757d;
-$link-hover-color: #2F3AB2;
-$link-hover-bg: #e2e3f3;
-
 .home-page {
   ul {
     list-style-type: none;
-  }
-  &__sidebar {
-    a {
-      color: $link-color;
-    }
-  
-    a:hover {
-      color: $link-hover-color;
-      background: $link-hover-bg;
-      text-decoration: underline;
-    }
   }
 }

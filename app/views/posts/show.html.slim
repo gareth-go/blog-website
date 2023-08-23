@@ -1,15 +1,16 @@
 = render "shared/navbar"
 
-.container
-  .post.row.mx-auto.justify-content-center.my-3.gx-1
-    .post__option.col-1.text-center.d-flex.flex-column.align-items-center.gap-4.gy-5 id="post__option"
-      = render partial: "reactions/post_reactions", locals: { post: @post, reactions: @reactions, reaction: @reaction }
-      div
-        = image_pack_tag "media/images/jump-to-cmt.svg", class: "mx-auto mb-2"
-        br
-        span
-          | 0
-    .col-8
+.container.px-0
+  .post.row.justify-content-center.my-3.gx-1
+    - if @post.accepted?
+      .post__option.col-lg-1.col-md-1.col-sm-1.text-center.align-items-center.gy-5 id="post__option"
+        = render partial: "reactions/post_reactions", locals: { post: @post, reactions: @reactions, reaction: @reaction }
+        .post__option__comment type="button"
+          = image_pack_tag "media/images/comment-icon.svg", class: "mx-auto mb-2"
+          br
+          span.post__option__comment__count
+            = @post.comments.size
+    .post__main__wrapper.col-lg-8.col-md-10.col-sm-12
       - if current_user && @post.pending? && (@post.user == current_user || current_user.admin?)
         .bg-warning.text-white.p-2.mb-2.rounded
           | Pending...
@@ -18,11 +19,11 @@
         .bg-danger.text-white.p-2.mb-2.rounded
           | This post was rejected!
 
-      .shadow-sm.bg-white.border.rounded
+      .post__main.shadow-sm.bg-white.border.rounded
         - if @post.cover_image.attached?
-          = image_tag @post.cover_image, class: "w-100 rounded-top shadow-sm"
+          = image_tag @post.cover_image, class: "w-100 rounded-top shadow-sm post__main__cover-image"
 
-        .py-3.px-5
+        .post__main__user.py-3.px-5
           span.fs-4.fw-bold
             = render partial: "shared/post_username_link", locals: {post: @post}
           - if current_user && (@post.user == current_user || current_user.admin?)
@@ -35,17 +36,31 @@
             | Post on 
             = @post.created_at.to_date.to_s(:long)
 
-        .px-5
+        .post__main__title.px-5
           h1.fw-bold 
             = @post.title
 
-        .px-5
+        .post__main__tags.px-5
           = render partial: "shared/post_tags_link", locals: {post: @post}
 
-        .py-3.px-5
+        .post__main__content.py-3.px-5
           = @post.content
+
+        - if @post.accepted?
+          .post__main__comments.py-4.px-5.border-top
+            - if current_user
+              h3.fw-bold.pb-4
+                | Comments
+              = form_with model: @new_comment, url: post_comments_path(@post), local: false, class: "pb-4 container comment__form post__main__comments__form" do |f|
+                .row.gx-3
+                  .align-top.col-1
+                    i class="fa-solid fa-user fa-lg border border-secondary text-secondary p-2 rounded-5 float-end"
+                  .col-11
+                    = f.text_area :content, placeholder: "Write a comment...", class: "p-2 w-100"
+                    = f.submit "Submit", class: "btn btn-positive"
+            = render partial: "comments/list_comments", locals: { comments: @comments }
           
       - if @post.pending? && current_user.admin?
         .mt-4
-          = link_to "Accept", accept_post_path(@post), method: :put, class: "btn btn-primary mx-2 px-3"
+          = link_to "Accept", accept_post_path(@post), method: :put, class: "btn btn-positive mx-2 px-3"
           = link_to "Reject", reject_post_path(@post), method: :put, class: "btn btn-danger px-3"

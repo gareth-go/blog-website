@@ -3,6 +3,9 @@
 Rails.application.routes.draw do
   resources :posts do
     resources :reactions, only: %i[create update destroy]
+    resources :comments, only: %i[create update destroy] do
+      resources :replies, only: %i[create update destroy], controller: 'comments'
+    end
 
     member do
       put 'accept'
