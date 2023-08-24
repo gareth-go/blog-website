@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_post, :set_parent_comment
   before_action :set_comment, except: %i[create]
+  before_action :set_parent_comment, :set_post
   before_action :set_new_comment, only: %i[create]
 
   before_action :authenticate_user!
@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    @parent_comment.reload if @parent_comment.present?
+    @parent_comment&.reload
     @post.reload
   end
 
@@ -31,7 +31,11 @@ class CommentsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:post_id])
+    @post = if params[:post_id].present?
+              Post.find(params[:post_id])
+            else
+              @comment&.post || @parent_comment.post
+            end
   end
 
   def set_parent_comment

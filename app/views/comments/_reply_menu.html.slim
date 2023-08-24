@@ -1,0 +1,10 @@
+span.dropdown.text-secondary.float-end.reply__list__detail__menu
+  span.reply__list__detail__menu__toggle type="button" data-bs-toggle="dropdown" aria-expanded="false"
+    = image_pack_tag "media/images/option-icon.svg"
+  ul.post__main__comments__list__detail__reply__menu__dropdown class="dropdown-menu dropdown-menu-end"
+    - if current_user == reply.user
+      li.toggle-edit-comment-form.reply__list__detail__menu__dropdown__edit.btn.menu-link.text-decoration-none.dropdown-item
+        | Edit
+    li.reply__list__detail__menu__dropdown__delete
+      = link_to "Delete", comment_reply_path(parent_comment, reply), method: :delete, remote: true, data: {confirm: 'Are you sure to delete this comment?'}, class: "menu-link text-decoration-none dropdown-item"
+            

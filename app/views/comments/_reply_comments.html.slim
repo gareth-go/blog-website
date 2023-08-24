@@ -1,7 +1,7 @@
 .reply
   = render partial: "comments/reply_option", locals: { comment: comment }
 
-  = form_with model: Comment.new, url: post_comment_replies_path(@post, comment), local: false, class: "comment__form py-2 d-none" do |f|
+  = form_with model: Comment.new, url: comment_replies_path(comment), local: false, class: "comment__form py-2 d-none" do |f|
     = f.text_area :content, class: "p-2 w-100"
     = f.submit "Submit", class: "btn btn-positive"
     .btn.btn-negative.cancel-reply-comment Dismiss
