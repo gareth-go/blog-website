@@ -39,7 +39,11 @@ class CommentsController < ApplicationController
   end
 
   def set_parent_comment
-    @parent_comment = Comment.find(params[:comment_id]) if params[:comment_id].present?
+    @parent_comment = if params[:comment_id].present?
+                        Comment.find(params[:comment_id])
+                      else
+                        @parent_comment = @comment&.parent_comment
+                      end
   end
 
   def set_comment
