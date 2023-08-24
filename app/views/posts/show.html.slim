@@ -58,7 +58,9 @@
                   .col-11
                     = f.text_area :content, placeholder: "Write a comment...", class: "p-2 w-100"
                     = f.submit "Submit", class: "btn btn-positive"
-            = render partial: "comments/list_comments", locals: { comments: @comments }
+            .post__main__comments__list
+              - @comments.each do |comment|
+                = render partial: "comments/comment", locals: { comment: comment }
           
       - if @post.pending? && current_user.admin?
         .mt-4

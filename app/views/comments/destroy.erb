@@ -1,2 +1,6 @@
-$(".post__main__comments__list").replaceWith("<%= j render 'list_comments', comments: @comments %>")
+$("#comment-<%= @comment.id %>").remove()
+<% if @parent_comment.present? %>
+  $($("#replies-of-comment-<%= @parent_comment.id %>").closest(".reply").find(".reply__option")[0]).replaceWith("<%= j render 'reply_option', comment: @parent_comment %>")
+<% end %>
 $(".post__option__comment__count").replaceWith("<span class='post__option__comment__count'><%= @post.comments.size %></span>")
+

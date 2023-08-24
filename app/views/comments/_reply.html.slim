@@ -1,6 +1,4 @@
-.reply__list
-  - comment.replies.order(created_at: :desc).includes(%i[user parent_comment]).each do |reply|
-    .reply__list__detail__wrapper.mt-3
+.reply__list__detail__wrapper.mt-3 id="comment-#{reply.id}"
       .row.gx-3
         .align-top.col-1
           i class="fa-solid fa-user fa-lg border border-secondary text-secondary p-2 rounded-5 float-end"
@@ -22,12 +20,12 @@
                       li.toggle-edit-comment-form.reply__list__detail__menu__dropdown__edit.btn.menu-link.text-decoration-none.dropdown-item
                         | Edit
                     li.reply__list__detail__menu__dropdown__delete
-                      = link_to "Delete", post_comment_reply_path(@post, comment, reply), method: :delete, remote: true, data: {confirm: 'Are you sure to delete this comment?'}, class: "menu-link text-decoration-none dropdown-item"
+                      = link_to "Delete", post_comment_reply_path(@post, parent_comment, reply), method: :delete, remote: true, data: {confirm: 'Are you sure to delete this comment?'}, class: "menu-link text-decoration-none dropdown-item"
             
             = reply.content
 
           - if current_user && current_user == reply.user
-            = form_with model: reply, url: post_comment_reply_path(@post, comment, reply), local: false, class: "col-12 comment__form reply__list__edit-form d-none" do |f|
+            = form_with model: reply, url: post_comment_reply_path(@post, parent_comment, reply), local: false, class: "col-12 comment__form reply__list__edit-form d-none" do |f|
               = f.text_area :content, class: "p-2 w-100", autofocus: true
               = f.submit "Submit", class: "btn btn-positive me-2"
               .btn.btn-negative.cancel-edit-comment Dismiss

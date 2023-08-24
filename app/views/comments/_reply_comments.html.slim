@@ -1,16 +1,11 @@
 .reply
-  .reply__option.mt-1
-    span.reply__option__toggle-form.me-2 type="button"
-      = image_pack_tag "media/images/comment-icon.svg", size: "20x20", class: "me-1"
-      small Reply
-    - if comment.replies.size > 0
-      small.reply__option__show-replies type="button" Collapse replies
-
+  = render partial: "comments/reply_option", locals: { comment: comment }
 
   = form_with model: Comment.new, url: post_comment_replies_path(@post, comment), local: false, class: "comment__form py-2 d-none" do |f|
     = f.text_area :content, class: "p-2 w-100"
     = f.submit "Submit", class: "btn btn-positive"
     .btn.btn-negative.cancel-reply-comment Dismiss
 
-  - if comment.replies.size > 0
-    = render partial: "comments/list_replies", locals: { comment: comment }
+  .reply__list id="replies-of-comment-#{comment.id}"
+    - comment.replies.order(created_at: :desc).includes(%i[user parent_comment]).each do |reply|
+      = render partial: "comments/reply", locals: { parent_comment: comment, reply: reply }

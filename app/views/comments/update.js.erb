@@ -1,1 +1,5 @@
-$(".post__main__comments__list").replaceWith("<%= j render 'list_comments', comments: @comments %>")
+<% if @parent_comment.present? %>
+  $("#comment-<%= @comment.id %>").replaceWith("<%= j render 'reply', parent_comment: @parent_comment, reply: @comment %>")
+<% else %>
+  $("#comment-<%= @comment.id %>").replaceWith("<%= j render 'comment', comment: @comment %>")
+<% end %>

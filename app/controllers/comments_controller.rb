@@ -1,31 +1,22 @@
 class CommentsController < ApplicationController
-  before_action :set_post
+  before_action :set_post, :set_parent_comment
   before_action :set_comment, except: %i[create]
-  before_action :set_parent_comment, :set_new_comment, only: %i[create]
+  before_action :set_new_comment, only: %i[create]
 
   before_action :authenticate_user!
 
   def create
-    if @new_comment.update(comment_params)
-      set_comments
-    else
-      redirect_to @post
-    end
+    redirect_to @post unless @new_comment.update(comment_params)
   end
 
   def update
-    if @comment.update(comment_params)
-      set_comments
-    else
-      redirect_to @post
-    end
+    redirect_to @post unless @comment.update(comment_params)
   end
 
   def destroy
     @comment.destroy
+    @parent_comment.reload if @parent_comment.present?
     @post.reload
-
-    set_comments
   end
 
   private
@@ -49,9 +40,5 @@ class CommentsController < ApplicationController
 
   def set_comment
     @comment = Comment.find(params[:id])
-  end
-
-  def set_comments
-    @comments = Comment.where(post: @post, parent_comment: nil).order(created_at: :desc).includes(%i[user parent_comment])
   end
 end
