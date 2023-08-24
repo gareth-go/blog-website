@@ -1,0 +1,6 @@
+.reply__option.mt-1
+    span.reply__option__toggle-form.me-2 type="button"
+      = image_pack_tag "media/images/comment-icon.svg", size: "20x20", class: "me-1"
+      small Reply
+    - if comment.replies.size > 0
+      small.reply__option__show-replies type="button" Collapse replies

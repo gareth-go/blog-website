@@ -5,32 +5,32 @@
     button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
     = flash[:notice] 
 
-.container
+.container.p-0
   .row.home-page.mx-auto.justify-content-center.mt-3
-    ul.col-2.home-page__sidebar
+    ul.col-lg-2.col-md-1.col-sm-1.home-page__sidebar.p-0
       li.home-page__sidebar__home
-        = link_to root_path, class: "btn border-0 w-100 text-start mb-1" do
+        = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
           = image_pack_tag "media/images/home-icon.svg", class: "pe-2" 
           | Home
       li.home-page__sidebar__tag
-        = link_to root_path, class: "btn border-0 w-100 text-start mb-1" do
+        = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
           = image_pack_tag "media/images/tags-icon.svg", class: "pe-2"
           | Tags
         ul 
           - @tags.each do |tag|
             li 
-              = link_to root_path, class: "btn border-0 w-100 text-start mb-1" do 
+              = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do 
                 i class="fa-solid fa-tags me-3"
                 = tag.name
           li 
-            = link_to root_path, class: "btn border-0 w-100 text-start mb-1" do
+            = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
               i class="fa-solid fa-chevron-down me-3"
               | more
         li.home-page__sidebar__tag
-          = link_to root_path, class: "btn border-0 w-100 text-start mb-1" do
+          = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
             = image_pack_tag "media/images/contact-icon.svg", class: "pe-2"
             | Contact
-    .col-6.home-page__main id="#home-page__main"
+    .col-lg-6.col-md-3.col-sm-4.home-page__main.p-0 id="#home-page__main"
       nav.navbar.navbar-expand-lg.navbar-light.py-1
         = link_to "Lastest", root_path, class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
         = link_to "Top comments", root_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"

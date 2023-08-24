@@ -3,9 +3,10 @@
 @import "~select2/dist/css/select2";
 @import "~trix/dist/trix";
 
-$body-bg: whitesmoke;
-$secondary-alter-hover-bg: #3B49DF;
-$link-hover-color: #2F3AB2;
+$body-bg: #f5f5f5;
+$secondary-alter-bg: #3B49DF;
+$secondary-alter-hover-bg: #2F3AB2;
+$link-color: #6c757d;
 $link-hover-bg: #e2e3f3;
 
 body {
@@ -18,11 +19,45 @@ body {
 }
 
 .btn-secondary-alter:hover {
-  color: $secondary-alter-hover-bg;
+  color: $secondary-alter-bg;
   background: white;
 }
 
 .active {
   font-weight: bold;
+}
+
+.menu-link {
+  color: $link-color;
+}
+
+.menu-link:hover {
+  color: $secondary-alter-hover-bg;
+  background: $link-hover-bg;
+  text-decoration: underline;
+}
+
+.btn-positive {
+  background: $secondary-alter-bg;
+  color: white;
+}
+
+.btn-positive:hover {
+  background: $secondary-alter-hover-bg;
+  color: white;
+}
+
+.btn-negative {
+  background: white;
+  color: black;
+}
+
+.btn-negative:hover {
+  background: #efefef;
+  color: black;
+}
+
+.btn:active {
+  border: none;
 }
 

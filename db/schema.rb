@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_10_084624) do
+ActiveRecord::Schema.define(version: 2023_08_23_085229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,11 +55,14 @@ ActiveRecord::Schema.define(version: 2023_08_10_084624) do
 
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "commentable_type"
-    t.bigint "commentable_id"
     t.text "content"
     t.datetime "created_at"
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.integer "comments_count"
+    t.bigint "post_id"
+    t.bigint "parent_comment_id"
+    t.integer "replies_count"
+    t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -87,6 +90,7 @@ ActiveRecord::Schema.define(version: 2023_08_10_084624) do
     t.bigint "user_id"
     t.integer "status"
     t.string "cover_image"
+    t.integer "comments_count"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -120,6 +124,8 @@ ActiveRecord::Schema.define(version: 2023_08_10_084624) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "comments", column: "parent_comment_id"
+  add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "post_tags", "posts"
