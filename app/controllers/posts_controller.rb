@@ -8,17 +8,6 @@ class PostsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[show]
 
-  def index
-    @posts = if current_user.admin?
-               Post.all.order(created_at: :desc).includes(%i[user tags])
-             else
-               current_user.posts.order(created_at: :desc).includes(%i[tags])
-             end
-
-    @posts = @posts.where(status: Post.statuses[params[:status]]) if params[:status] &&
-                                                                     Post.statuses.include?(params[:status])
-  end
-
   def show
     @reaction = current_user.reactions.find_by(post: @post)
     @reactions = @post.reactions
@@ -60,13 +49,13 @@ class PostsController < ApplicationController
   def accept
     @post.update(status: :accepted)
 
-    redirect_to @post
+    redirect_to dashboard_posts_path(status: :accepted)
   end
 
   def reject
     @post.update(status: :rejected)
 
-    redirect_to @post
+    redirect_to dashboard_posts_path(status: :rejected)
   end
 
   def destroy

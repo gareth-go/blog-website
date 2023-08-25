@@ -1,0 +1,5 @@
+<% if @tag.valid? %>
+  $("#dashboard-tag-<%= @tag.id %>").replaceWith("<%= j render 'tag', tag: @tag %>")
+<% else %>
+  $("#dashboard-tag-<%= @tag.id %>-error")[0].innerHTML = "<%= @tag.errors.messages[:name][0] %>"
+<% end %>

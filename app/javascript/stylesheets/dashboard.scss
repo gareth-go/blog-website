@@ -1,0 +1,31 @@
+$text-area-focus-border: #3B49DF;
+$secondary-alter-hover-bg: #2F3AB2;
+$link-hover-bg: #e2e3f3;
+
+.dashboard{
+  &__body {
+    &__sidebar {
+      list-style-type: none;
+  
+      li:hover {
+        color: $secondary-alter-hover-bg;
+      }
+
+      &__tags {
+        &__count {
+          background: $link-hover-bg;
+        }
+      }
+    }
+  }
+}
+
+.tag-name-input {
+  border-radius: 0.375rem;
+  border: 2px solid #dee2e6;
+}
+
+.tag-name-input:focus {
+  outline: 0;
+  border-color: $text-area-focus-border;
+}

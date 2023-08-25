@@ -1,0 +1,38 @@
+= render "shared/navbar"
+
+.container.p-0
+  .mx-auto.justify-content-center
+    .dashboard.row.col-12.pb-4
+      h3.dashboard__head.fw-bold
+        | Dashboard >> Posts
+      
+    .row.dashboard__body.justify-content-center.gx-3
+      ul.col-lg-2.col-md-2.col-sm-4.dashboard__body__sidebar
+        li.dashboard__body__sidebar__tags
+          = link_to dashboard_posts_path, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex bg-white" do 
+            | Posts
+        - if current_user.admin?
+          li.dashboard__body__sidebar__tags
+            = link_to dashboard_tags_path, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex" do 
+              | Tags
+
+      .dashboard__body__table.col-lg-10.col-md-10.col-sm-12
+        nav.navbar.navbar-expand-lg.navbar-light.p-0
+          = link_to "All", dashboard_posts_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
+
+          = link_to_unless_current "Accepted", dashboard_posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
+            = link_to "Accepted", dashboard_posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
+
+          = link_to_unless_current "Pending", dashboard_posts_path(status: :pending), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
+            = link_to "Pending", dashboard_posts_path(status: :pending), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
+            
+          = link_to_unless_current "Rejected", dashboard_posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
+            = link_to "Rejected", dashboard_posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
+
+        - if @posts.empty? && !params.key?(:status)
+          .p-4.mb-2.bg-white.rounded.shadow-sm
+            h2
+              | You haven't created a post yet. Try to create one.
+
+        = render partial: "shared/list_posts", locals: {posts: @posts, page: nil}
+
