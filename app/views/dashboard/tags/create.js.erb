@@ -1,0 +1,10 @@
+<% if @new_tag.valid? %>
+  $(".dashboard__body__table__tag").prepend("<%= j render 'tag', tag: @new_tag %>")
+  $(".dashboard__body__sidebar__tags__count")[0].innerHTML = +$(".dashboard__body__sidebar__tags__count")[0].innerHTML + 1
+  $(".dashboard__body__table__add-form").addClass("d-none")
+  $(".dashboard__body__table__add-button").removeClass("d-none")
+  $(".dashboard__body__table__add-form input").val("")
+<% else %>
+  $(".dashboard__body__table__add-form__error")[0].innerHTML = "<%= @new_tag.errors.messages[:name][0] %>"
+<% end %>
+

@@ -1,0 +1,22 @@
+.dashboard__body__table__tag__detail.bg-white.border-bottom.p-4.row id="dashboard-tag-#{tag.id}" data-controller="dashboard-tags"
+  .col-lg-6.col-md-6.col-sm-6.dashboard__body__table__tag__detail__name
+    .fs-5.mb-1.fw-bold.text-secondary-alter data-dashboard-tags-target="tagName"
+      = tag.name
+
+    = form_with model: tag, url: dashboard_tag_path(tag), local: false, class: "d-none", data: { dashboard_tags_target: "editForm" } do |f|
+      = f.text_field :name, class: "fs-5 fw-bold text-secondary-alter w-50 me-1 tag-name-input"
+      small.text-danger id="dashboard-tag-#{tag.id}-error"
+      .mt-1
+        = f.submit "Save", class: "btn btn-negative py-0 px-1"
+        .btn.btn-negative.py-0.px-1 data-action="click->dashboard-tags#toggleEdit"
+          | Dissmis
+
+  .dashboard__body__table__tag__detail__posts-count.col-lg-3.col-md-2.col-sm-2.py-2
+    | Posts: 
+    = tag.posts_count || 0
+    
+  .dashboard__body__table__tag__detail__option.col-lg-3.col-md-2.col-sm-2
+    .d-flex
+      button.dashboard__body__table__tag__detail__option__edit.btn.btn-outline-secondary.ms-auto.me-2 data-dashboard-tags-target="toggleEditButton" data-action="dashboard-tags#toggleEdit"
+        | Edit
+      = link_to "Delete", dashboard_tag_path(tag), method: :delete, remote: true, class: "btn btn-outline-secondary", data: {confirm: 'Are you sure to delete this tag?'}
