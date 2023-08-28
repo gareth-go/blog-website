@@ -3,7 +3,11 @@
 - if flash[:notice]
   .alert.alert-success.alert-dismissible.fade.show.position-absolute.start-0.bottom-0.d-inline-block role="alert"
     button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
-    = flash[:notice] 
+    = flash[:notice]
+
+- if flash[:alert]
+  .alert.alert-danger.fade.show
+    = flash[:alert]
 
 .container.p-0
   .row.home-page.mx-auto.justify-content-center.mt-3

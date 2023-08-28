@@ -11,11 +11,11 @@
           span.post__option__comment__count
             = @post.comments.size
     .post__main__wrapper.col-lg-8.col-md-10.col-sm-12
-      - if current_user && @post.pending? && (@post.user == current_user || current_user.admin?)
+      - if @post.pending? && policy(@post).show?
         .bg-warning.text-white.p-2.mb-2.rounded
           | Pending...
 
-      - if @post.rejected?
+      - if @post.rejected? && policy(@post).show?
         .bg-danger.text-white.p-2.mb-2.rounded
           | This post was rejected!
 
@@ -25,10 +25,11 @@
 
         .post__main__user.py-3.px-5
           span.fs-4.fw-bold
-            = render partial: "shared/post_username_link", locals: {post: @post}
-          - if current_user && (@post.user == current_user || current_user.admin?)
+            = link_to profile_path(@post.user.username), class: "text-decoration-none text-reset" do
+              = render partial: "shared/post_username_link", locals: {post: @post}
+          - if policy(@post).destroy?
             = link_to "Delete", @post, method: :delete, class: "btn btn-outline-secondary float-end"
-          - if @post.user == current_user
+          - if policy(@post).update?
             = link_to "Edit", edit_post_path(@post), class: "btn btn-outline-secondary float-end mx-2"
           
           br
@@ -54,7 +55,9 @@
               = form_with model: @new_comment, url: post_comments_path(@post), local: false, class: "pb-4 container comment__form post__main__comments__form" do |f|
                 .row.gx-3
                   .align-top.col-1
-                    i class="fa-solid fa-user fa-lg border border-secondary text-secondary p-2 rounded-5 float-end"
+                    = image_tag current_user.avatar,
+                        size: "32x32",
+                        class: "rounded-circle border me-1 object-fit-cover"
                   .col-11
                     = f.text_area :content, placeholder: "Write a comment...", class: "p-2 w-100"
                     = f.submit "Submit", class: "btn btn-positive"
@@ -62,7 +65,7 @@
               - @comments.each do |comment|
                 = render partial: "comments/comment", locals: { comment: comment }
           
-      - if @post.pending? && current_user.admin?
+      - if policy(@post).accept?
         .mt-4
           = link_to "Accept", accept_post_path(@post), method: :put, class: "btn btn-positive mx-2 px-3"
           = link_to "Reject", reject_post_path(@post), method: :put, class: "btn btn-danger px-3"

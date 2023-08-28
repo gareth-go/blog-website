@@ -2,7 +2,7 @@ span.dropdown.text-secondary.float-end.post__main__comments__list__detail__menu
   span.post__main__comments__list__detail__menu__toggle type="button" data-bs-toggle="dropdown" aria-expanded="false"
     = image_pack_tag "media/images/option-icon.svg"
   ul.post__main__comments__list__detail__menu__dropdown class="dropdown-menu dropdown-menu-end"
-    - if current_user == comment.user
+    - if policy(comment).update?
       li.toggle-edit-comment-form.post__main__comments__list__detail__menu__dropdown__edit.btn.menu-link.text-decoration-none.dropdown-item
         | Edit
     li.post__main__comments__list__detail__menu__dropdown__delete

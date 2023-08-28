@@ -2,25 +2,28 @@ class PostsController < ApplicationController
   before_action :set_new_post, only: %i[create]
   before_action :set_post, only: %i[show edit update accept reject destroy]
 
-  before_action :require_admin, only: %i[accept reject]
-  before_action :require_owner, only: %i[edit create]
-  before_action :require_owner_or_admin, only: %i[destroy]
-
   before_action :authenticate_user!, except: %i[show]
 
   def show
-    @reaction = current_user.reactions.find_by(post: @post)
+    authorize @post
+
+    @reaction = current_user&.reactions&.find_by(post: @post)
     @reactions = @post.reactions
 
     @new_comment = Comment.new
-    @comments = @post.comments.where(parent_comment: nil).order(created_at: :desc).includes(%i[user parent_comment])
+    @comments = @post.comments
+                     .where(parent_comment: nil)
+                     .order(created_at: :desc)
+                     .includes({ user: { avatar_attachment: :blob } }, :parent_comment)
   end
 
   def new
     @post = Post.new
   end
 
-  def edit; end
+  def edit
+    authorize @post
+  end
 
   def create
     values = post_params_tag_ids_to_tags
@@ -33,11 +36,12 @@ class PostsController < ApplicationController
   end
 
   def update
+    authorize @post
+
     values = post_params_tag_ids_to_tags
 
     # set cover_image nil if no image is attached
     @post.cover_image.purge if params.dig(:post, :remove_cover_image) == '1' && !values.key?(:cover_image)
-    # values.delete(:remove_cover_image)
 
     if @post.update(values)
       redirect_to @post
@@ -47,21 +51,24 @@ class PostsController < ApplicationController
   end
 
   def accept
-    @post.update(status: :accepted)
+    authorize @post
 
+    @post.update(status: :accepted)
     redirect_to dashboard_posts_path(status: :accepted)
   end
 
   def reject
-    @post.update(status: :rejected)
+    authorize @post
 
+    @post.update(status: :rejected)
     redirect_to dashboard_posts_path(status: :rejected)
   end
 
   def destroy
-    @post.destroy
+    authorize @post
 
-    redirect_to posts_path
+    @post.destroy
+    redirect_to dashboard_posts_path
   end
 
   private

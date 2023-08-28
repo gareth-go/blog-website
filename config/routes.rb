@@ -19,7 +19,14 @@ Rails.application.routes.draw do
     resources :tags
     resources :posts, only: :index
   end
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+
+  resources :profile, param: :username, only: %i[show edit update]
+
+  devise_for :users, path: ''
+  # get '/:username', to: 'users/profile#index', as: :user_profile
+  # get '/:username/edit', to: 'users/profile#edit', as: :user_profile_edit
+  # patch '/:username/update', to: 'users/profile#update', as: :user_profile_update
+  # put '/:username/update', to: 'users/profile#update', as: :user_profile_update
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'home#index'
 end

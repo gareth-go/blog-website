@@ -1,7 +1,9 @@
 .post__main__comments__list__detail__wrapper.container.mb-4 id="comment-#{comment.id}"
   .row.gx-3
     .align-top.col-1
-      i class="fa-solid fa-user fa-lg border border-secondary text-secondary p-2 rounded-5 float-end"
+      = image_tag comment.user.avatar,
+            size: "32x32",
+            class: "rounded-circle border me-1 object-fit-cover"
     .col-11
       .post__main__comments__list__detail.border.p-2.rounded.w-100
         .mb-2.post__main__comments__list__detail__infomation
@@ -16,7 +18,7 @@
           
         = comment.content
       
-      - if current_user && current_user == comment.user
+      - if policy(comment).update?
         = form_with model: comment, url: comment_path(comment), local: false, class: "col-12 comment__form post__main__comments__list__edit-form d-none" do |f|
           = f.text_area :content, class: "p-2 w-100", autofocus: true
           = f.submit "Submit", class: "btn btn-positive me-2"

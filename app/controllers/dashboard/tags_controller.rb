@@ -1,6 +1,6 @@
 class Dashboard::TagsController < ApplicationController
   before_action :set_tag, only: %i[update destroy]
-  before_action :authenticate_admin
+  before_action :authenticate_user!
 
   def index
     @tags = Tag.all.order(id: :desc)

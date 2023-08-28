@@ -12,11 +12,12 @@
           i class="fa-regular fa-bell fa-lg me-3 btn-outline-secondary p-2 rounded-5 btn border-0"
         .dropdown
           div type="button" data-bs-toggle="dropdown" aria-expanded="false"
-            i class="fa-solid fa-user fa-lg border border-secondary btn-outline-secondary p-2 rounded-5 btn"
+            = image_tag current_user.avatar,
+                        size: "40x40",
+                        class: "rounded-circle border object-fit-cover"
           ul class="dropdown-menu dropdown-menu-end"
             li
-              .dropdown-item
-                = current_user.username
+              = link_to current_user.username, profile_path(current_user.username), class: "dropdown-item"
             li 
               hr class="dropdown-divider"
             li 

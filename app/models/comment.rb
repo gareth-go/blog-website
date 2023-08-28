@@ -10,8 +10,7 @@
 #  created_at       :datetime
 #
 class Comment < ApplicationRecord
-  belongs_to :user
-  # belongs_to :commentable, polymorphic: true, counter_cache: true
+  belongs_to :user, counter_cache: true
   belongs_to :post, counter_cache: true
   belongs_to :parent_comment, class_name: 'Comment', counter_cache: :replies_count, optional: true
   has_many :replies, class_name: 'Comment', foreign_key: 'parent_comment_id', dependent: :destroy
