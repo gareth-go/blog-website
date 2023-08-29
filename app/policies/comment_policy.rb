@@ -4,7 +4,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user&.admin? || user == record.user
+    user&.admin? || user == record.user || user == record.post.user
   end
 
   class Scope < Scope

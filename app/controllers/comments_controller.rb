@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    authorize @comment if @post.user != current_user
+    authorize @comment
 
     @comment.destroy
     @parent_comment&.reload
