@@ -10,10 +10,14 @@ class CommentsController < ApplicationController
   end
 
   def update
+    authorize @comment
+
     redirect_to @post unless @comment.update(comment_params)
   end
 
   def destroy
+    authorize @comment
+
     @comment.destroy
     @parent_comment&.reload
     @post.reload

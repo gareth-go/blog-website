@@ -4,9 +4,8 @@ class HomeController < ApplicationController
     # include only cover_image_attachment if it is not first page to avoid n + 1
     @posts = Post.where(status: Post.statuses[:accepted])
                  .order(created_at: :desc)
-                 .includes(%i[user tags])
+                 .includes({ user: { avatar_attachment: :blob } }, :tags)
     @posts = @posts.with_attached_cover_image if params[:page] == '1' || params[:page].nil?
-    @posts = @posts.includes([:cover_image_attachment]) if params[:page].present? && params[:page].to_i > 1
 
     @pagy, @posts = pagy(@posts)
 

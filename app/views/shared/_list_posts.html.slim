@@ -9,7 +9,8 @@
     = cover_image_if_first_post(page, post, index == 0)
     .py-2.px-4
       .fs-6.text-secondary
-        = render partial: "shared/post_username_link", locals: {post: post}
+        = link_to profile_path(post.user.username), class: "text-decoration-none text-secondary" do
+          = render partial: "shared/post_username_link", locals: {post: post}
       small.text-secondary
         = post.created_at.to_date.to_s(:long)
     .pb-2.px-4
