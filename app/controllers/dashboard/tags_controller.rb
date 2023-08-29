@@ -1,22 +1,26 @@
 class Dashboard::TagsController < ApplicationController
   before_action :set_tag, only: %i[update destroy]
+
   before_action :authenticate_user!
 
   def index
-    @tags = Tag.all.order(id: :desc)
+    @tags = policy_scope([:dashboard, Tag]).all.order(id: :desc)
     @new_tag = Tag.new
   end
 
   def create
     @new_tag = Tag.new(tag_params)
+    authorize [:dashboard, @new_tag]
     @new_tag.save
   end
 
   def update
+    authorize [:dashboard, @tag]
     @tag.update(tag_params)
   end
 
   def destroy
+    authorize [:dashboard, @tag]
     @tag.destroy
   end
 
@@ -31,6 +35,6 @@ class Dashboard::TagsController < ApplicationController
   end
 
   def authenticate_admin
-    render plain: 'You do not have permission!' unless current_user&.admin?
+    user_not_authorized unless current_user.admin?
   end
 end

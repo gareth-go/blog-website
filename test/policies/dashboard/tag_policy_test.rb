@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TagsManagementPolicyTest < ActiveSupport::TestCase
+class Dashboard::TagPolicyTest < ActiveSupport::TestCase
   def test_scope
   end
 
