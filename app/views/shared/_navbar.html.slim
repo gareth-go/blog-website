@@ -17,11 +17,13 @@
                         class: "rounded-circle border object-fit-cover"
           ul class="dropdown-menu dropdown-menu-end"
             li
-              = link_to current_user.username, profile_path(current_user.username), class: "dropdown-item"
+              = link_to current_user.username, user_path(current_user.username), class: "dropdown-item"
             li 
               hr class="dropdown-divider"
             li 
               = link_to "Dashboard", dashboard_posts_path, class: "dropdown-item"
+            li 
+              = link_to "Settings", edit_settings_profile_path(current_user.username), class: "dropdown-item"
             li 
               = link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item"
       - else

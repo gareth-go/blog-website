@@ -17,16 +17,24 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     resources :tags
+    resources :accounts, only: :index do
+      member do
+        put 'grant-admin'
+        put 'revoke-admin'
+        put 'ban'
+        put 'unban'
+      end
+    end
     resources :posts, only: :index
   end
 
-  resources :profile, param: :username, only: %i[show edit update]
+  namespace :settings do
+    resources :profile, param: :username, only: %i[edit update]
+    resources :password, param: :username, only: %i[edit update]
+  end
+  resources :users, param: :username, only: :show
 
   devise_for :users, path: ''
-  # get '/:username', to: 'users/profile#index', as: :user_profile
-  # get '/:username/edit', to: 'users/profile#edit', as: :user_profile_edit
-  # patch '/:username/update', to: 'users/profile#update', as: :user_profile_update
-  # put '/:username/update', to: 'users/profile#update', as: :user_profile_update
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
   root 'home#index'
 end

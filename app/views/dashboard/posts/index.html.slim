@@ -7,14 +7,7 @@
         | Dashboard >> Posts
       
     .row.dashboard__body.justify-content-center.gx-3
-      ul.col-lg-2.col-md-2.col-sm-4.dashboard__body__sidebar
-        li.dashboard__body__sidebar__tags
-          = link_to dashboard_posts_path, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex bg-white" do 
-            | Posts
-        - if current_user.admin?
-          li.dashboard__body__sidebar__tags
-            = link_to dashboard_tags_path, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex" do 
-              | Tags
+      = render "dashboard/sidebar"
 
       .dashboard__body__table.col-lg-10.col-md-10.col-sm-12
         nav.navbar.navbar-expand-lg.navbar-light.p-0
@@ -32,7 +25,9 @@
         - if @posts.empty? && !params.key?(:status)
           .p-4.mb-2.bg-white.rounded.shadow-sm
             h2
-              | You haven't created a post yet. Try to create one.
+              | You haven't created any post yet. Try to create one.
 
-        = render partial: "shared/list_posts", locals: {posts: @posts, page: nil}
+        = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}
+        .load-more__button.opacity-0
+          == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"
 

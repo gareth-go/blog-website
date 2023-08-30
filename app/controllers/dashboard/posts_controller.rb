@@ -14,5 +14,7 @@ class Dashboard::PostsController < ApplicationController
 
     @posts = @posts.where(status: Post.statuses[params[:status]]) if params[:status] &&
                                                                      Post.statuses.include?(params[:status])
+
+    @pagy, @posts = pagy(@posts)
   end
 end

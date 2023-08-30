@@ -1,0 +1,24 @@
+- if account.banned?
+  = link_to "Unban",
+            unban_dashboard_account_path(account),
+            method: :put,
+            remote: true,
+            class: "dashboard__body__table__accounts__row__actions__unban btn btn-primary ms-auto align-middle"
+- else
+  - if account.admin?
+    = link_to "Revoke admin",
+              revoke_admin_dashboard_account_path(account),
+              method: :put,
+              remote: true,
+              class: "dashboard__body__table__accounts__row__actions__revoke btn btn-warning ms-auto"
+  - else 
+    = link_to "Grant admin",
+              grant_admin_dashboard_account_path(account),
+              method: :put,
+              remote: true,
+              class: "dashboard__body__table__accounts__row__actions__grant btn btn-outline-secondary ms-auto me-2"
+    = link_to "Ban",
+              ban_dashboard_account_path(account),
+              method: :put,
+              remote: true,
+              class: "dashboard__body__table__accounts__row__actions__ban btn btn-danger align-middle"

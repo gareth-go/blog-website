@@ -1,0 +1,4 @@
+<% if @pagy.present? %>
+  $("#load-more").replaceWith("<%= j render 'shared/list_posts', posts: @posts, page: @pagy.page %>")
+  $(".pagy-bootstrap-nav").replaceWith("<%== j pagy_bootstrap_nav @pagy %>")
+<% end %>

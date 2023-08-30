@@ -1,11 +1,8 @@
 class HomeController < ApplicationController
   def index
-    # include both cover_image_attachment and blob if it is first page
-    # include only cover_image_attachment if it is not first page to avoid n + 1
     @posts = Post.where(status: Post.statuses[:accepted])
                  .order(created_at: :desc)
-                 .includes({ user: { avatar_attachment: :blob } }, :tags)
-    @posts = @posts.with_attached_cover_image if params[:page] == '1' || params[:page].nil?
+                 .includes({ user: { avatar_attachment: :blob } }, :tags, :cover_image_attachment)
 
     @pagy, @posts = pagy(@posts)
 
