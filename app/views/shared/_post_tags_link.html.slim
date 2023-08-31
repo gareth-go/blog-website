@@ -1,3 +1,2 @@
 - post.tags.each do |tag|
-  span.pe-3.text-secondary style="cursor: pointer;"
-    = tag.name
+  = link_to tag.name, tag_path(tag.name), class: "pe-3 text-secondary text-decoration-none"

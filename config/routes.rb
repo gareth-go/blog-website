@@ -2,18 +2,20 @@
 
 Rails.application.routes.draw do
   resources :posts, except: :index do
-    resources :reactions, only: %i[create update destroy]
-    resources :comments, only: %i[create]
-
     member do
       put 'accept'
       put 'reject'
     end
+
+    resources :reactions, only: %i[create update destroy]
+    resources :comments, only: %i[create]
   end
 
   resources :comments, only: %i[update destroy] do
     resources :replies, only: %i[create update destroy], controller: 'comments'
   end
+
+  resources :tags, param: :name, only: %i[index show]
 
   namespace :dashboard do
     resources :tags
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
     resources :profile, param: :username, only: %i[edit update]
     resources :password, param: :username, only: %i[edit update]
   end
+
   resources :users, param: :username, only: :show
 
   devise_for :users, path: ''
