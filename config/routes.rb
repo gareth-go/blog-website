@@ -17,14 +17,7 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     resources :tags
-    resources :accounts, only: :index do
-      member do
-        put 'grant-admin'
-        put 'revoke-admin'
-        put 'ban'
-        put 'unban'
-      end
-    end
+    resources :accounts, only: %i[index update]
     resources :posts, only: :index
   end
 
