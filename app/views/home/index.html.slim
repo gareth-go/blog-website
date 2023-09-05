@@ -17,17 +17,17 @@
           = image_pack_tag "media/images/home-icon.svg", class: "pe-2" 
           | Home
       li.home-page__sidebar__tag
-        = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
+        = link_to tags_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
           = image_pack_tag "media/images/tags-icon.svg", class: "pe-2"
           | Tags
         ul 
           - @tags.each do |tag|
             li 
-              = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do 
+              = link_to tag_path(tag.name), class: "btn menu-link border-0 w-100 text-start mb-1" do 
                 i class="fa-solid fa-tags me-3"
                 = tag.name
           li 
-            = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
+            = link_to tags_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
               i class="fa-solid fa-chevron-down me-3"
               | more
         li.home-page__sidebar__tag

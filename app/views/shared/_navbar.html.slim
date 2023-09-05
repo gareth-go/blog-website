@@ -1,32 +1,33 @@
 .bg-white.shadown-sm
-  nav.navbar.navbar-expand-lg.navbar-light.mx-auto.py-2.col-lg-9.col-md-10.col-sm-12
-    = link_to "LNNV", root_path, class: "navbar-brand fw-bold text-white bg-dark px-2 rounded"
-    .collapse.navbar-collapse
-      = form_with method: :get, class: "d-flex" do
-        = text_field_tag :search, params[:search], placeholder: "Search..." , class: "form-control"
-        = submit_tag "Search", name: "", class: "btn text-secondary border-0"
-    .navbar.justify-content-end
-      - if current_user 
-        = link_to "Create Post", new_post_path, class: "btn btn-outline-primary me-3"
-        = link_to root_path do
-          i class="fa-regular fa-bell fa-lg me-3 btn-outline-secondary p-2 rounded-5 btn border-0"
-        .dropdown
-          div type="button" data-bs-toggle="dropdown" aria-expanded="false"
-            = image_tag current_user.avatar,
-                        size: "40x40",
-                        class: "rounded-circle border object-fit-cover"
-          ul class="dropdown-menu dropdown-menu-end"
-            li
-              = link_to current_user.username, user_path(current_user.username), class: "dropdown-item"
-            li 
-              hr class="dropdown-divider"
-            li 
-              = link_to "Dashboard", dashboard_posts_path, class: "dropdown-item"
-            li 
-              = link_to "Settings", edit_settings_profile_path(current_user.username), class: "dropdown-item"
-            li 
-              = link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item"
-      - else
-        = link_to "Log in", new_user_session_path, class: "btn btn-outline-primary mx-3"
-        = link_to "Sign up", new_user_registration_path, class: "btn btn-outline-primary"
+  .container.p-0
+    nav.navbar.navbar-expand-lg.navbar-light.mx-auto.py-2
+      = link_to "LNNV", root_path, class: "navbar-brand fw-bold text-white bg-dark px-2 rounded"
+      .collapse.navbar-collapse
+        = form_with url: root_path, method: :get, class: "d-flex" do
+          = text_field_tag :search, params[:search], placeholder: "Search..." , class: "form-control"
+          = submit_tag "Search", name: "", class: "btn text-secondary border-0"
+      .navbar.justify-content-end
+        - if current_user 
+          = link_to "Create Post", new_post_path, class: "btn btn-outline-primary me-3"
+          = link_to root_path do
+            i class="fa-regular fa-bell fa-lg me-3 btn-outline-secondary p-2 rounded-5 btn border-0"
+          .dropdown
+            div type="button" data-bs-toggle="dropdown" aria-expanded="false"
+              = image_tag current_user.avatar,
+                          size: "40x40",
+                          class: "rounded-circle border object-fit-cover"
+            ul class="dropdown-menu dropdown-menu-end"
+              li
+                = link_to current_user.username, user_path(current_user.username), class: "dropdown-item"
+              li 
+                hr class="dropdown-divider"
+              li 
+                = link_to "Dashboard", dashboard_posts_path, class: "dropdown-item"
+              li 
+                = link_to "Settings", edit_settings_profile_path(current_user.username), class: "dropdown-item"
+              li 
+                = link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item"
+        - else
+          = link_to "Log in", new_user_session_path, class: "btn btn-outline-primary mx-3"
+          = link_to "Sign up", new_user_registration_path, class: "btn btn-outline-primary"
 

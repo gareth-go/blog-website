@@ -1,0 +1,22 @@
+= render "shared/navbar"
+
+.container.p-0
+  .mx-auto.justify-content-center
+    nav.navbar
+      .navbar-brand.fs-3.fw-bold
+        | Tags
+      .navbar.justify-content-end
+        = form_with method: :get, class: "d-flex" do
+          = text_field_tag :search_tags, params[:search_tags], placeholder: "Search..." , class: "form-control"
+          = submit_tag "Search", name: "", class: "btn text-secondary border-0"
+    .container.p-0
+      .row
+        - @tags.each do |tag|
+          .col-lg-3.col-md-4.col-sm-6.col-12.g-3
+            .border.rounded.bg-white.p-4
+              div 
+                = link_to tag.name, tag_path(tag.name), class: "h4 text-primary menu-link px-2 py-1 rounded fw-bold text-decoration-none"
+              small.text-secondary.px-2
+                = tag.posts_count || 0
+                |  posts
+
