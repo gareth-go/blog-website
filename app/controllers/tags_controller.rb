@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   def index
     @tags = Tag.all.order(id: :asc)
 
-    @tags = @tags.where('name LIKE ?', "%#{params[:search_tags]}%")
+    @tags = @tags.where('name LIKE ?', "%#{params[:search_tags]}%") if params[:search_tag].present?
   end
 
   def show
