@@ -3,6 +3,7 @@ class HomeController < ApplicationController
     @posts = Post.where(status: Post.statuses[:accepted])
                  .order(created_at: :desc)
                  .includes({ user: { avatar_attachment: :blob } }, :tags, :cover_image_attachment)
+    @posts = Posts::PostsFilterService.call(@posts, params)
 
     @pagy, @posts = pagy(@posts)
 
