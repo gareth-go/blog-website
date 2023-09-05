@@ -6,9 +6,9 @@ module Accounts
     end
 
     def call
-      search
-      filter_by_status
-      filter_by_role
+      search if @params[:search].present?
+      filter_by_status if User.statuses.include?(@params[:status])
+      filter_by_role if User.roles.include?(@params[:role])
 
       @accounts
     end
@@ -17,16 +17,16 @@ module Accounts
 
     def search
       @accounts = @accounts.where('username LIKE ? OR email LIKE ?',
-                                  "%#{@params[:search] || ''}%",
-                                  "%#{@params[:search] || ''}%")
+                                  "%#{@params[:search]}%",
+                                  "%#{@params[:search]}%")
     end
 
     def filter_by_status
-      @accounts = @accounts.where(status: @params[:status]) if User.statuses.include?(@params[:status])
+      @accounts = @accounts.where(status: @params[:status])
     end
 
     def filter_by_role
-      @accounts = @accounts.where(role: @params[:role]) if User.roles.include?(@params[:role])
+      @accounts = @accounts.where(role: @params[:role])
     end
   end
 end
