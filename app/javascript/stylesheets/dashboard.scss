@@ -5,8 +5,6 @@ $link-hover-bg: #e2e3f3;
 .dashboard{
   &__body {
     &__sidebar {
-      list-style-type: none;
-  
       li:hover {
         color: $secondary-alter-hover-bg;
       }
@@ -28,4 +26,13 @@ $link-hover-bg: #e2e3f3;
 .tag-name-input:focus {
   outline: 0;
   border-color: $text-area-focus-border;
+}
+
+.dashboard__body__table__accounts__row__email::-webkit-scrollbar{
+  display: none;
+}
+
+.dashboard__body__table__accounts__row__email {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

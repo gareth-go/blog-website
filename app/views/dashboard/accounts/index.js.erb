@@ -1,0 +1,3 @@
+$(".dashboard__body__table__accounts")[0].innerHTML = "<%= j render "list_accounts" %>"
+$(".dashboard__body__sidebar__tags__count")[0].innerHTML = "<%= @accounts_count %>"
+$(".pagy-bootstrap-nav").replaceWith("<%== j pagy_bootstrap_nav @pagy %>")

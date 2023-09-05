@@ -1,0 +1,18 @@
+.dashboard__body__table__accounts__row.bg-white.border-bottom.p-4.row id="dashboard-account-#{account.id}"
+  .col-lg-3.col-md-3.col-sm-3.overflow-hidden.dashboard__body__table__accounts__row__username
+    .fs-5.fw-bold.mb-1.text-secondary-alter
+      = account.username
+
+  .col-lg-3.col-md-3.col-sm-2.align-self-center.overflow-auto.dashboard__body__table__accounts__row__email align="center"
+    = account.email
+
+  .col-lg-2.col-md-2.col-sm-2.align-self-center.dashboard__body__table__accounts__row__status align="center"
+    = display_status(account)
+
+  .col-lg-1.col-md-1.col-sm-1.align-self-center.dashboard__body__table__accounts__row__role align="center"
+    = display_role(account)
+
+  .col-lg-3.col-md-3.col-sm-2.align-self-center.dashboard__body__table__accounts__row__actions
+    .d-flex
+      - if current_user != account 
+       = render "actions", account: account

@@ -33,8 +33,4 @@ class Dashboard::TagsController < ApplicationController
   def set_tag
     @tag = Tag.find(params[:id])
   end
-
-  def authenticate_admin
-    user_not_authorized unless current_user.admin?
-  end
 end

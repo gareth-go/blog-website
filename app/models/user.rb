@@ -29,7 +29,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   enum role: { normal_user: 0, admin: 1 }, _default: 'normal_user'
-  enum status: { baned: 0, active: 1 }, _default: 'active'
+  enum status: { banned: 0, active: 1 }, _default: 'active'
 
   validates :username,
             presence: { message: 'Please enter username!' },
@@ -37,11 +37,23 @@ class User < ApplicationRecord
 
   after_create_commit :add_default_avatar
 
+  def active_for_authentication?
+    # Uncomment the below debug statement to view the properties of the returned
+    # self model values.
+    # logger.debug self.to_yaml
+    super && active?
+  end
+
   private
 
   def add_default_avatar
-    avatar.attach(io: File.open(Rails.root.join('app', 'javascript', 'images', 'avatar.png')),
-                  filename: 'avatar.png',
+    seed = rand(100)
+
+    uri = URI("https://api.dicebear.com/7.x/identicon/png?seed=#{seed}")
+    response = Net::HTTP.get(uri)
+
+    avatar.attach(io: StringIO.new(response),
+                  filename: 'default_avatar.png',
                   content_type: 'image/png')
   end
 end

@@ -1,0 +1,50 @@
+= render "shared/navbar"
+
+- if flash[:notice]
+  .alert.alert-success.alert-dismissible.fade.show role="alert"
+    = flash[:notice]
+
+.container.p-0
+  .col-9.mx-auto.justify-content-center
+    .row.col-12.py-3
+      h2.fw-bold
+        | Settings for 
+        = link_to @user.username,
+                  user_path(current_user.username),
+                  class: "text-decoration-none"
+
+    .row.justify-content-center.gx-3
+      = render "settings/sidebar"
+
+      .col-lg-9.col-md-10.col-sm-12.bg-white.border.rounded.p-4
+        .h2.fw-bold
+          | Update Password 
+        = form_with model: @user, url: settings_password_path(current_user.username) do |f|
+          .my-2
+            = f.label "Old password"
+            = f.password_field :old_password,
+                               class: "form-control"
+            - if @old_password_error.present?
+                small.text-danger = @old_password_error
+
+          .my-2
+            = f.label :password
+              | Passowrd 
+              - if @minimum_password_length
+                em
+                  | (
+                  = @minimum_password_length
+                  |  characters minimum)
+            = f.password_field :password,
+                                class: "form-control"
+            - if @user.errors.messages[:password].any?
+            small.text-danger = @user.errors.messages[:password][0]
+
+          .my-2
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation,
+                               class: "form-control"
+            - if @user.errors.messages[:password_confirmation].any?
+            small.text-danger = @user.errors.messages[:password_confirmation][0]
+
+          = f.submit "Set new password", class: "btn btn-primary my-2 w-100"

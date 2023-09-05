@@ -1,0 +1,10 @@
+ul.col-lg-2.col-md-2.col-sm-4.dashboard__body__sidebar
+  li.dashboard__body__sidebar__tags
+    = link_to_unless_current "Posts", dashboard_posts_path, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex" do 
+      span.btn.menu-link.border-0.w-100.text-start.text-decoration-none.text-reset.d-flex.bg-white 
+        | Posts
+  - if current_user.admin?
+    li.dashboard__body__sidebar__tags
+      = sidebar_tags
+    li.dashboard__body__sidebar__tags
+      = sidebar_accounts

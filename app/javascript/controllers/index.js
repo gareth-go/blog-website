@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import Dashboard__AccountsController from "./dashboard/accounts_controller"
+application.register("dashboard--accounts", Dashboard__AccountsController)
+
 import DashboardTagsController from "./dashboard_tags_controller"
 application.register("dashboard-tags", DashboardTagsController)
 

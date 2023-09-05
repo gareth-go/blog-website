@@ -7,15 +7,7 @@
         | Dashboard >> Tags
       
     .row.dashboard__body.justify-content-center.gx-3
-      ul.col-lg-2.col-md-2.col-sm-4.dashboard__body__sidebar
-        li.dashboard__body__sidebar__tags
-          = link_to dashboard_posts_path, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex" do 
-            | Posts
-        li.dashboard__body__sidebar__tags
-          = link_to dashboard_tags_path, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex bg-white" do 
-            | Tags
-            span.dashboard__body__sidebar__tags__count.px-1.rounded.ms-auto
-              = @tags.size
+      = render "dashboard/sidebar"
 
       .dashboard__body__table.col-lg-10.col-md-10.col-sm-12 data-controller="dashboard-tags"
         .dashboard__body__table__add-button.btn.btn-positive.py-1.fw-bold data-dashboard-tags-target="toggleAddButton" data-action="click->dashboard-tags#toggleAdd"
@@ -27,6 +19,6 @@
             | Dissmis
           .dashboard__body__table__add-form__error.text-danger
 
-        .dashboard__body__table__tag.shadow.rounded.mt-2
+        .dashboard__body__table__tag.container.shadow-sm.rounded.mt-2
           - @tags.each do |tag|
             = render "tag", tag: tag
