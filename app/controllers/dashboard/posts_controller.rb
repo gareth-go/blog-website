@@ -12,8 +12,7 @@ class Dashboard::PostsController < ApplicationController
                            .includes(%i[tags])
              end
 
-    @posts = @posts.where(status: Post.statuses[params[:status]]) if params[:status] &&
-                                                                     Post.statuses.include?(params[:status])
+    @posts = Posts::PostsFilterService.call(@posts, params)
 
     @pagy, @posts = pagy(@posts)
   end
