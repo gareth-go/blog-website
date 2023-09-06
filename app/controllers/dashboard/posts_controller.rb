@@ -12,7 +12,7 @@ class Dashboard::PostsController < ApplicationController
                            .includes(%i[tags])
              end
 
-    @posts = Posts::PostsFilterService.call(@posts, params)
+    @posts = Posts::ListPostsService.call(@posts, params)
 
     @pagy, @posts = pagy(@posts)
   end
