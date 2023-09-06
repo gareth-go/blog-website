@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     @posts = Posts::PostsFilterService.call(@posts, params)
     @posts = Posts::PostsSortService.call(@posts, params)
     # load cover image of first post
-    @posts.first.cover_image if params[:page].nil? || params[:page] == '1'
+    @posts.first&.cover_image if params[:page].nil? || params[:page] == '1'
 
     @pagy, @posts = pagy(@posts)
 

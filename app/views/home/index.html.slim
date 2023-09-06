@@ -18,7 +18,7 @@
           = params[:search]
           | "
     .container
-      .row
+      .row.justify-content-center
         ul.col-lg-2.col-md-3.col-sm-4.home-page__sidebar.p-0
           li.home-page__sidebar__home
             = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
@@ -44,7 +44,7 @@
                 | Contact
 
         .col-lg-6.col-md-6.col-sm-12.col-12.home-page__main.p-0 data-controller="home" data-home-sort-value=params[:sort] id="#home-page__main"
-          nav.navbar.navbar-light.py-1 
+          nav.navbar.navbar-expand.navbar-light.py-1 
             - if params[:search].present?
               = link_to "Lastest",
                         root_path(search: params[:search]),
@@ -79,6 +79,6 @@
           .home-page__main__posts
             = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}
 
-          .load-more__button.opacity-0
+          .load-more__button.opacity-0.overflow-hidden
             == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"
 
