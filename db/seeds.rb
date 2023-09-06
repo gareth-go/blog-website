@@ -9,7 +9,7 @@
 
 ActiveRecord::Base.transaction do
   100.times.each do |time|
-    # Tag.create!(name: Faker::Lorem.unique.word)
+    Tag.create!(name: Faker::Lorem.unique.word)
     User.create!(username: "#{Faker::Artist.name} #{time}", email: Faker::Internet.unique.email, password: '123456')
   end
 
@@ -18,5 +18,17 @@ ActiveRecord::Base.transaction do
 
   100.times.each do
     Post.create!(title: Faker::Lorem.unique.sentence, content: Faker::Lorem.paragraphs, user: users.sample, tags: tags.sample(4))
+  end
+
+  posts = Post.all
+
+  300.times.each do
+    Comment.create!(user: users.sample, post: posts.sample, content: Faker::Lorem.paragraph)
+  end
+
+  300.times.each do
+    post = posts.sample
+    Comment.create!(user: users.sample, post: post, parent_comment: post.comments.sample, content: Faker::Lorem.paragraph)
+    Reaction.create!(user: users.sample, post: posts.sample, reaction_type: rand(5))
   end
 end

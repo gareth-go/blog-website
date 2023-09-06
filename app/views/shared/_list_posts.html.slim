@@ -1,5 +1,5 @@
-- posts.each_with_index do |post, index |
-  .mb-2.bg-white.border.rounded.shadow-sm
+- posts.each_with_index do |post, index|
+  .mb-2.pb-2.bg-white.border.rounded.shadow-sm
     - if post.pending?
       .px-4.pt-2.text-warning
         | Pending 
@@ -10,11 +10,30 @@
     .py-2.px-4
       .fs-6.text-secondary
         = link_to user_path(post.user.username), class: "text-decoration-none text-secondary" do
-          = render partial: "shared/post_username_link", locals: {post: post}
+          = render partial: "shared/post_username_link", locals: { post: post }
       small.text-secondary
         = post.created_at.to_date.to_s(:long)
     .pb-2.px-4
       = link_to post.title, post, class: "fs-2 text-black fw-bold text-decoration-none"
     .pb-2.px-4
-      = render partial: "shared/post_tags_link", locals: {post: post}
+      = render partial: "shared/post_tags_link", locals: { post: post }
+    .pb-2.px-3
+      - if post.reactions.size > 0
+        = link_to post, class: "text-decoration-none text-reset menu-link py-2 px-2 rounded" do
+          = render "shared/reactions", icon_src: "media/images/like-icon.svg", count: post.reactions.like.size
+          = render "shared/reactions", icon_src: "media/images/unicorn-icon.svg", count: post.reactions.unicorn.size
+          = render "shared/reactions", icon_src: "media/images/exploding_head-icon.svg", count: post.reactions.exploding_head.size
+          = render "shared/reactions", icon_src: "media/images/raised_hand-icon.svg", count: post.reactions.raised_hand.size
+          = render "shared/reactions", icon_src: "media/images/fire-icon.svg", count: post.reactions.fire.size
+          small.ms-1.align-bottom
+            = post.reactions.size
+            |  Reactions 
+      = link_to post_path(post) + "#comments", class: "text-decoration-none text-reset menu-link py-2 px-2 rounded" do
+        = image_pack_tag "media/images/comment-icon.svg", size: "20x20"
+        small.ms-1.align-bottom
+          - if post.comments.size > 0
+            = post.comments_count
+            |  Comments
+          - else 
+            | Add comments
 div id="load-more"

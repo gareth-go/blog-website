@@ -1,9 +1,11 @@
 class HomeController < ApplicationController
   def index
     @posts = Post.where(status: Post.statuses[:accepted])
-                 .order(created_at: :desc)
-                 .includes({ user: { avatar_attachment: :blob } }, :tags, :cover_image_attachment)
+                 .includes({ user: { avatar_attachment: :blob } }, :tags)
     @posts = Posts::PostsFilterService.call(@posts, params)
+    @posts = Posts::PostsSortService.call(@posts, params)
+    # load cover image of first post
+    @posts.first.cover_image if params[:page].nil? || params[:page] == '1'
 
     @pagy, @posts = pagy(@posts)
 

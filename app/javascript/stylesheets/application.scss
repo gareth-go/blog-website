@@ -9,6 +9,10 @@ $secondary-alter-hover-bg: #2F3AB2;
 $link-color: #6c757d;
 $link-hover-bg: #e2e3f3;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: Sans-Serif;
   background: $body-bg;
