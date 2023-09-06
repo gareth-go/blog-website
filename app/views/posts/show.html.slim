@@ -54,11 +54,11 @@
             - if current_user
               = form_with model: @new_comment, url: post_comments_path(@post), local: false, class: "pb-4 container comment__form post__main__comments__form" do |f|
                 .row.gx-3
-                  .align-top.col-1
+                  .align-top.col-lg-1.col-2
                     = image_tag current_user.avatar,
                         size: "32x32",
                         class: "rounded-circle border me-1 object-fit-cover"
-                  .col-11
+                  .col-lg-11.col-10
                     = f.text_area :content, placeholder: "Write a comment...", class: "p-2 w-100"
                     = f.submit "Submit", class: "btn btn-positive"
             .post__main__comments__list
