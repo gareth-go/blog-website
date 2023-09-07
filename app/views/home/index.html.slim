@@ -17,39 +17,68 @@
           | Search result for "
           = params[:search]
           | "
-
-    .row.justify-content-center
-      ul.col-lg-2.col-md-3.col-sm-4.home-page__sidebar.p-0
-        li.home-page__sidebar__home
-          = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
-            = image_pack_tag "media/images/home-icon.svg", class: "pe-2" 
-            | Home
-        li.home-page__sidebar__tag
-          = link_to tags_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
-            = image_pack_tag "media/images/tags-icon.svg", class: "pe-2"
-            | Tags
-          ul 
-            - @tags.each do |tag|
-              li 
-                = link_to tag_path(tag.name), class: "btn menu-link border-0 w-100 text-start mb-1" do 
-                  i class="fa-solid fa-tags me-3"
-                  = tag.name
-            li 
-              = link_to tags_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
-                i class="fa-solid fa-chevron-down me-3"
-                | more
-          li.home-page__sidebar__tag
+    .container
+      .row.justify-content-center
+        ul.col-lg-2.col-md-3.col-sm-4.home-page__sidebar.p-0
+          li.home-page__sidebar__home
             = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
-              = image_pack_tag "media/images/contact-icon.svg", class: "pe-2"
-              | Contact
+              = image_pack_tag "media/images/home-icon.svg", class: "pe-2" 
+              | Home
+          li.home-page__sidebar__tag
+            = link_to tags_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
+              = image_pack_tag "media/images/tags-icon.svg", class: "pe-2"
+              | Tags
+            ul 
+              - @tags.each do |tag|
+                li 
+                  = link_to tag_path(tag.name), class: "btn menu-link border-0 w-100 text-start mb-1" do 
+                    i class="fa-solid fa-tags me-3"
+                    = tag.name
+              li 
+                = link_to tags_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
+                  i class="fa-solid fa-chevron-down me-3"
+                  | more
+            li.home-page__sidebar__tag
+              = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
+                = image_pack_tag "media/images/contact-icon.svg", class: "pe-2"
+                | Contact
 
-      .col-lg-6.col-md-6.col-sm-8.home-page__main.p-0 id="#home-page__main"
-        nav.navbar.navbar-expand-lg.navbar-light.py-1
-          = link_to "Lastest", root_path, class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
-          = link_to "Top comments", root_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
-          = link_to "Top reactions", root_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
-        .home-page__main__posts
-          = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}
-        .load-more__button.opacity-0
-          == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"
+        .col-lg-6.col-md-6.col-sm-12.col-12.home-page__main.p-0 data-controller="home" data-home-sort-value=params[:sort] id="#home-page__main"
+          nav.navbar.navbar-expand.navbar-light.py-1 
+            - if params[:search].present?
+              = link_to "Lastest",
+                        root_path(search: params[:search]),
+                        data: { home_target: "lastestLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0"
+
+              = link_to "Top comments",
+                        root_path(search: params[:search], sort: "comments"),
+                        data: { home_target: "topCommentsLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0"
+
+              = link_to "Top reactions",
+                        root_path(search: params[:search], sort: "reactions"),
+                        data: { home_target: "topReactionsLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0"
+            - else
+              = link_to "Lastest",
+                        root_path,
+                        data: { home_target: "lastestLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0"
+
+              = link_to "Top comments",
+                        root_path(sort: "comments"),
+                        data: { home_target: "topCommentsLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0"
+
+              = link_to "Top reactions",
+                        root_path(sort: "reactions"),
+                        data: { home_target: "topReactionsLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0"
+
+          .home-page__main__posts
+            = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}
+
+          .load-more__button.opacity-0.overflow-hidden
+            == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"
 

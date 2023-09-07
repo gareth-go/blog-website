@@ -12,3 +12,9 @@ application.register("dashboard-tags", DashboardTagsController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import HomeController from "./home_controller"
+application.register("home", HomeController)
+
+import PostsController from "./posts_controller"
+application.register("posts", PostsController)

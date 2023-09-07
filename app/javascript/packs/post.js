@@ -1,8 +1,4 @@
 $(document).on('turbolinks:load', function() {  
-  $('.post__option__comment').on('click', function() {
-    $('.post__main__comments__form textarea').trigger('focus')
-  })
-
   $('.post__main__comments').on('click', '.reply__option__show-replies', function(event) {
     var replies = $(event.target.closest('.reply__option').nextSibling.nextSibling)
 

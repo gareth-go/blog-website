@@ -28,7 +28,7 @@ class ReactionsController < ApplicationController
   end
 
   def destroy
-    @reaction = @reaction.delete.persisted?
+    @reaction = @reaction.destroy.persisted?
 
     set_reactions
   end

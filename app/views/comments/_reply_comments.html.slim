@@ -7,5 +7,7 @@
     .btn.btn-negative.cancel-reply-comment Dismiss
 
   .reply__list id="replies-of-comment-#{comment.id}"
-    - comment.replies.order(created_at: :desc).includes(%i[user parent_comment]).each do |reply|
+    - replies = comment.replies.order(created_at: :desc).includes({ user: { avatar_attachment: :blob } }, :parent_comment, :post)
+
+    - replies.each do |reply|
       = render partial: "comments/reply", locals: { parent_comment: comment, reply: reply }

@@ -24,7 +24,7 @@
           .profile__body__stat.bg-white.border.rounded.py-2.px-3.col-lg-4.col-md-4.col-sm-12.col-12.align-self-start
             .profile__body__stat__posts.mb-2.mt
               = image_pack_tag "media/images/post-icon.svg", class: "me-2"
-              = @user.posts_count || 0
+              = @posts.count || 0
               |  posts published
             .profile__body__stat__comments
               = image_pack_tag "media/images/comment-icon.svg", class: "me-2"

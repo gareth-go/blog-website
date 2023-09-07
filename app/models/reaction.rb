@@ -10,7 +10,7 @@
 #
 class Reaction < ApplicationRecord
   belongs_to :user
-  belongs_to :post
+  belongs_to :post, counter_cache: true
 
   enum reaction_type: { like: 0, unicorn: 1, exploding_head: 2, raised_hand: 3, fire: 4 }
 end
