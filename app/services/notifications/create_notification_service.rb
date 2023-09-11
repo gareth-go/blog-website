@@ -15,9 +15,7 @@ module Notifications
     private
 
     def user_is_notificationable_owner
-      return true if @notification_type != 'post' && @user == @notificationable.user
-
-      false
+      @notification_type != 'post' && @user == @notificationable.user
     end
 
     def notification_content
