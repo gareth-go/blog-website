@@ -27,6 +27,6 @@
               = link_to "Top reactions", root_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
             .home-page__main__posts
               = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}
-            .load-more__button.opacity-0
+            .load-more__button.opacity-0.overflow-hidden
               == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"
         

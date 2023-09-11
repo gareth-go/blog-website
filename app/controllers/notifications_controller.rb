@@ -10,5 +10,7 @@ class NotificationsController < ApplicationController
 
     @notifications.unviewed.update(viewed: true)
     @unviewed_notifications_count = Notification.where(user: current_user).unviewed.count
+
+    @pagy, @notifications = pagy(@notifications, items: 10)
   end
 end
