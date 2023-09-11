@@ -69,6 +69,14 @@ body {
   border: none;
 }
 
+.notification-link {
+  background: white;
+}
+
+.notification-link:hover {
+  background: $link-hover-bg;
+}
+
 ul {
   list-style-type: none;
 }

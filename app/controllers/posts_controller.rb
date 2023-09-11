@@ -54,6 +54,8 @@ class PostsController < ApplicationController
     authorize @post
 
     @post.update(status: :accepted)
+    Notification.create(user: @post.user, notificationable: @post, content: 'Your post was accepted by admin.')
+
     redirect_to dashboard_posts_path(status: :accepted)
   end
 
@@ -61,6 +63,8 @@ class PostsController < ApplicationController
     authorize @post
 
     @post.update(status: :rejected)
+    Notification.create(user: @post.user, notificationable: @post, content: 'Your post was rejected by admin.')
+
     redirect_to dashboard_posts_path(status: :rejected)
   end
 

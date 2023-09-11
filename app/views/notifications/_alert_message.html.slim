@@ -1,0 +1,11 @@
+- unless notification.notificationable_type == 'Post'
+  span.align-middle.fw-bold
+    = notification.notificationable.user.username
+span.align-middle
+  |  
+  = notification.content
+  - if notification.notificationable_type == 'Reaction'
+    |  with 
+    span.text-info
+      = notification.notificationable.reaction_type
+    |.

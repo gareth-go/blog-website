@@ -1,1 +1,2 @@
-$(".post__option__reation").replaceWith("<%= j render 'post_reactions', post: @post, reactions: @reactions, reaction: @reaction %>")
+$(".post__option__reaction").replaceWith("<%= j render 'post_reactions', post: @post, reactions: @reactions, reaction: @reaction %>")
+$(".post__main__reactions").replaceWith("<%= j render 'posts/reactions', post: @post %>")

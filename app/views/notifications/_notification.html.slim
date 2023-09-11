@@ -1,0 +1,16 @@
+.mb-2.py-3.border.rounded.shadow-sm.notification-link
+  .py-2.px-4
+    - unless notification.notificationable_type == 'Post'
+      = image_tag notification.notificationable.user.avatar,
+                  size: "32x32",
+                  class: "rounded-circle border me-2 object-fit-cover"
+      span.align-middle.fw-bold
+        = notification.notificationable.user.username
+    span.align-middle
+      |  
+      = notification.content
+      - if notification.notificationable_type == 'Reaction'
+        |  with 
+        span.text-info
+          = notification.notificationable.reaction_type
+        |.

@@ -1,5 +1,5 @@
-.post__option__reation.btn-group.dropend.mb-3
-  .post__option__reation__toggle type="button" data-bs-toggle="dropdown" aria-expanded="false"
+.post__option__reaction.btn-group.dropend.mb-3
+  .post__option__reaction__toggle type="button" data-bs-toggle="dropdown" aria-expanded="false"
     - if reaction
       = image_pack_tag "media/images/add-reaction-active-icon.svg", class: "mx-auto mb-2"
     - else 
@@ -7,7 +7,7 @@
     br
     span
       = reactions.size
-  ul.post__option__reation__menu.dropdown-menu.ms-2.px-3.rounded-5
+  ul.post__option__reaction__menu.dropdown-menu.ms-2.px-3.rounded-5
     .d-flex.gap-1
       = render partial: "reactions/reaction_type", locals: { type: "like", reaction: reaction, icon_src: "media/images/like-icon.svg", count: reactions.like.size, post: post }
       = render partial: "reactions/reaction_type", locals: { type: "unicorn", reaction: reaction, icon_src: "media/images/unicorn-icon.svg", count: reactions.unicorn.size, post: post }

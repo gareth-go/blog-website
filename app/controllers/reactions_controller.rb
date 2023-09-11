@@ -11,11 +11,12 @@ class ReactionsController < ApplicationController
       redirect_to @post
     end
 
-    if @reaction.save
-      set_reactions
-    else
-      redirect_to @post
-    end
+    redirect_to @post unless @reaction.save
+    set_reactions
+
+    return if @post.user == @reaction.user
+
+    Notification.create(user: @post.user, notificationable: @reaction, content: 'reacted to your post')
   end
 
   def update

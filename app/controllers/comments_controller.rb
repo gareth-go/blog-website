@@ -7,6 +7,20 @@ class CommentsController < ApplicationController
 
   def create
     redirect_to @post unless @new_comment.update(comment_params)
+
+    if @new_comment.parent_comment.present?
+      return if @new_comment.parent_comment.user == @new_comment.user
+
+      Notification.create(user: @new_comment.parent_comment.user,
+                          notificationable: @new_comment,
+                          content: 'replied to your comment.')
+    else
+      return if @post.user == @new_comment.user
+
+      Notification.create(user: @post.user,
+                          notificationable: @new_comment,
+                          content: 'commented to your post.')
+    end
   end
 
   def update
