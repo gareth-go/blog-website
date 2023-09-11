@@ -4,6 +4,8 @@ class PostsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[show]
 
+  after_action :create_notification, only: %i[accept reject]
+
   def show
     authorize @post
 
@@ -54,8 +56,6 @@ class PostsController < ApplicationController
     authorize @post
 
     @post.update(status: :accepted)
-    Notification.create(user: @post.user, notificationable: @post, content: 'Your post was accepted by admin.')
-
     redirect_to dashboard_posts_path(status: :accepted)
   end
 
@@ -63,8 +63,6 @@ class PostsController < ApplicationController
     authorize @post
 
     @post.update(status: :rejected)
-    Notification.create(user: @post.user, notificationable: @post, content: 'Your post was rejected by admin.')
-
     redirect_to dashboard_posts_path(status: :rejected)
   end
 
@@ -101,15 +99,7 @@ class PostsController < ApplicationController
     values
   end
 
-  def require_admin
-    redirect_to root_path unless current_user.admin?
-  end
-
-  def require_owner
-    redirect_to root_path unless @post.user == current_user
-  end
-
-  def require_owner_or_admin
-    redirect_to root_path unless current_user.admin? || @post.user == current_user
+  def create_notification
+    Notifications::CreateNotificationService.call(@post.user, @post, 'post')
   end
 end
