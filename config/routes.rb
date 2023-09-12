@@ -30,6 +30,10 @@ Rails.application.routes.draw do
 
   resources :users, param: :username, only: :show
 
+  resources :notifications, only: :index
+
+  mount ActionCable.server => '/cable'
+
   devise_for :users, path: ''
 
   root 'home#index'

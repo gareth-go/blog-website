@@ -4,6 +4,8 @@ class PostsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[show]
 
+  after_action :create_notification, only: %i[accept reject]
+
   def show
     authorize @post
 
@@ -97,15 +99,7 @@ class PostsController < ApplicationController
     values
   end
 
-  def require_admin
-    redirect_to root_path unless current_user.admin?
-  end
-
-  def require_owner
-    redirect_to root_path unless @post.user == current_user
-  end
-
-  def require_owner_or_admin
-    redirect_to root_path unless current_user.admin? || @post.user == current_user
+  def create_notification
+    Notifications::CreateNotificationService.call(@post.user, @post, 'post')
   end
 end

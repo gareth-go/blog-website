@@ -37,6 +37,8 @@
             | Post on 
             = @post.created_at.to_date.to_s(:long)
 
+        = render "reactions", post: @post
+          
         .post__main__title.px-5
           h1.fw-bold 
             = @post.title

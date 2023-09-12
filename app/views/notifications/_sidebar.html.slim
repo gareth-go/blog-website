@@ -1,0 +1,9 @@
+ul.col-lg-3.col-md-3.col-sm-4
+  li 
+    = link_to "All", notifications_path, data: { notifications_target: "allNotifications" }, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex"
+  li 
+    = link_to "Posts", notifications_path(type: "Post"), data: { notifications_target: "postsNotifications" }, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex"
+  li 
+    = link_to "Comments", notifications_path(type: "Comment"), data: { notifications_target: "commentsNotifications" }, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex"
+  li 
+    = link_to "Reactions", notifications_path(type: "Reaction"), data: { notifications_target: "reactionsNotifications" }, class: "btn menu-link border-0 w-100 text-start text-decoration-none text-reset d-flex"

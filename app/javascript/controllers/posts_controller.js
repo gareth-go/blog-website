@@ -9,6 +9,14 @@ export default class extends Controller {
       this.coverImageTarget.onload = () => {
         this.commentsTarget.scrollIntoView(true, { behavior: "smooth" })
       }
+    } else {
+      let comment = document.querySelector(window.location.hash)
+      if (comment) {
+        comment.querySelector(".comment-detail").classList.add("bg-light", "rounded")
+        this.coverImageTarget.onload = () => {
+          comment.scrollIntoView(true, { behavior: "smooth" })
+        }
+      }
     }
   }
 

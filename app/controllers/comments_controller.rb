@@ -7,6 +7,8 @@ class CommentsController < ApplicationController
 
   def create
     redirect_to @post unless @new_comment.update(comment_params)
+
+    Notifications::CreateNotificationService.call(@new_comment.parent_comment&.user || @post.user, @new_comment, 'comment')
   end
 
   def update

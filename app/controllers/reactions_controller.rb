@@ -11,11 +11,10 @@ class ReactionsController < ApplicationController
       redirect_to @post
     end
 
-    if @reaction.save
-      set_reactions
-    else
-      redirect_to @post
-    end
+    redirect_to @post unless @reaction.save
+    set_reactions
+
+    Notifications::CreateNotificationService.call(@post.user, @reaction, 'reaction')
   end
 
   def update

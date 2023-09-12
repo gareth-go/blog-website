@@ -1,0 +1,16 @@
+= render "shared/navbar"
+
+.container.p-0 data-controller="notifications" data-notifications-type-value=params[:type]
+  .col-9.mx-auto.justify-content-center
+    .row.col-12.py-3
+      h2.fw-bold
+        | Notifications 
+    
+    .row.justify-content-center.gx-3
+      = render "sidebar"
+
+      .col-lg-9.col-md-9.col-sm-12.list-notifications
+        = render "list_notifications"
+
+      .opacity-0.overflow-hidden data-notifications-target="loadMoreButton"
+          == pagy_bootstrap_nav @pagy

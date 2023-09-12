@@ -1,0 +1,6 @@
+.post__main__reactions.pb-3.px-5
+  = render "posts/reaction", icon_src: "media/images/like-icon.svg", count: post.reactions.like.size
+  = render "posts/reaction", icon_src: "media/images/unicorn-icon.svg", count: post.reactions.unicorn.size
+  = render "posts/reaction", icon_src: "media/images/exploding_head-icon.svg", count: post.reactions.exploding_head.size
+  = render "posts/reaction", icon_src: "media/images/raised_hand-icon.svg", count: post.reactions.raised_hand.size
+  = render "posts/reaction", icon_src: "media/images/fire-icon.svg", count: post.reactions.fire.size

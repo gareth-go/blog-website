@@ -31,5 +31,5 @@
         .dashboard__body__table__accounts.container.shadow-sm.rounded.mt-2
           = render "list_accounts"
 
-        .load-more__accounts.opacity-0 data-dashboard--accounts-target="loadMoreButton"
+        .load-more__accounts.opacity-0.overflow-hidden data-dashboard--accounts-target="loadMoreButton"
           == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"
