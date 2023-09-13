@@ -70,28 +70,32 @@ RSpec.describe PostsController, type: :controller do
     context 'with valid params' do
       let(:new_attributes) { { title: 'new title' } }
 
-      it 'updates the post' do
+      before do
         put :update, params: { id: post_record.id, post: new_attributes }
+      end
+
+      it 'updates the post' do
         post_record.reload
         expect(post_record.title).to eq('new title')
       end
 
       it 'redirects to the updated post' do
-        put :update, params: { id: post_record.id, post: new_attributes }
         post_record.reload
         should redirect_to post_record
       end
     end
 
     context 'with invalid params' do
-      it 'does not update the post' do
+      before do
         put :update, params: { id: post_record.id, post: invalid_attributes }
+      end
+
+      it 'does not update the post' do
         post_record.reload
         expect(post_record.title).not_to eq('')
       end
 
       it "render 'edit' template" do
-        put :update, params: { id: post_record.id, post: invalid_attributes }
         should render_template 'edit'
       end
     end

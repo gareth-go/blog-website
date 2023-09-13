@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-09-13T15:39:06+07:00">2023-09-13T15:39:06+07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-09-13T16:41:20+07:00">2023-09-13T16:41:20+07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -30,7 +30,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.88
+         1.9
        </span>
     </span> hits/line
     )
@@ -330,7 +330,7 @@
             <td class="cell--number">19</td>
             <td class="cell--number">19</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">5.79</td>
+            <td class="cell--number">6.00</td>
             
           </tr>
         
@@ -546,11 +546,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#5257bf3631afe53858c8ee98309576b72faa8a62" class="src_link" title="spec/controllers/posts_controller_spec.rb">spec/controllers/posts_controller_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">152</td>
+            <td class="cell--number">156</td>
             <td class="cell--number">85</td>
             <td class="cell--number">85</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.71</td>
+            <td class="cell--number">1.73</td>
             
           </tr>
         
@@ -6019,8 +6019,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="20" data-linenumber="50">
-            <span class="hits">20</span>
+          <li class="covered" data-hits="21" data-linenumber="50">
+            <span class="hits">21</span>
             
 
             
@@ -6041,8 +6041,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="20" data-linenumber="52">
-            <span class="hits">20</span>
+          <li class="covered" data-hits="21" data-linenumber="52">
+            <span class="hits">21</span>
             
 
             
@@ -6052,8 +6052,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="20" data-linenumber="53">
-            <span class="hits">20</span>
+          <li class="covered" data-hits="21" data-linenumber="53">
+            <span class="hits">21</span>
             
 
             
@@ -6074,8 +6074,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="20" data-linenumber="55">
-            <span class="hits">20</span>
+          <li class="covered" data-hits="21" data-linenumber="55">
+            <span class="hits">21</span>
             
 
             
@@ -17590,13 +17590,13 @@
 
             
 
-            <code class="ruby">      it &#39;updates the post&#39; do</code>
+            <code class="ruby">      before do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="74">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="74">
+            <span class="hits">2</span>
             
 
             
@@ -17606,29 +17606,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="75">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        post_record.reload</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="76">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        expect(post_record.title).to eq(&#39;new title&#39;)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="77">
+          <li class="never" data-hits="" data-linenumber="75">
             
             
 
@@ -17639,13 +17617,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="78">
+          <li class="never" data-hits="" data-linenumber="76">
             
             
 
             
 
             <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="77">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      it &#39;updates the post&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="78">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        post_record.reload</code>
           </li>
         </div>
       
@@ -17656,45 +17656,12 @@
 
             
 
-            <code class="ruby">      it &#39;redirects to the updated post&#39; do</code>
+            <code class="ruby">        expect(post_record.title).to eq(&#39;new title&#39;)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="80">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        put :update, params: { id: post_record.id, post: new_attributes }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="81">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        post_record.reload</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="82">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        should redirect_to post_record</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="83">
+          <li class="never" data-hits="" data-linenumber="80">
             
             
 
@@ -17705,18 +17672,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="84">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="85">
+          <li class="never" data-hits="" data-linenumber="81">
             
             
 
@@ -17727,40 +17683,18 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="86">
+          <li class="covered" data-hits="1" data-linenumber="82">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    context &#39;with invalid params&#39; do</code>
+            <code class="ruby">      it &#39;redirects to the updated post&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="87">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      it &#39;does not update the post&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="88">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        put :update, params: { id: post_record.id, post: invalid_attributes }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="89">
+          <li class="covered" data-hits="1" data-linenumber="83">
             <span class="hits">1</span>
             
 
@@ -17771,13 +17705,79 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="90">
+          <li class="covered" data-hits="1" data-linenumber="84">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">        expect(post_record.title).not_to eq(&#39;&#39;)</code>
+            <code class="ruby">        should redirect_to post_record</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="85">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="86">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="87">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="88">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    context &#39;with invalid params&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="89">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      before do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="90">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">        put :update, params: { id: post_record.id, post: invalid_attributes }</code>
           </li>
         </div>
       
@@ -17810,7 +17810,7 @@
 
             
 
-            <code class="ruby">      it &quot;render &#39;edit&#39; template&quot; do</code>
+            <code class="ruby">      it &#39;does not update the post&#39; do</code>
           </li>
         </div>
       
@@ -17821,7 +17821,7 @@
 
             
 
-            <code class="ruby">        put :update, params: { id: post_record.id, post: invalid_attributes }</code>
+            <code class="ruby">        post_record.reload</code>
           </li>
         </div>
       
@@ -17832,7 +17832,7 @@
 
             
 
-            <code class="ruby">        should render_template &#39;edit&#39;</code>
+            <code class="ruby">        expect(post_record.title).not_to eq(&#39;&#39;)</code>
           </li>
         </div>
       
@@ -17854,62 +17854,62 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="98">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      it &quot;render &#39;edit&#39; template&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="99">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        should render_template &#39;edit&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="100">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="101">
+            
+            
+
+            
+
             <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="98">
+          <li class="never" data-hits="" data-linenumber="102">
             
             
 
             
 
             <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="99">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="100">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  describe &#39;PUT #accept&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="101">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    context &#39;user are not authorize to accept post&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="102">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      before { login_user }</code>
           </li>
         </div>
       
@@ -17931,23 +17931,34 @@
 
             
 
-            <code class="ruby">      include_examples &#39;user do unauthorize action&#39;, :accept</code>
+            <code class="ruby">  describe &#39;PUT #accept&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="105">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="105">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">    end</code>
+            
+
+            <code class="ruby">    context &#39;user are not authorize to accept post&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="106">
+          <li class="covered" data-hits="2" data-linenumber="106">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      before { login_user }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="107">
             
             
 
@@ -17958,24 +17969,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="107">
+          <li class="covered" data-hits="1" data-linenumber="108">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    context &#39;admin accept post success&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="108">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      before { login_admin }</code>
+            <code class="ruby">      include_examples &#39;user do unauthorize action&#39;, :accept</code>
           </li>
         </div>
       
@@ -17986,18 +17986,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="110">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="110">
+            
             
 
             
 
-            <code class="ruby">      it &#39;update post status to accepted&#39; do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -18008,18 +18008,18 @@
 
             
 
-            <code class="ruby">        put :accept, params: { id: post_record.id }</code>
+            <code class="ruby">    context &#39;admin accept post success&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="112">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="112">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">        expect(post_record.reload.status).to eq(&#39;accepted&#39;)</code>
+            <code class="ruby">      before { login_admin }</code>
           </li>
         </div>
       
@@ -18030,12 +18030,56 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="114">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      it &#39;update post status to accepted&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="115">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        put :accept, params: { id: post_record.id }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="116">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        expect(post_record.reload.status).to eq(&#39;accepted&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="117">
+            
+            
+
+            
+
             <code class="ruby">      end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="114">
+          <li class="never" data-hits="" data-linenumber="118">
             
             
 
@@ -18046,57 +18090,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="115">
+          <li class="never" data-hits="" data-linenumber="119">
             
             
 
             
 
             <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="116">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="117">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  describe &#39;PUT #reject&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="118">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    context &#39;user are not authorize to reject post&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="119">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      before { login_user }</code>
           </li>
         </div>
       
@@ -18118,23 +18118,34 @@
 
             
 
-            <code class="ruby">      include_examples &#39;user do unauthorize action&#39;, :reject</code>
+            <code class="ruby">  describe &#39;PUT #reject&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="122">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="122">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">    end</code>
+            
+
+            <code class="ruby">    context &#39;user are not authorize to reject post&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="123">
+          <li class="covered" data-hits="2" data-linenumber="123">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      before { login_user }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="124">
             
             
 
@@ -18145,24 +18156,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="124">
+          <li class="covered" data-hits="1" data-linenumber="125">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    context &#39;admin reject post success&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="125">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      before { login_admin }</code>
+            <code class="ruby">      include_examples &#39;user do unauthorize action&#39;, :reject</code>
           </li>
         </div>
       
@@ -18173,18 +18173,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="127">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="127">
+            
             
 
             
 
-            <code class="ruby">      it &#39;update post status to rejected&#39; do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -18195,18 +18195,18 @@
 
             
 
-            <code class="ruby">        put :reject, params: { id: post_record.id }</code>
+            <code class="ruby">    context &#39;admin reject post success&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="129">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="129">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">        expect(post_record.reload.status).to eq(&#39;rejected&#39;)</code>
+            <code class="ruby">      before { login_admin }</code>
           </li>
         </div>
       
@@ -18217,12 +18217,56 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="131">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      it &#39;update post status to rejected&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="132">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        put :reject, params: { id: post_record.id }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="133">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        expect(post_record.reload.status).to eq(&#39;rejected&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="134">
+            
+            
+
+            
+
             <code class="ruby">      end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="131">
+          <li class="never" data-hits="" data-linenumber="135">
             
             
 
@@ -18233,57 +18277,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="132">
+          <li class="never" data-hits="" data-linenumber="136">
             
             
 
             
 
             <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="133">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="134">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  describe &#39;DELETE #destroy&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="135">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    context &#39;user can not delete post of other user&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="136">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      before { login_user }</code>
           </li>
         </div>
       
@@ -18305,45 +18305,23 @@
 
             
 
-            <code class="ruby">      include_examples &#39;user do unauthorize action&#39;, :destroy</code>
+            <code class="ruby">  describe &#39;DELETE #destroy&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="139">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="140">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="141">
+          <li class="covered" data-hits="1" data-linenumber="139">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    context &#39;user delete own post success&#39; do</code>
+            <code class="ruby">    context &#39;user can not delete post of other user&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="142">
+          <li class="covered" data-hits="2" data-linenumber="140">
             <span class="hits">2</span>
             
 
@@ -18354,84 +18332,29 @@
         </div>
       
         <div>
+          <li class="never" data-hits="" data-linenumber="141">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="142">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      include_examples &#39;user do unauthorize action&#39;, :destroy</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="never" data-hits="" data-linenumber="143">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="144">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      let(:post_record) { FactoryBot.create(:post, user: controller.current_user) }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="145">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="146">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      it &#39;delete post&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="147">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        delete :destroy, params: { id: post_record.id }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="148">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        expect(Post.exists?(post_record.id)).to eq(false)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="149">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="150">
             
             
 
@@ -18442,7 +18365,128 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="151">
+          <li class="never" data-hits="" data-linenumber="144">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="145">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    context &#39;user delete own post success&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="146">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      before { login_user }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="147">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="148">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      let(:post_record) { FactoryBot.create(:post, user: controller.current_user) }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="149">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="150">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      it &#39;delete post&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="151">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        delete :destroy, params: { id: post_record.id }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="152">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        expect(Post.exists?(post_record.id)).to eq(false)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="153">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="154">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="155">
             
             
 
@@ -18453,7 +18497,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="152">
+          <li class="never" data-hits="" data-linenumber="156">
             
             
 
