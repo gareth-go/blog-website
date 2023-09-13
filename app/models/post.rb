@@ -23,5 +23,7 @@ class Post < ApplicationRecord
   has_rich_text :content
   has_one_attached :cover_image
 
-  validates :title, presence: { message: 'Title can not be blank' }
+  validates :title,
+            presence: { message: 'Title can not be blank' },
+            uniqueness: { message: 'This title is already exist' }
 end
