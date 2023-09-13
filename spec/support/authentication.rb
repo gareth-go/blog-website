@@ -1,7 +1,7 @@
 module Authentication
   def login_admin
     @request.env['devise.mapping'] = Devise.mappings[:admin]
-    sign_in FactoryBot.create(:admin)
+    sign_in FactoryBot.create(:user, :admin)
   end
 
   def login_user
