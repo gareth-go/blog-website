@@ -14,9 +14,7 @@ class ReactionsController < ApplicationController
     redirect_to @post unless @reaction.save
     set_reactions
 
-    return if @post.user == @reaction.user
-
-    Notification.create(user: @post.user, notificationable: @reaction, content: 'reacted to your post')
+    Notifications::CreateNotificationService.call(@post.user, @reaction, 'reaction')
   end
 
   def update

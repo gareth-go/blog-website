@@ -9,6 +9,8 @@
     .row.justify-content-center.gx-3
       = render "sidebar"
 
-      .col-lg-9.col-md-9.col-sm-12
-        - @notifications.each do |notification|
-          = link_to_notificationable(notification, false)
+      .col-lg-9.col-md-9.col-sm-12.list-notifications
+        = render "list_notifications"
+
+      .opacity-0.overflow-hidden data-notifications-target="loadMoreButton"
+          == pagy_bootstrap_nav @pagy

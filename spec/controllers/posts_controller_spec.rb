@@ -1,100 +1,155 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  let(:post) { FactoryBot.create(:post) }
+  let(:post_record) { FactoryBot.create(:post) }
+  let(:valid_attributes) { attributes_for(:post) }
+  let(:invalid_attributes) { { title: '' } }
 
-  describe 'Show' do
+  shared_examples 'user do unauthorize action' do |action|
+    it 'redirects to root path' do
+      get action, params: { id: post_record.id } if %i[show edit].include?(action)
+      put action, params: { id: post_record.id } if %i[accept reject].include?(action)
+      delete action, params: { id: post_record.id } if action == :destroy
+
+      should redirect_to root_path
+      should set_flash[:alert]
+    end
+  end
+
+  describe 'GET #show' do
     context 'user can not see un-accepted post of other user' do
       before { login_user }
 
-      it do
-        get :edit, params: { id: post.id }
-
-        should redirect_to root_path
-        should set_flash[:alert]
-      end
+      include_examples 'user do unauthorize action', :show
     end
   end
 
-  describe 'Edit' do
+  describe 'GET #edit' do
     context 'user can not edit post of other user' do
       before { login_user }
 
-      it do
-        get :edit, params: { id: post.id }
+      include_examples 'user do unauthorize action', :edit
+    end
+  end
 
-        should redirect_to root_path
-        should set_flash[:alert]
+  describe 'POST #create' do
+    before { login_user }
+
+    context 'with valid params' do
+      it 'creates a new post' do
+        expect do
+          post :create, params: { post: valid_attributes }
+        end.to change(Post, :count).by(1)
+      end
+
+      it 'redirects to the created post' do
+        post :create, params: { post: valid_attributes }
+        should redirect_to Post.last
+      end
+    end
+
+    context 'with invalid params' do
+      it 'does not create a new post' do
+        expect do
+          post :create, params: { post: invalid_attributes }
+        end.not_to change(Post, :count)
+      end
+
+      it "render 'new' template" do
+        post :create, params: { post: invalid_attributes }
+        should render_template 'new'
       end
     end
   end
 
-  describe 'Accept' do
+  describe 'PUT #update' do
+    before { login_user }
+
+    let(:post_record) { FactoryBot.create(:post, user: controller.current_user) }
+
+    context 'with valid params' do
+      let(:new_attributes) { { title: 'new title' } }
+
+      before do
+        put :update, params: { id: post_record.id, post: new_attributes }
+      end
+
+      it 'updates the post' do
+        post_record.reload
+        expect(post_record.title).to eq('new title')
+      end
+
+      it 'redirects to the updated post' do
+        post_record.reload
+        should redirect_to post_record
+      end
+    end
+
+    context 'with invalid params' do
+      before do
+        put :update, params: { id: post_record.id, post: invalid_attributes }
+      end
+
+      it 'does not update the post' do
+        post_record.reload
+        expect(post_record.title).not_to eq('')
+      end
+
+      it "render 'edit' template" do
+        should render_template 'edit'
+      end
+    end
+  end
+
+  describe 'PUT #accept' do
     context 'user are not authorize to accept post' do
       before { login_user }
 
-      it do
-        put :accept, params: { id: post.id }
-
-        should redirect_to root_path
-        should set_flash[:alert]
-      end
+      include_examples 'user do unauthorize action', :accept
     end
 
     context 'admin accept post success' do
       before { login_admin }
 
-      it do
-        put :accept, params: { id: post.id }
-
-        expect(post.reload.status).to eq('accepted')
+      it 'update post status to accepted' do
+        put :accept, params: { id: post_record.id }
+        expect(post_record.reload.status).to eq('accepted')
       end
     end
   end
 
-  describe 'Reject' do
+  describe 'PUT #reject' do
     context 'user are not authorize to reject post' do
       before { login_user }
 
-      it do
-        put :reject, params: { id: post.id }
-
-        should redirect_to root_path
-        should set_flash[:alert]
-      end
+      include_examples 'user do unauthorize action', :reject
     end
 
     context 'admin reject post success' do
       before { login_admin }
 
-      it do
-        put :reject, params: { id: post.id }
-
-        expect(post.reload.status).to eq('rejected')
+      it 'update post status to rejected' do
+        put :reject, params: { id: post_record.id }
+        expect(post_record.reload.status).to eq('rejected')
       end
     end
   end
 
-  describe 'Delete' do
+  describe 'DELETE #destroy' do
     context 'user can not delete post of other user' do
       before { login_user }
 
-      it do
-        delete :destroy, params: { id: post.id }
-
-        should redirect_to root_path
-        should set_flash[:alert]
-      end
+      include_examples 'user do unauthorize action', :destroy
     end
 
-    context 'delete post success' do
+    context 'user delete own post success' do
       before { login_user }
 
-      it do
-        post = FactoryBot.create(:post, user: controller.current_user)
-        delete :destroy, params: { id: post.id }
+      let(:post_record) { FactoryBot.create(:post, user: controller.current_user) }
 
-        expect(Post.exists?(post.id)).to eq(false)
+      it 'delete post' do
+        delete :destroy, params: { id: post_record.id }
+        expect(Post.exists?(post_record.id)).to eq(false)
       end
     end
   end
