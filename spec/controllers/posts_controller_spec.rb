@@ -16,6 +16,14 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
+  shared_examples 'notify when admin browse post' do |action|
+    it 'create new notification' do
+      expect do
+        put action, params: { id: post_record.id }
+      end.to change(Notification, :count).by(1)
+    end
+  end
+
   describe 'GET #show' do
     context 'user can not see un-accepted post of other user' do
       before { login_user }
@@ -115,6 +123,8 @@ RSpec.describe PostsController, type: :controller do
         put :accept, params: { id: post_record.id }
         expect(post_record.reload.status).to eq('accepted')
       end
+
+      include_examples 'notify when admin browse post', :accept
     end
   end
 
@@ -132,6 +142,8 @@ RSpec.describe PostsController, type: :controller do
         put :reject, params: { id: post_record.id }
         expect(post_record.reload.status).to eq('rejected')
       end
+
+      include_examples 'notify when admin browse post', :reject
     end
   end
 
