@@ -29,10 +29,4 @@ class Dashboard::AccountsController < ApplicationController
   def set_account
     @account = User.find(params[:id])
   end
-
-  def render_update
-    respond_to do |format|
-      format.js { render 'update' }
-    end
-  end
 end

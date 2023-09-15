@@ -7,5 +7,9 @@ FactoryBot.define do
     trait :admin do
       role { :admin }
     end
+
+    trait :banned do
+      status { :banned }
+    end
   end
 end
