@@ -1,7 +1,13 @@
 class Settings::PasswordController < ApplicationController
   before_action :set_user
 
+  def edit
+    authorize [:settings, @user]
+  end
+
   def update
+    authorize [:settings, @user]
+
     unless @user.valid_password?(params[:user][:old_password])
       @old_password_error = 'Password is not correct!'
       render 'edit'
@@ -9,7 +15,7 @@ class Settings::PasswordController < ApplicationController
     end
 
     if @user.update(user_params)
-      sign_in(@user, bypass: true)
+      bypass_sign_in(@user)
       flash[:notice] = 'Your password has been change'
       redirect_to edit_settings_password_path(@user.username)
     else

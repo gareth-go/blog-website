@@ -6,7 +6,10 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    redirect_to @post unless @new_comment.update(comment_params)
+    unless @new_comment.update(comment_params)
+      redirect_to @post
+      return
+    end
 
     Notifications::CreateNotificationService.call(@new_comment.parent_comment&.user || @post.user, @new_comment, 'comment')
   end

@@ -5,7 +5,7 @@
     .row.col-12.py-3
       h2.fw-bold
         | Settings for 
-        = link_to @user.username,
+        = link_to current_user.username,
                   user_path(current_user.username),
                   class: "text-decoration-none"
 
