@@ -9,9 +9,10 @@ class ReactionsController < ApplicationController
       @reaction = @post.reactions.build(user: current_user, reaction_type: params[:reaction_type])
     else
       redirect_to @post
+      return
     end
 
-    redirect_to @post unless @reaction.save
+    @reaction.save
     set_reactions
 
     Notifications::CreateNotificationService.call(@post.user, @reaction, 'reaction')
