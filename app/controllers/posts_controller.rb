@@ -93,8 +93,8 @@ class PostsController < ApplicationController
     # remove blank tag value
     # convert from tag_id to tag object
     values = post_params
-    values[:tags].shift
-    values[:tags].map! { |tag_id| Tag.find(tag_id) }
+    values[:tags]&.shift
+    values[:tags]&.map! { |tag_id| Tag.find(tag_id) }
 
     values
   end
