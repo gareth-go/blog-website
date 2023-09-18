@@ -88,10 +88,10 @@ ActiveRecord::Schema.define(version: 2023_09_11_100200) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.string "cover_image"
     t.datetime "created_at"
     t.bigint "user_id"
     t.integer "status"
+    t.string "cover_image"
     t.integer "comments_count"
     t.integer "reactions_count"
     t.index ["user_id"], name: "index_posts_on_user_id"
