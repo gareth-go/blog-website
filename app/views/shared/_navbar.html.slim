@@ -1,7 +1,7 @@
 .bg-white.shadown-sm
   .container.p-0
     nav.navbar.navbar-expand-lg.navbar-light.mx-auto.py-2
-      = link_to "LNNV", root_path, class: "navbar-brand fw-bold text-white bg-dark px-2 rounded"
+      = link_to "BLOG", root_path, class: "navbar-brand fw-bold text-white bg-dark px-2 rounded"
       .collapse.navbar-collapse
         = form_with url: root_path, method: :get, class: "d-flex" do
           = text_field_tag :search, params[:search], placeholder: "Search..." , class: "form-control"
