@@ -26,6 +26,7 @@ gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'annotate'
 gem 'bullet', group: 'development'
+gem 'cloudinary'
 gem 'font-awesome-sass', '~> 6.4.2'
 gem 'image_processing', '~> 1.0'
 gem 'pagy', '~> 6.0' # omit patch digit
