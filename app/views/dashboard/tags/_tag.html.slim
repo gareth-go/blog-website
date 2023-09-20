@@ -1,5 +1,5 @@
 .dashboard__body__table__tag__detail.bg-white.border-bottom.p-4.row id="dashboard-tag-#{tag.id}" data-controller="dashboard-tags"
-  .col-lg-6.col-md-6.col-sm-6.dashboard__body__table__tag__detail__name
+  .col-lg-6.col-md-5.col-sm-6.dashboard__body__table__tag__detail__name
     .fs-5.mb-1.fw-bold.text-secondary-alter data-dashboard-tags-target="tagName"
       = tag.name
 
@@ -11,7 +11,7 @@
         .btn.btn-negative.py-0.px-1 data-action="click->dashboard-tags#toggleEdit"
           | Dissmis
 
-  .dashboard__body__table__tag__detail__posts-count.col-lg-3.col-md-2.col-sm-2.py-2
+  .dashboard__body__table__tag__detail__posts-count.col-lg-3.col-md-3.col-sm-2.py-2
     | Posts: 
     = tag.posts_count || 0
     

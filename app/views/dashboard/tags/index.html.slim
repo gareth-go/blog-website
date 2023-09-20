@@ -2,23 +2,24 @@
 
 .container.p-0
   .mx-auto.justify-content-center
-    .dashboard.row.col-12.pb-4
+    .dashboard.row.col-12.py-3.px-sm-0.px-3
       h3.dashboard__head.fw-bold
         | Dashboard >> Tags
-      
-    .row.dashboard__body.justify-content-center.gx-3
-      = render "dashboard/sidebar"
+    
+    .container
+      .row.dashboard__body.justify-content-center
+        = render "dashboard/sidebar"
 
-      .dashboard__body__table.col-lg-10.col-md-10.col-sm-12 data-controller="dashboard-tags"
-        .dashboard__body__table__add-button.btn.btn-positive.py-1.fw-bold data-dashboard-tags-target="toggleAddButton" data-action="click->dashboard-tags#toggleAdd"
-          | Add +
-        = form_with model: @new_tag, url: dashboard_tags_path, local: false, class: "dashboard__body__table__add-form d-none", data: { dashboard_tags_target: "addForm" } do |f|
-          = f.text_field :name, class: "fs-5 fw-bold text-secondary-alter w-50 me-1 tag-name-input"
-          = f.submit "Save", class: "btn btn-positive py-1"
-          .btn.btn-negative.bg-transparent data-action="click->dashboard-tags#toggleAdd"
-            | Dissmis
-          .dashboard__body__table__add-form__error.text-danger
+        .dashboard__body__table.col-lg-10.col-md-9.col-sm-12.p-0.ps-md-3.ps-0 data-controller="dashboard-tags"
+          .dashboard__body__table__add-button.btn.btn-positive.py-1.mx-sm-0.mx-3.fw-bold data-dashboard-tags-target="toggleAddButton" data-action="click->dashboard-tags#toggleAdd"
+            | Add +
+          = form_with model: @new_tag, url: dashboard_tags_path, local: false, class: "dashboard__body__table__add-form d-none", data: { dashboard_tags_target: "addForm" } do |f|
+            = f.text_field :name, class: "fs-5 fw-bold text-secondary-alter w-50 me-1 tag-name-input"
+            = f.submit "Save", class: "btn btn-positive py-1"
+            .btn.btn-negative.bg-transparent data-action="click->dashboard-tags#toggleAdd"
+              | Dissmis
+            .dashboard__body__table__add-form__error.text-danger
 
-        .dashboard__body__table__tag.container.shadow-sm.rounded.mt-2
-          - @tags.each do |tag|
-            = render "tag", tag: tag
+          .dashboard__body__table__tag.container.shadow-sm.rounded.mt-2
+            - @tags.each do |tag|
+              = render "tag", tag: tag

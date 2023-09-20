@@ -10,7 +10,7 @@
               dashboard_account_path(account, role: :normal_user),
               method: :put,
               remote: true,
-              class: "dashboard__body__table__accounts__row__actions__revoke btn btn-warning ms-auto"
+              class: "dashboard__body__table__accounts__row__actions__revoke btn btn-warning ms-auto align-middle"
   - else 
     = link_to "Grant admin",
               dashboard_account_path(account, role: :admin),
