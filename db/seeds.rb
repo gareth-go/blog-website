@@ -17,7 +17,7 @@ ActiveRecord::Base.transaction do
   users = User.all
 
   100.times.each do
-    Post.create!(title: Faker::Lorem.unique.sentence, content: Faker::Lorem.paragraphs, user: users.sample, tags: tags.sample(4))
+    Post.create!(title: Faker::Lorem.unique.sentence, content: Faker::Lorem.paragraph, user: users.sample, tags: tags.sample(4))
   end
 
   posts = Post.all

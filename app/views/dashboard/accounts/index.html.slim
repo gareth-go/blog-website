@@ -2,34 +2,35 @@
 
 .container.p-0
   .mx-auto.justify-content-center
-    .dashboard.row.col-12.pb-4
+    .dashboard.row.col-12.py-3.px-sm-0.px-3
       h3.dashboard__head.fw-bold
         | Dashboard >> Accounts
       
-    .row.dashboard__body.justify-content-center.gx-3
-      = render "dashboard/sidebar"
+    .container
+      .row.dashboard__body.justify-content-center
+        = render "dashboard/sidebar"
 
-      .dashboard__body__table.col-lg-10.col-md-10.col-sm-12 data-controller="dashboard--accounts"
-        nav.dashboard__body__table__options.navbar.navbar-expand-lg.navbar-light.p-0
-          .collapse.navbar-collapse
-            input.me-1 placeholder="Search account..." type="text" data-dashboard--accounts-target="searchInput"
-            span.me-2 type="button" data-action="click->dashboard--accounts#filter" Search 
-            
-          .navbar.justify-content-end
-            span class="me-1" Role: 
-            select class="dashboard__body__table__options__item me-2" data-dashboard--accounts-target="roleSelector" data-action="change->dashboard--accounts#filter"
-              option value="" All
-              option value="admin" Admin
-              option value="normal_user" Normal user
+        .dashboard__body__table.col-lg-10.col-md-9.col-sm-12.p-0.ps-md-3.ps-0 data-controller="dashboard--accounts"
+          nav.dashboard__body__table__options.navbar.navbar-expand-lg.navbar-light.p-0.px-sm-0.px-3
+            .collapse.navbar-collapse
+              input.account-search-input.me-1 placeholder="Search account..." type="text" data-dashboard--accounts-target="searchInput"
+              span.me-2 type="button" data-action="click->dashboard--accounts#filter" Search 
+              
+            .navbar.justify-content-end
+              span class="me-1" Role: 
+              select.account-select class="dashboard__body__table__options__item me-2" data-dashboard--accounts-target="roleSelector" data-action="change->dashboard--accounts#filter"
+                option value="" All
+                option value="admin" Admin
+                option value="normal_user" Normal user
 
-            span class="me-1" Status:
-            select class="dashboard__body__table__options__item" data-dashboard--accounts-target="statusSelector" data-action="change->dashboard--accounts#filter"
-              option value="" All
-              option value="active" Active
-              option value="banned" Banned
+              span class="me-1" Status:
+              select.account-select class="dashboard__body__table__options__item" data-dashboard--accounts-target="statusSelector" data-action="change->dashboard--accounts#filter"
+                option value="" All
+                option value="active" Active
+                option value="banned" Banned
 
-        .dashboard__body__table__accounts.container.shadow-sm.rounded.mt-2
-          = render "list_accounts"
+          .dashboard__body__table__accounts.container.shadow-sm.rounded.mt-2
+            = render "list_accounts"
 
-        .load-more__accounts.opacity-0.overflow-hidden data-dashboard--accounts-target="loadMoreButton"
-          == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"
+          .load-more__accounts.opacity-0.overflow-hidden data-dashboard--accounts-target="loadMoreButton"
+            == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"

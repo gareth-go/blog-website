@@ -2,32 +2,33 @@
 
 .container.p-0
   .mx-auto.justify-content-center
-    .dashboard.row.col-12.pb-4
+    .dashboard.row.col-12.py-3.px-sm-0.px-3
       h3.dashboard__head.fw-bold
         | Dashboard >> Posts
-      
-    .row.dashboard__body.justify-content-center.gx-3
-      = render "dashboard/sidebar"
+    
+    .container
+      .row.dashboard__body.justify-content-center
+        = render "dashboard/sidebar"
 
-      .dashboard__body__table.col-lg-10.col-md-10.col-sm-12
-        nav.navbar.navbar-expand-lg.navbar-light.p-0
-          = link_to "All", dashboard_posts_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
+        .dashboard__body__table.col-lg-10.col-md-9.col-sm-12.p-0.ps-md-3.ps-0
+          nav.navbar.navbar-expand-lg.navbar-light.p-0
+            = link_to "All", dashboard_posts_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
 
-          = link_to_unless_current "Accepted", dashboard_posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
-            = link_to "Accepted", dashboard_posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
+            = link_to_unless_current "Accepted", dashboard_posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
+              = link_to "Accepted", dashboard_posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
 
-          = link_to_unless_current "Pending", dashboard_posts_path(status: :pending), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
-            = link_to "Pending", dashboard_posts_path(status: :pending), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
-            
-          = link_to_unless_current "Rejected", dashboard_posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
-            = link_to "Rejected", dashboard_posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
+            = link_to_unless_current "Pending", dashboard_posts_path(status: :pending), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
+              = link_to "Pending", dashboard_posts_path(status: :pending), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
+              
+            = link_to_unless_current "Rejected", dashboard_posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
+              = link_to "Rejected", dashboard_posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
 
-        - if @posts.empty? && !params.key?(:status)
-          .p-4.mb-2.bg-white.rounded.shadow-sm
-            h2
-              | You haven't created any post yet. Try to create one.
+          - if @posts.empty? && !params.key?(:status)
+            .p-4.mb-2.bg-white.rounded.shadow-sm
+              h2
+                | You haven't created any post yet. Try to create one.
 
-        = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}
-        .load-more__button.opacity-0.overflow-hidden
-          == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"
+          = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}
+          .load-more__button.opacity-0.overflow-hidden
+            == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"
 
