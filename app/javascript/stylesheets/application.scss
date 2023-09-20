@@ -18,6 +18,10 @@ body {
   background: $body-bg;
 }
 
+.w-40 {
+  width: 40%;
+}
+
 .text-secondary-alter {
   color: $secondary-alter-bg;  
 }
@@ -81,3 +85,16 @@ ul {
   list-style-type: none;
 }
 
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.error_404_text {
+  font-size: 6rem;
+}
+
+@media (min-width: 768px) {
+  .side_navbar_toggle {
+    display: none;
+  }
+}
