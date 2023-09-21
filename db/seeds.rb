@@ -10,25 +10,43 @@
 ActiveRecord::Base.transaction do
   100.times.each do
     Tag.create!(name: Faker::Lorem.unique.word)
-    User.create!(username: Faker::Internet.unique.username, email: Faker::Internet.unique.email, password: '123456')
+    User.create!(username: Faker::Internet.unique.username,
+                 email: Faker::Internet.unique.email,
+                 password: '123456')
   end
 
   tags = Tag.all
   users = User.all
 
   100.times.each do
-    Post.create!(title: Faker::Lorem.unique.sentence, content: Faker::Lorem.paragraph, user: users.sample, tags: tags.sample(4))
+    Post.create!(title: Faker::Lorem.unique.sentence,
+                 content: Faker::Lorem.paragraph(sentence_count: 10, supplemental: false, random_sentences_to_add: 5),
+                 user: users.sample,
+                 tags: tags.sample(4))
   end
 
   posts = Post.all
 
-  300.times.each do
-    Comment.create!(user: users.sample, post: posts.sample, content: Faker::Lorem.paragraph)
+  500.times.each do
+    Comment.create!(user: users.sample,
+                    post: posts.sample,
+                    content: Faker::Lorem.paragraph)
   end
 
-  300.times.each do
+  500.times.each do
     post = posts.sample
-    Comment.create!(user: users.sample, post: post, parent_comment: post.comments.sample, content: Faker::Lorem.paragraph)
-    Reaction.create!(user: users.sample, post: posts.sample, reaction_type: rand(5))
+    user = users.sample
+    comment = post.comments.where(parent_comment: nil).sample
+
+    Comment.create!(user: user,
+                    post: post,
+                    parent_comment: comment,
+                    content: Faker::Lorem.paragraph)
+
+    next if Reaction.exists?(user: user, post: post)
+
+    Reaction.create!(user: user,
+                     post: post,
+                     reaction_type: rand(5))
   end
 end

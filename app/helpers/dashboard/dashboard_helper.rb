@@ -6,7 +6,7 @@ module Dashboard::DashboardHelper
         concat('Tags')
         concat(content_tag(:span,
                            @tags.size,
-                           class: 'dashboard__body__sidebar__tags__count rounded ms-auto'))
+                           class: 'dashboard__body__sidebar__tags__count rounded ms-auto px-1'))
       end
     else
       link_to 'Tags',
@@ -22,7 +22,7 @@ module Dashboard::DashboardHelper
         concat('Accounts')
         concat(content_tag(:span,
                            @accounts_count,
-                           class: 'dashboard__body__sidebar__tags__count rounded ms-auto'))
+                           class: 'dashboard__body__sidebar__tags__count rounded ms-auto px-1'))
       end
     else
       link_to 'Accounts',
