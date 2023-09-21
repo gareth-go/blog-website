@@ -1,4 +1,10 @@
 # BLOG Community
+https://blog-web-no66.onrender.com/
+
+## Project structure diagram
+
+![structure-diagram drawio](https://github.com/gareth-go/blog-website/assets/140365512/60cebd4f-5787-4932-9076-1395a2d5d215)
+
 
 ## Development Guideline
 ***Enviroment***:
