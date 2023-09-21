@@ -14,6 +14,8 @@ class Dashboard::PostsController < ApplicationController
 
     @posts = Posts::ListPostsService.call(@posts, params)
 
+    @posts_count = @posts.count
+
     @pagy, @posts = pagy(@posts)
   end
 end
