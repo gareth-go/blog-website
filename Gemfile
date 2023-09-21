@@ -27,6 +27,7 @@ gem 'redis', '~> 4.0'
 gem 'annotate'
 gem 'bullet', group: 'development'
 gem 'cloudinary'
+gem 'faker'
 gem 'font-awesome-sass', '~> 6.4.2'
 gem 'image_processing', '~> 1.0'
 gem 'pagy', '~> 6.0' # omit patch digit
@@ -43,7 +44,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'rspec-rails', '~> 6.0.0'
 end
 
