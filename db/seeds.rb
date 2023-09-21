@@ -10,7 +10,7 @@
 ActiveRecord::Base.transaction do
   100.times.each do
     Tag.create!(name: Faker::Lorem.unique.word)
-    User.create!(username: Faker::Internet.unique.username,
+    User.create!(username: Faker::Internet.unique.username(specifier: nil, separators: %w[_]),
                  email: Faker::Internet.unique.email,
                  password: '123456')
   end

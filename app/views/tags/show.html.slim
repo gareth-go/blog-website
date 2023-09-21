@@ -22,10 +22,19 @@
                                 class: "rounded-circle border object-fit-cover"
 
           .col.p-0 id="#home-page__main"
-            nav.navbar.navbar-expand-lg.navbar-light.py-1
-              = link_to "Lastest", root_path, class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
-              = link_to "Top comments", root_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
-              = link_to "Top reactions", root_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
+            nav.navbar.navbar-expand-lg.navbar-light.py-1 data-controller="home" data-home-sort-value=params[:sort]
+              = link_to "Lastest",
+                        tag_path(@tag.name),
+                        data: { home_target: "lastestLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
+              = link_to "Top comments",
+                        tag_path(@tag.name, sort: "comments"),
+                        data: { home_target: "topCommentsLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
+              = link_to "Top reactions",
+                        tag_path(@tag.name, sort: "reactions"),
+                        data: { home_target: "topReactionsLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
             .home-page__main__posts
               = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}
             .load-more__button.opacity-0.overflow-hidden
