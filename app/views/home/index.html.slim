@@ -25,7 +25,7 @@
             = link_to tags_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
               = image_pack_tag "media/images/tags-icon.svg", class: "pe-2"
               | Tags
-            ul 
+            ul
               - @tags.each do |tag|
                 li 
                   = link_to tag_path(tag.name), class: "btn menu-link border-0 w-100 text-start mb-1" do 
@@ -52,7 +52,12 @@
               = link_to "Top reactions",
                         root_path(search: params[:search], sort: "reactions"),
                         data: { home_target: "topReactionsLink" },
-                        class: "text-decoration-none btn btn-secondary-alter border-0"
+                        class: "text-decoration-none btn btn-secondary-alter border-0"  
+
+              = link_to "Following",
+                        root_path(search: params[:search], filter: "following"),
+                        data: { home_target: "followingLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0"  
             - else
               = link_to "Lastest",
                         root_path,
@@ -68,6 +73,11 @@
                         root_path(sort: "reactions"),
                         data: { home_target: "topReactionsLink" },
                         class: "text-decoration-none btn btn-secondary-alter border-0"
+
+              = link_to "Following",
+                        root_path(filter: "following"),
+                        data: { home_target: "followingLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0"  
 
           .home-page__main__posts
             = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}
