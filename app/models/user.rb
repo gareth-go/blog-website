@@ -26,6 +26,12 @@ class User < ApplicationRecord
   has_many :comments
   has_many :notifications
 
+  has_many :follows, inverse_of: :user, dependent: :destroy
+  has_many :followers, through: :follows
+
+  has_many :followings, inverse_of: :follower, class_name: 'Follow', foreign_key: 'follower_id', dependent: :destroy
+  has_many :following_users, through: :followings, source: :user
+
   has_one_attached :avatar
 
   enum role: { normal_user: 0, admin: 1 }, _default: 'normal_user'

@@ -25,7 +25,7 @@
             = link_to tags_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
               = image_pack_tag "media/images/tags-icon.svg", class: "pe-2"
               | Tags
-            ul 
+            ul
               - @tags.each do |tag|
                 li 
                   = link_to tag_path(tag.name), class: "btn menu-link border-0 w-100 text-start mb-1" do 
@@ -36,7 +36,7 @@
                   i class="fa-solid fa-chevron-down me-3"
                   | more
 
-        .col-lg-6.col-md-6.col-sm-12.col-12.home-page__main.p-0 data-controller="home" data-home-sort-value=params[:sort] id="#home-page__main"
+        .col-lg-6.col-md-6.col-sm-12.col-12.home-page__main.p-0 data-controller="home" data-home-sort-value=params[:sort] data-home-filter-value=params[:filter] id="#home-page__main"
           nav.navbar.navbar-expand.navbar-light.py-1 
             - if params[:search].present?
               = link_to "Lastest",
@@ -52,7 +52,13 @@
               = link_to "Top reactions",
                         root_path(search: params[:search], sort: "reactions"),
                         data: { home_target: "topReactionsLink" },
-                        class: "text-decoration-none btn btn-secondary-alter border-0"
+                        class: "text-decoration-none btn btn-secondary-alter border-0"  
+
+              - if current_user.present?
+                = link_to "Following",
+                          root_path(search: params[:search], filter: "following"),
+                          data: { home_target: "followingLink" },
+                          class: "text-decoration-none btn btn-secondary-alter border-0"  
             - else
               = link_to "Lastest",
                         root_path,
@@ -68,6 +74,12 @@
                         root_path(sort: "reactions"),
                         data: { home_target: "topReactionsLink" },
                         class: "text-decoration-none btn btn-secondary-alter border-0"
+
+              - if current_user.present?
+                = link_to "Following",
+                          root_path(filter: "following"),
+                          data: { home_target: "followingLink" },
+                          class: "text-decoration-none btn btn-secondary-alter border-0"  
 
           .home-page__main__posts
             = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}

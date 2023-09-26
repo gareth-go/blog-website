@@ -1,4 +1,4 @@
-- unless notification.notificationable_type == 'Post'
+- unless notification.browse_post_notification?
   span.align-middle.fw-bold
     = notification.notificationable.user.username
 span.align-middle
