@@ -16,6 +16,10 @@ class Notification < ApplicationRecord
 
   scope :unviewed, -> { where(viewed: false) }
 
+  def browse_post_notification?
+    notificationable_type == 'Post' && notificationable.user == user
+  end
+
   private
 
   def sent_message

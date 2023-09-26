@@ -38,7 +38,7 @@ module Notifications
 
     def notify_to_followers
       @notificationable.user.followers.each do |user|
-        Notification.create(user: user, notificationable: @notificationable, content: 'pushlished a post')
+        Notification.create(user: user, notificationable: @notificationable, content: 'published a post')
       end
     end
   end
