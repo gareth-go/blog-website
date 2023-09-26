@@ -4,7 +4,7 @@
 .container
   .row.justify-content-center
     .profile.col-lg-9.col-md-9.col-sm-12.col-12.p-0
-      header.profile__header.bg-white.text-center.border.rounded.mt-4.p-4
+      header.profile__header.bg-white.text-center.border.rounded.mt-4.py-3
         .profile__header__avatar.position-relative.d-inline-block
           span
               = image_tag @user.avatar,
@@ -14,15 +14,29 @@
         .profile__header__username.fs-1.fw-bold
           = @user.username
 
-        - if @user == current_user
-          .profile__header__actions
+        .profile__header__follows.mb-1
+          small.profile__header__follows__followers.me-3 type="button" data-bs-toggle="modal" data-bs-target="#followersModal"
+            | Followers: 
+            = @user.follows.size
+          small.profile__header__follows__followings type="button" data-bs-toggle="modal" data-bs-target="#followingsModal"
+            | Following: 
+            = @user.followings.size
+
+        .profile__header__actions
+          - if @user == current_user
             = link_to edit_settings_profile_path(@user.username), class: "text-secondary text-decoration-none" do 
               i class="fa-solid fa-pencil me-1"
               | Edit profile
+          - else 
+            - if @user.followers.include?(current_user)
+              = link_to "Unfollow", @user.follows.find_by(follower: current_user), method: :delete, class: "btn btn-secondary py-1 px-2 mt-1"
+            - else 
+              = link_to "Follow", follows_path(user_id: @user.id), method: :post, class: "btn btn-primary py-1 px-2 mt-1"
+
 
       .container.mt-3
         .profile__body.row.gap-lg-3.gap-md-2
-          .profile__body__stat.bg-white.border.rounded.py-2.px-3.col-lg-4.col-md-4.col-sm-12.col-12.align-self-start
+          .profile__body__stat.bg-white.border.rounded.mb-3.py-2.px-3.col-lg-4.col-md-4.col-sm-12.col-12.align-self-start
             .profile__body__stat__posts.mb-2.mt
               = image_pack_tag "media/images/post-icon.svg", class: "me-2"
               = @posts.count || 0
@@ -35,6 +49,20 @@
           .profile__body__posts.col.p-0
             = render partial: "shared/list_posts", locals: {posts: @posts, page: nil}
 
+.modal.fade id="followersModal" tabindex="-1" aria-labelledby="followersModalLabel" aria-hidden="true"
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      .modal-header
+        h5.modal-title.fw-bold id="followersModalLabel" Followers
+        button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      .modal-body
+        = render "follows", users: @user.followers
 
-    
-          
+.modal.fade id="followingsModal" tabindex="-1" aria-labelledby="followingsModalLabel" aria-hidden="true"
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      .modal-header
+        h5.modal-title.fw-bold id="followingsModalLabel" Following
+        button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      .modal-body
+        = render "follows", users: @user.following_users 

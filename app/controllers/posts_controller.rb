@@ -31,6 +31,7 @@ class PostsController < ApplicationController
     values = post_params_tag_ids_to_tags
 
     if @post.update(values)
+      Notifications::NotifyToFollowerService.call(@post) if @post.accepted?
       redirect_to post_path(@post)
     else
       render 'new'
@@ -56,6 +57,7 @@ class PostsController < ApplicationController
     authorize @post
 
     @post.update(status: :accepted)
+    Notifications::NotifyToFollowerService.call(@post)
     redirect_to dashboard_posts_path(status: :accepted)
   end
 

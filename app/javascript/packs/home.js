@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
   // set auto close alert
   setTimeout(function() {
     $('.alert').alert('close');
-  }, 2000)
+  }, 3500)
 
   // infinite scroll with intersection observer
   load_button = $('.load-more__button')[0]

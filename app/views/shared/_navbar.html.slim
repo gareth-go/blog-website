@@ -24,7 +24,7 @@
             = link_to "Create Post", new_post_path, class: "btn btn-outline-primary me-3"
             = link_to notifications_path, class: "position-relative" do
               i class="fa-regular fa-bell fa-lg btn-outline-primary p-2 rounded btn border-0"
-              small.position-absolute.end-0.top-0.bg-danger.rounded.py-0.px-1.text-white.me-2 id="unview-notifications-count"
+              small.position-absolute.end-0.top-0.bg-danger.rounded.py-0.px-1.text-white id="unview-notifications-count"
                 - if @unviewed_notifications_count > 0
                   = @unviewed_notifications_count
             .dropdown.ms-3

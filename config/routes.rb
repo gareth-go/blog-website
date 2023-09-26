@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   resources :notifications, only: :index
 
+  resources :follows, only: %i[create destroy]
+
   mount ActionCable.server => '/cable'
 
   devise_for :users, path: ''

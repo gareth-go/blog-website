@@ -1,0 +1,4 @@
+- users.each do |user|
+  .followers.mb-2 id="follower-id-#{user.id}"
+    = link_to user_path(user.username), class: "text-reset text-decoration-none" do
+      = render "user", user: user
