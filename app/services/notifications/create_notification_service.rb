@@ -10,7 +10,6 @@ module Notifications
       return if user_is_notificationable_owner
 
       Notification.create(user: @user, notificationable: @notificationable, content: notification_content)
-      notify_to_followers if @notification_type == 'post' && @notificationable.accepted?
     end
 
     private
@@ -33,12 +32,6 @@ module Notifications
         return 'replied to your comment.' if @notificationable.parent_comment.present?
 
         'commented to your post.'
-      end
-    end
-
-    def notify_to_followers
-      @notificationable.user.followers.each do |user|
-        Notification.create(user: user, notificationable: @notificationable, content: 'published a post')
       end
     end
   end

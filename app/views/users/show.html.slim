@@ -53,7 +53,7 @@
   .modal-dialog.modal-dialog-centered
     .modal-content
       .modal-header
-        h5.modal-title id="followersModalLabel" Followers
+        h5.modal-title.fw-bold id="followersModalLabel" Followers
         button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
       .modal-body
         = render "follows", users: @user.followers
@@ -62,7 +62,7 @@
   .modal-dialog.modal-dialog-centered
     .modal-content
       .modal-header
-        h5.modal-title id="followingsModalLabel" Following
+        h5.modal-title.fw-bold id="followingsModalLabel" Following
         button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
       .modal-body
         = render "follows", users: @user.following_users 

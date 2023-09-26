@@ -22,7 +22,7 @@
                                 class: "rounded-circle border object-fit-cover"
 
           .col.p-0 id="#home-page__main"
-            nav.navbar.navbar-expand-lg.navbar-light.py-1 data-controller="home" data-home-sort-value=params[:sort]
+            nav.navbar.navbar-expand-lg.navbar-light.py-1 data-controller="home" data-home-sort-value=params[:sort] data-home-filter-value=params[:filter]
               = link_to "Lastest",
                         tag_path(@tag.name),
                         data: { home_target: "lastestLink" },
@@ -35,6 +35,10 @@
                         tag_path(@tag.name, sort: "reactions"),
                         data: { home_target: "topReactionsLink" },
                         class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
+              = link_to "Following",
+                        tag_path(@tag.name, filter: "following"),
+                        data: { home_target: "followingLink" },
+                        class: "text-decoration-none btn btn-secondary-alter border-0"  
             .home-page__main__posts
               = render partial: "shared/list_posts", locals: {posts: @posts, page: @pagy.page}
             .load-more__button.opacity-0.overflow-hidden

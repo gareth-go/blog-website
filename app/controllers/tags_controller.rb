@@ -8,7 +8,7 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find_by!(name: params[:name])
     @posts = @tag.posts.accepted.includes(%i[user tags])
-    @posts = Posts::ListPostsService.call(@posts, params)
+    @posts = Posts::ListPostsService.call(@posts, params, current_user)
 
     @users = User.joins(posts: :tags)
                  .where(tags: { id: @tag.id }, posts: { status: :accepted })
