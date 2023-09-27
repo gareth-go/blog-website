@@ -94,8 +94,9 @@
               .px-4.py-2.border-bottom
                 .fs-5.fw-bold
                   = link_to tag_path(tag.name), class: "text-reset text-decoration-none" do
+                    | #
                     = tag.name
-              - tag.posts.accepted.limit(5).each do |post|
+              - tag.posts.accepted.order(created_at: :desc).limit(5).each do |post|
                 .px-4.py-3.border-bottom
                   .fs-6
                     = link_to post, class: "text-reset text-decoration-none" do
