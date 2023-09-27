@@ -23,7 +23,6 @@ class Notification < ApplicationRecord
   private
 
   def sent_message
-    alert = ApplicationController.render partial: 'notifications/alert', locals: { notification: self }, formats: [:html]
-    ActionCable.server.broadcast "notifications:#{user_id}", alert
+    NotifyJob.perform_async(id)
   end
 end

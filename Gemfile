@@ -30,6 +30,7 @@ gem 'bullet', group: 'development'
 gem 'font-awesome-sass', '~> 6.4.2'
 gem 'image_processing', '~> 1.0'
 gem 'pagy', '~> 6.0' # omit patch digit
+gem 'sidekiq'
 gem 'slim'
 gem 'stimulus-rails'
 
