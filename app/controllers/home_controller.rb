@@ -14,7 +14,8 @@ class HomeController < ApplicationController
                .order('count(posts.id) desc')
                .limit(5)
 
-    @top_interacted_tags = Tag.joins(posts: :tags)
+    @top_interacted_tags = Tag.joins(:posts)
+                              .where(posts: { status: :accepted })
                               .select('tags.*, SUM(posts.comments_count + posts.reactions_count) AS interactions')
                               .group('tags.id')
                               .order('interactions DESC')
