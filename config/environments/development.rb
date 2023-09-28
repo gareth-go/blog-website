@@ -97,6 +97,6 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  # Uncomment and add you ngrok url if you want to test share feature
-  config.hosts << 'fdad-2a09-bac5-d46d-16c8-00-245-10.ngrok-free.app'
+  # Uncomment and add your ngrok url if you want to test share post/profile feature
+  # config.hosts << '/[ngrok url]'
 end
