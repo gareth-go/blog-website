@@ -21,3 +21,6 @@ application.register("notifications", NotificationsController)
 
 import PostsController from "./posts_controller"
 application.register("posts", PostsController)
+
+import UsersController from "./users_controller"
+application.register("users", UsersController)

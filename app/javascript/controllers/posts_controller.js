@@ -20,6 +20,10 @@ export default class extends Controller {
     }
   }
 
+  copyLink() {
+    navigator.clipboard.writeText(document.URL)
+  }
+
   scrollToComments() {
     this.commentsTarget.scrollIntoView(true, { behavior: "smooth" })
   }

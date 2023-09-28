@@ -32,7 +32,17 @@
               = link_to "Unfollow", @user.follows.find_by(follower: current_user), method: :delete, class: "btn btn-secondary py-1 px-2 mt-1"
             - else 
               = link_to "Follow", follows_path(user_id: @user.id), method: :post, class: "btn btn-primary py-1 px-2 mt-1"
-
+          .btn-group.dropend.ms-2 data-controller="users"
+            .post__option__share__toggle type="button" data-bs-toggle="dropdown" aria-expanded="false"
+              = image_pack_tag "media/images/share-icon.svg", class: "mx-auto"
+            ul.dropdown-menu.dropdown-menu-end
+              li 
+                .dropdown-item.menu-link.text-decoration-none data-action="click->users#copyLink" type="button"
+                  | Copy profile link
+              li
+                = link_to "Shared profile to Facebook", "https://www.facebook.com/sharer/sharer.php?u=#{user_url(@user.username)}", target: "_blank", class: "dropdown-item menu-link text-decoration-none"
+              li 
+                = link_to "Shared profile to Twitter", "http://twitter.com/intent/tweet?url=#{user_url(@user.username)}", target: "_blank", class: "dropdown-item menu-link text-decoration-none"
 
       .container.mt-3
         .profile__body.row.gap-lg-3.gap-md-2
