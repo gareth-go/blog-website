@@ -33,6 +33,7 @@
             - else 
               = link_to "Follow", follows_path(user_id: @user.id), method: :post, class: "btn btn-primary py-1 px-2 mt-1"
 
+          = share_button(user_url(@user), 'profile', 'ms-2')
 
       .container.mt-3
         .profile__body.row.gap-lg-3.gap-md-2
