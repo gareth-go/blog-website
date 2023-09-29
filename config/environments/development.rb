@@ -56,8 +56,8 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     port: 587,
     domain: 'mail.google.com',
-    user_name: 'tsmvu123@gmail.com',
-    password: 'nklmlpnfupvizoxv',
+    user_name: ENV['STMP_USERNAME'],
+    password: ENV['STMP_PASSWORD'],
     authentication: :plain
   }
 
@@ -98,5 +98,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Uncomment and add your ngrok url if you want to test share post/profile feature
-  # config.hosts << '/[ngrok url]'
+  config.hosts << '299e-2a09-bac5-d46a-16c8-00-245-4f.ngrok-free.app'
 end
