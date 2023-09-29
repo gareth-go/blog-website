@@ -20,5 +20,6 @@ class HomeController < ApplicationController
                               .group('tags.id')
                               .order('interactions DESC')
                               .limit(3)
+                              .preload(:posts)
   end
 end
