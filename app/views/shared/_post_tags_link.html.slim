@@ -1,2 +1,4 @@
 - post.tags.each do |tag|
-  = link_to tag.name, tag_path(tag.name), class: "pe-3 text-secondary text-decoration-none"
+  = link_to tag_path(tag.name), class: "pe-3 text-secondary text-decoration-none" do 
+    | #
+    = tag.name
