@@ -98,5 +98,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Uncomment and add your ngrok url if you want to test share post/profile feature
-  config.hosts << '299e-2a09-bac5-d46a-16c8-00-245-4f.ngrok-free.app'
+  # config.hosts << '/[ngrok url]'
 end
