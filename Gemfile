@@ -5,6 +5,8 @@ git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
 ruby '2.7.8'
 
+gem 'dotenv-rails', groups: %i[development test]
+
 gem 'pundit', '~> 2.3', '>= 2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.4'
@@ -30,6 +32,9 @@ gem 'cloudinary'
 gem 'faker'
 gem 'font-awesome-sass', '~> 6.4.2'
 gem 'image_processing', '~> 1.0'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
 gem 'pagy', '~> 6.0' # omit patch digit
 gem 'slim'
 gem 'stimulus-rails'

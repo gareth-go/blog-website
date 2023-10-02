@@ -31,6 +31,9 @@
 # Ignore coverage folder
 /coverage/*
 
+# Ignote env file
+.env
+
 /public/packs
 /public/packs-test
 /node_modules

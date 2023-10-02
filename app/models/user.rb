@@ -19,12 +19,16 @@ class User < ApplicationRecord
          :registerable,
          :recoverable,
          :rememberable,
-         :validatable
+         :validatable,
+         :omniauthable,
+         omniauth_providers: %i[google_oauth2]
 
-  has_many :posts
-  has_many :reactions
-  has_many :comments
-  has_many :notifications
+  has_many :posts, dependent: :destroy
+  has_many :book_marks, dependent: :destroy
+  has_many :saved_posts, through: :book_marks, source: :post
+  has_many :reactions, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   has_many :follows, inverse_of: :user, dependent: :destroy
   has_many :followers, through: :follows
@@ -48,6 +52,14 @@ class User < ApplicationRecord
     # self model values.
     # logger.debug self.to_yaml
     super && active?
+  end
+
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.username = auth.info.name.split('@')[0].gsub('.', '_')
+    end
   end
 
   private

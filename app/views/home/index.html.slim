@@ -14,9 +14,10 @@
           | Search result for "
           = params[:search]
           | "
-    .container
-      .row.justify-content-center.gap-3
-        ul.col-xl-2.col-lg-3.col-md-3.col-sm-4.home-page__sidebar.p-0.pt-1
+    
+    .container.p-0
+      .row.justify-content-center
+        ul.col-xl-3.col-lg-3.col-md-3.col-sm-4.home-page__sidebar.pt-1
           li.home-page__sidebar__home
             = link_to root_path, class: "btn menu-link border-0 w-100 text-start mb-1" do
               = image_pack_tag "media/images/home-icon.svg", class: "pe-2" 
@@ -36,7 +37,7 @@
                   i class="fa-solid fa-chevron-down me-3"
                   | more
 
-        .col-lg-6.col-md-6.col-sm-12.col-12.home-page__main.p-0 data-controller="home" data-home-sort-value=params[:sort] data-home-filter-value=params[:filter] id="#home-page__main"
+        .col-lg-6.col-md-6.col-sm-12.col-12.home-page__main.p-sm-0.p-0 data-controller="home" data-home-sort-value=params[:sort] data-home-filter-value=params[:filter] id="#home-page__main"
           nav.navbar.navbar-expand.navbar-light.py-1 
             - if params[:search].present?
               = link_to "Lastest",
@@ -87,3 +88,19 @@
           .load-more__button.opacity-0.overflow-hidden
             == pagy_bootstrap_nav @pagy, pagy_id: "home-page__main__pagy-nav"
 
+        .col-lg-3.col-md-3.mt-2.home-page__top-interacted-tags
+          - @top_interacted_tags.each do |tag|
+            .mb-2.bg-white.border.rounded.shadow-sm
+              .px-4.py-2.border-bottom
+                .fs-5.fw-bold
+                  = link_to tag_path(tag.name), class: "text-reset text-decoration-none" do
+                    | #
+                    = tag.name
+              - tag.posts.sort_by { |post| post.created_at }.reverse.first(5).each do |post|
+                .px-4.py-3.border-bottom
+                  .fs-6
+                    = link_to post, class: "text-reset text-decoration-none" do
+                      = post.title
+                  small.text-secondary
+                    = post.comments.size
+                    |  comments

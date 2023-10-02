@@ -6,11 +6,18 @@
     - if @post.accepted?
       .post__option.col-lg-1.col-md-1.col-sm-1.text-center.align-items-center.gy-5 id="post__option"
         = render partial: "reactions/post_reactions", locals: { post: @post, reactions: @reactions, reaction: @reaction }
-        .post__option__comment type="button" data-action="click->posts#scrollToComments"
+        .post__option__comment.mb-3 type="button" data-action="click->posts#scrollToComments" title="Jump to Comments"
           = image_pack_tag "media/images/comment-icon.svg", class: "mx-auto mb-2"
           br
           span.post__option__comment__count
             = @post.comments.size
+        .post__option__comment__bookmark.mb-3 title="Save"
+          - if @book_mark
+            = link_to_bookmark(book_mark_path(@book_mark), :delete)
+          - else 
+            = link_to_bookmark(book_marks_path(post_id: @post.id), :post)
+        = share_button(post_url(@post), 'post', 'mb-3')
+
     .post__main__wrapper.col-lg-8.col-md-10.col-sm-12
       - if @post.pending? && policy(@post).show?
         .bg-warning.text-white.p-2.mb-2.rounded

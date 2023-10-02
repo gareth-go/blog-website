@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create]
   end
 
+  get '/readinglist', to: 'posts#readinglist', as: :readinglist
+
   resources :comments, only: %i[update destroy] do
     resources :replies, only: %i[create update destroy], controller: 'comments'
   end
@@ -34,9 +36,11 @@ Rails.application.routes.draw do
 
   resources :follows, only: %i[create destroy]
 
+  resources :book_marks, only: %i[create destroy]
+
   mount ActionCable.server => '/cable'
 
-  devise_for :users, path: ''
+  devise_for :users, path: '', controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
   root 'home#index'
 end

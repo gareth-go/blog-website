@@ -56,8 +56,8 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     port: 587,
     domain: 'mail.google.com',
-    user_name: 'tsmvu123@gmail.com',
-    password: 'nklmlpnfupvizoxv',
+    user_name: ENV['STMP_USERNAME'],
+    password: ENV['STMP_PASSWORD'],
     authentication: :plain
   }
 
@@ -96,4 +96,7 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # Uncomment and add your ngrok url if you want to test share post/profile feature
+  # config.hosts << '/[ngrok url]'
 end

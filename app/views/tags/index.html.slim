@@ -4,16 +4,16 @@
 .container.p-0
   .mx-auto.justify-content-center
     nav.navbar
-      .navbar-brand.fs-3.fw-bold
+      .navbar-brand.fs-3.fw-bold.ps-md-0.ps-3
         | Tags
       .navbar.justify-content-end
-        = form_with method: :get, class: "d-flex" do
-          = text_field_tag :search_tags, params[:search_tags], placeholder: "Search..." , class: "form-control"
+        = form_with method: :get, class: "d-flex pe-md-0 pe-2" do
           = submit_tag "Search", name: "", class: "btn text-secondary border-0"
-    .container.p-0
-      .row
+          = text_field_tag :search_tags, params[:search_tags], placeholder: "Search..." , class: "form-control"
+    .container.p-md-0
+      .row.p-0
         - @tags.each do |tag|
-          .col-lg-3.col-md-4.col-sm-6.col-12.g-3
+          .col-lg-3.col-md-4.col-sm-6.col-12.g-3.mt-0.mb-md-3.mb-2
             .border.rounded.bg-white.p-4
               div 
                 = link_to tag.name, tag_path(tag.name), class: "h4 text-primary menu-link px-2 py-1 rounded fw-bold text-decoration-none"

@@ -4,8 +4,6 @@ class PostsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[show]
 
-  after_action :create_notification, only: %i[accept reject]
-
   def show
     authorize @post
 
@@ -17,6 +15,15 @@ class PostsController < ApplicationController
                      .where(parent_comment: nil)
                      .order(created_at: :desc)
                      .includes({ user: { avatar_attachment: :blob } }, :parent_comment)
+
+    @book_mark = BookMark.find_by(user: current_user, post: @post)
+  end
+
+  def readinglist
+    @posts = current_user.saved_posts
+                         .includes({ user: { avatar_attachment: :blob } }, :tags)
+                         .order('book_marks.id DESC')
+    @posts = @posts.where('title LIKE ?', "%#{params[:search_bookmark]}%") if params[:search_bookmark].present?
   end
 
   def new
@@ -56,15 +63,19 @@ class PostsController < ApplicationController
   def accept
     authorize @post
 
-    @post.update(status: :accepted)
-    Notifications::NotifyToFollowerService.call(@post)
+    if @post.update(status: :accepted)
+      create_notification
+      send_mail
+    end
+
     redirect_to dashboard_posts_path(status: :accepted)
   end
 
   def reject
     authorize @post
 
-    @post.update(status: :rejected)
+    send_mail if @post.update(status: :rejected)
+
     redirect_to dashboard_posts_path(status: :rejected)
   end
 
@@ -103,5 +114,10 @@ class PostsController < ApplicationController
 
   def create_notification
     Notifications::CreateNotificationService.call(@post.user, @post, 'post')
+    Notifications::NotifyToFollowerService.call(@post)
+  end
+
+  def send_mail
+    PostMailer.with(post: @post).post_browsed_email.deliver_now
   end
 end
