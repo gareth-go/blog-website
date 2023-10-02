@@ -1,0 +1,9 @@
+p
+  | Hello 
+  = link_to @post.user.username, user_url(@post.user.username)
+  | !
+p 
+  = link_to "Your post", @post
+  |  in BLOG Community has been 
+  = @post.status
+  |  by admin. 
