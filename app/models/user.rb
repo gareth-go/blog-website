@@ -52,21 +52,11 @@ class User < ApplicationRecord
     super && active?
   end
 
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if (data = session['devise.facebook_data']) &&
-         session['devise.facebook_data']['extra']['raw_info'] &&
-         user.email.blank?
-        user.email = data['email']
-      end
-    end
-  end
-
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.username = auth.info.name.split('@')[0]
+      user.username = auth.info.name.split('@')[0].gsub('.', '_')
     end
   end
 
