@@ -460,4 +460,4 @@ After you done all these step you can open http://localhost:3000/ in your browse
 
 
 ## Database Diagram
-![image](https://github.com/gareth-go/blog-website/assets/140365512/203aafaf-5d9b-4193-870d-728a8c75e58a)
+![mermaid-diagram-2023-10-02-152606](https://github.com/gareth-go/blog-website/assets/140365512/51918f95-7b75-42d3-aee5-4185a3d88365)
