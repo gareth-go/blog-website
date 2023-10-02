@@ -17,6 +17,15 @@ class PostsController < ApplicationController
                      .where(parent_comment: nil)
                      .order(created_at: :desc)
                      .includes({ user: { avatar_attachment: :blob } }, :parent_comment)
+
+    @book_mark = BookMark.find_by(user: current_user, post: @post)
+  end
+
+  def readinglist
+    @posts = current_user.saved_posts
+                         .includes({ user: { avatar_attachment: :blob } }, :tags)
+                         .order('book_marks.id DESC')
+    @posts = @posts.where('title LIKE ?', "%#{params[:search_bookmark]}%") if params[:search_bookmark].present?
   end
 
   def new

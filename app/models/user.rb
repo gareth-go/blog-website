@@ -23,10 +23,12 @@ class User < ApplicationRecord
          :omniauthable,
          omniauth_providers: %i[google_oauth2]
 
-  has_many :posts
-  has_many :reactions
-  has_many :comments
-  has_many :notifications
+  has_many :posts, dependent: :destroy
+  has_many :book_marks, dependent: :destroy
+  has_many :saved_posts, through: :book_marks, source: :post
+  has_many :reactions, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   has_many :follows, inverse_of: :user, dependent: :destroy
   has_many :followers, through: :follows
