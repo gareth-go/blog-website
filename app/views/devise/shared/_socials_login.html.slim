@@ -1,0 +1,6 @@
+- if devise_mapping.omniauthable?
+  - resource_class.omniauth_providers.each do |provider|
+    = button_to "Continue with #{OmniAuth::Utils.camelize(provider).gsub('Oauth2', '')}",
+                omniauth_authorize_path(resource_name, provider), data: { turbo: false },
+                class: "w-100 py-1 rounded-1 btn btn-outline-secondary"
+    br
