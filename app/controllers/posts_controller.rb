@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[show]
 
   after_action :create_notification, only: %i[accept reject]
+  after_action :send_mail, only: %i[accept reject]
 
   def show
     authorize @post
@@ -112,5 +113,9 @@ class PostsController < ApplicationController
 
   def create_notification
     Notifications::CreateNotificationService.call(@post.user, @post, 'post')
+  end
+
+  def send_mail
+    PostMailer.with(post: @post).post_browsed_email.deliver_now
   end
 end
