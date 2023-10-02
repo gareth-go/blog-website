@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_26_051402) do
+ActiveRecord::Schema.define(version: 2023_09_29_091747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(version: 2023_09_26_051402) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "book_marks", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.index ["post_id"], name: "index_book_marks_on_post_id"
+    t.index ["user_id", "post_id"], name: "index_book_marks_on_user_id_and_post_id", unique: true
+    t.index ["user_id"], name: "index_book_marks_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -133,6 +141,8 @@ ActiveRecord::Schema.define(version: 2023_09_26_051402) do
     t.integer "posts_count"
     t.integer "follows_count"
     t.integer "followings_count"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -140,6 +150,8 @@ ActiveRecord::Schema.define(version: 2023_09_26_051402) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "book_marks", "posts"
+  add_foreign_key "book_marks", "users"
   add_foreign_key "comments", "comments", column: "parent_comment_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"

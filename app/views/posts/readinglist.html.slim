@@ -1,0 +1,36 @@
+= content_for :title, "Reading list - BLOG Community" 
+= render "shared/navbar"
+
+.container.p-0
+  .col-md-9.col-12.mx-auto.justify-content-center
+    nav.navbar
+      .navbar-brand.fs-2.fw-bold.ps-md-0.ps-2
+        | Reading list (
+        = @posts.size
+        | )
+      .navbar.justify-content-end
+        = form_with method: :get, class: "d-flex pe-md-0 pe-2" do
+          = submit_tag "Search", name: "", class: "btn text-secondary border-0"
+          = text_field_tag :search_bookmark, params[:search_bookmark], placeholder: "Search..." , class: "form-control"
+    .bg-white.border.rounded.pb-2
+      - if @posts.empty?
+        = empty_list(params[:search_bookmark].present?)
+
+      - @posts.each do |post|
+        article.px-3.pt-3.pb-2.d-flex
+          = link_to user_path(post.user.username) do 
+            = image_tag post.user.avatar,
+                        size: "32x32",
+                        class: "rounded-circle border me-1 object-fit-cover"
+          .ps-2
+            = link_to post, class: "text-reset text-decoration-none d-flex" do 
+              h5.fw-bold.pt-0
+                = post.title
+            p.mb-0.small
+              = link_to post.user.username, user_path(post.user.username), class: "text-reset text-decoration-none"
+              span.text-secondary
+                |  • 
+                = post.created_at.to_date.to_s(:long)
+                |  • 
+              = render "shared/post_tags_link", post: post
+            
