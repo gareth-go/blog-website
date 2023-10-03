@@ -74,7 +74,10 @@ class PostsController < ApplicationController
   def reject
     authorize @post
 
-    send_mail if @post.update(status: :rejected)
+    if @post.update(status: :rejected)
+      create_notification
+      send_mail
+    end
 
     redirect_to dashboard_posts_path(status: :rejected)
   end
@@ -114,7 +117,7 @@ class PostsController < ApplicationController
 
   def create_notification
     Notifications::CreateNotificationService.call(@post.user, @post, 'post')
-    Notifications::NotifyToFollowerService.call(@post)
+    Notifications::NotifyToFollowerService.call(@post) if @post.accepted?
   end
 
   def send_mail
