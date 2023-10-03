@@ -35,6 +35,8 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'pagy', '~> 6.0' # omit patch digit
+gem 'sentry-rails'
+gem 'sentry-ruby'
 gem 'slim'
 gem 'stimulus-rails'
 
