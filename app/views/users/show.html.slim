@@ -1,4 +1,6 @@
-= content_for :title, "#{@user.username} - BLOG Community" 
+- set_meta_tags(title: @user.username,
+                description: "View profile of #{@user.username} in BLOG Community. BLOG Community is a blog platform for people to share the post and interact with each other.",
+                og: { image: rails_blob_url(@user.avatar) })
 = render "shared/navbar"
 
 .container

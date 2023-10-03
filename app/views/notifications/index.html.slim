@@ -1,4 +1,7 @@
-= content_for :title, "Notifications - BLOG Community" 
+- set_meta_tags(title: "Notifications",
+                description: "Notifications inbox of BLOG Community. BLOG Community is a blog platform for people to share the post and interact with each other.",
+                keywords: "blog community, notifications, blog website, blog",
+                og: { image: "https://res.cloudinary.com/dcsoijeug/image/upload/v1696324234/site-image_kiey7w.jpg" })
 = render "shared/navbar"
 
 .container.p-0 data-controller="notifications" data-notifications-type-value=params[:type]
