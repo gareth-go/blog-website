@@ -1,4 +1,7 @@
-= content_for :title, "#{@post.title} - BLOG Community" 
+- set_meta_tags(title: @post.title,
+                description: @post.content.to_plain_text,
+                keywords: "blog community, " + @post.tags.map(&:name).join(", "),
+                og: { image: (@post.cover_image.attached? ? rails_blob_url(@post.cover_image) : nil)})
 = render "shared/navbar"
 
 .container.px-0
