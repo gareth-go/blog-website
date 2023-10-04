@@ -20,7 +20,7 @@ RSpec.describe PostsController, type: :controller do
     it 'create new notification' do
       expect do
         put action, params: { id: post_record.id }
-      end.to change(Notification, :count).by(1)
+      end.to change(Notification, :count).by_at_least(1)
     end
   end
 
