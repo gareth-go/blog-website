@@ -1,4 +1,4 @@
-- posts.each_with_index do |post, index|
+- posts.includes(:reactions).each_with_index do |post, index|
   .mb-2.pb-2.bg-white.border.rounded.shadow-sm
     - if post.pending?
       .px-4.pt-2.text-warning
@@ -18,13 +18,23 @@
     .pb-2.px-4
       = render partial: "shared/post_tags_link", locals: { post: post }
     .pb-2.px-3
-      - if post.reactions.size > 0
+      - if post.reactions.present?
         = link_to post, class: "text-decoration-none text-reset menu-link py-2 px-2 rounded" do
-          = render "shared/reactions", icon_src: "media/images/like-icon.svg", count: post.reactions.like.size
-          = render "shared/reactions", icon_src: "media/images/unicorn-icon.svg", count: post.reactions.unicorn.size
-          = render "shared/reactions", icon_src: "media/images/exploding_head-icon.svg", count: post.reactions.exploding_head.size
-          = render "shared/reactions", icon_src: "media/images/raised_hand-icon.svg", count: post.reactions.raised_hand.size
-          = render "shared/reactions", icon_src: "media/images/fire-icon.svg", count: post.reactions.fire.size
+          = render "shared/reactions",
+                   icon_src: "media/images/like-icon.svg",
+                   count: post.reactions.select{ |reaction| reaction.reaction_type == 'like' }.size
+          = render "shared/reactions",
+                   icon_src: "media/images/unicorn-icon.svg",
+                   count: post.reactions.select{ |reaction| reaction.reaction_type == 'unicorn' }.size
+          = render "shared/reactions",
+                   icon_src: "media/images/exploding_head-icon.svg",
+                   count: post.reactions.select{ |reaction| reaction.reaction_type == 'exploding_head' }.size
+          = render "shared/reactions",
+                   icon_src: "media/images/raised_hand-icon.svg",
+                   count: post.reactions.select{ |reaction| reaction.reaction_type == 'raised_hand' }.size
+          = render "shared/reactions",
+                   icon_src: "media/images/fire-icon.svg",
+                   count: post.reactions.select{ |reaction| reaction.reaction_type == 'fire' }.size
           small.ms-1.align-bottom
             = post.reactions.size
             |  Reactions 
