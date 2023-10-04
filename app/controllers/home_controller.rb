@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     @posts = Post.where(status: Post.statuses[:accepted])
-                 .includes({ user: { avatar_attachment: :blob } }, :tags)
+                 .includes({ user: { avatar_attachment: :blob } }, :tags, :reactions)
     @posts = Posts::ListPostsService.call(@posts, params, current_user)
     # load cover image of first post
     @posts.first&.cover_image if params[:page].nil? || params[:page] == '1'
