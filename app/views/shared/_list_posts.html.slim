@@ -18,13 +18,23 @@
     .pb-2.px-4
       = render partial: "shared/post_tags_link", locals: { post: post }
     .pb-2.px-3
-      - if post.reactions.size > 0
+      - if post.reactions.present?
         = link_to post, class: "text-decoration-none text-reset menu-link py-2 px-2 rounded" do
-          = render "shared/reactions", icon_src: "media/images/like-icon.svg", count: post.reactions.like.size
-          = render "shared/reactions", icon_src: "media/images/unicorn-icon.svg", count: post.reactions.unicorn.size
-          = render "shared/reactions", icon_src: "media/images/exploding_head-icon.svg", count: post.reactions.exploding_head.size
-          = render "shared/reactions", icon_src: "media/images/raised_hand-icon.svg", count: post.reactions.raised_hand.size
-          = render "shared/reactions", icon_src: "media/images/fire-icon.svg", count: post.reactions.fire.size
+          = render "shared/reactions",
+                   icon_src: "media/images/like-icon.svg",
+                   count: post.reactions.select(&:like?).size
+          = render "shared/reactions",
+                   icon_src: "media/images/unicorn-icon.svg",
+                   count: post.reactions.select(&:unicorn?).size
+          = render "shared/reactions",
+                   icon_src: "media/images/exploding_head-icon.svg",
+                   count: post.reactions.select(&:exploding_head?).size
+          = render "shared/reactions",
+                   icon_src: "media/images/raised_hand-icon.svg",
+                   count: post.reactions.select(&:raised_hand?).size
+          = render "shared/reactions",
+                   icon_src: "media/images/fire-icon.svg",
+                   count: post.reactions.select(&:fire?).size
           small.ms-1.align-bottom
             = post.reactions.size
             |  Reactions 
