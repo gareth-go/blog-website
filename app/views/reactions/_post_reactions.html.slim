@@ -9,8 +9,8 @@
       = reactions.size
   ul.post__option__reaction__menu.dropdown-menu.ms-2.px-3.rounded-5
     .d-flex.gap-1
-      = render partial: "reactions/reaction_type", locals: { type: "like", reaction: reaction, icon_src: "media/images/like-icon.svg", count: reactions.like.size, post: post }
-      = render partial: "reactions/reaction_type", locals: { type: "unicorn", reaction: reaction, icon_src: "media/images/unicorn-icon.svg", count: reactions.unicorn.size, post: post }
-      = render partial: "reactions/reaction_type", locals: { type: "exploding_head", reaction: reaction, icon_src: "media/images/exploding_head-icon.svg", count: reactions.exploding_head.size, post: post }
-      = render partial: "reactions/reaction_type", locals: { type: "raised_hand", reaction: reaction, icon_src: "media/images/raised_hand-icon.svg", count: reactions.raised_hand.size, post: post }
-      = render partial: "reactions/reaction_type", locals: { type: "fire", reaction: reaction, icon_src: "media/images/fire-icon.svg", count: reactions.fire.size, post: post }
+      = render partial: "reactions/reaction_type", locals: { type: "like", reaction: reaction, icon_src: "media/images/like-icon.svg", count: reactions.select(&:like?).size, post: post }
+      = render partial: "reactions/reaction_type", locals: { type: "unicorn", reaction: reaction, icon_src: "media/images/unicorn-icon.svg", count: reactions.select(&:unicorn?).size, post: post }
+      = render partial: "reactions/reaction_type", locals: { type: "exploding_head", reaction: reaction, icon_src: "media/images/exploding_head-icon.svg", count: reactions.select(&:exploding_head?).size, post: post }
+      = render partial: "reactions/reaction_type", locals: { type: "raised_hand", reaction: reaction, icon_src: "media/images/raised_hand-icon.svg", count: reactions.select(&:raised_hand?).size, post: post }
+      = render partial: "reactions/reaction_type", locals: { type: "fire", reaction: reaction, icon_src: "media/images/fire-icon.svg", count: reactions.select(&:fire?).size, post: post }
