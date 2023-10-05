@@ -85,7 +85,7 @@ namespace :deploy do
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  # after  :finishing,    :restart
+  after  :finishing,    :restart
 end
 
 set :rvm_map_bins, %w{gem rake ruby rails bundle}
