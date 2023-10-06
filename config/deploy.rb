@@ -14,6 +14,7 @@ set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
 # Don't change these unless you know what you're doing
+set :linked_files,    %w[.env]
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
@@ -33,7 +34,7 @@ append :rbenv_map_bins, 'puma', 'pumactl'
 
 ## Defaults:
 # set :scm,           :git
-set :branch,          'deploy/digital-ocean'
+set :branch, 'deploy/digital-ocean'
 # set :format,        :pretty
 # set :log_level,     :debug
 # set :keep_releases, 5
@@ -88,7 +89,7 @@ namespace :deploy do
   after  :finishing,    :restart
 end
 
-set :rvm_map_bins, %w{gem rake ruby rails bundle}
+set :rvm_map_bins, %w[gem rake ruby rails bundle]
 
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
