@@ -14,7 +14,6 @@ set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
 # Don't change these unless you know what you're doing
-set :linked_files,    %w[.env]
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
@@ -28,7 +27,7 @@ set :puma_error_log,  "#{release_path}/log/puma.error.log"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
-set :puma_init_active_record, true  # Change to false when not using ActiveRecord
+set :puma_init_active_record, true # Change to false when not using ActiveRecord
 
 append :rbenv_map_bins, 'puma', 'pumactl'
 
@@ -86,7 +85,7 @@ namespace :deploy do
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  after  :finishing,    :restart
+  # after  :finishing,    :restart
 end
 
 set :rvm_map_bins, %w[gem rake ruby rails bundle]
