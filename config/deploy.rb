@@ -14,7 +14,6 @@ set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
 # Don't change these unless you know what you're doing
-set :linked_files,    %w[.env]
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
@@ -32,6 +31,7 @@ set :puma_init_active_record, true # Change to false when not using ActiveRecord
 
 append :rbenv_map_bins, 'puma', 'pumactl'
 
+append :linked_files, '.env'
 ## Defaults:
 # set :scm,           :git
 set :branch, 'deploy/digital-ocean'
