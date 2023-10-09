@@ -89,30 +89,4 @@ namespace :deploy do
   # after  :finishing,    :restart
 end
 
-namespace :sidekiq do
-  task :restart do
-    invoke 'sidekiq:stop'
-    invoke 'sidekiq:start'
-  end
-
-  # before 'deploy:finished', 'sidekiq:restart'
-
-  task :stop do
-    on roles(:worker) do
-      within current_path do
-        pid = capture "ps aux | grep '[s]idekiq' | awk '{print $2}'"
-        execute("kill -9 #{pid}") unless pid.empty?
-      end
-    end
-  end
-
-  task :start do
-    on roles(:worker) do
-      within current_path do
-        execute :bundle, "exec sidekiq -e #{fetch(:stage)} &"
-      end
-    end
-  end
-end
-
 set :rvm_map_bins, %w[gem rake ruby rails bundle]
