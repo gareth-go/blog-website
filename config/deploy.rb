@@ -1,5 +1,5 @@
 # Change these
-server '165.22.242.117', port: 22, roles: %i[web app db worker], primary: true
+server '165.22.242.117', port: 22, roles: %i[web app db], primary: true
 
 set :repo_url,        'git@github.com:gareth-go/blog-website.git'
 set :application,     'blog-website'
