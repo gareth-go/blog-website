@@ -1,5 +1,5 @@
 # Change these
-server '165.22.242.117', port: 22, roles: [:web, :app, :db], primary: true
+server '165.22.242.117', port: 22, roles: %i[web app db worker], primary: true
 
 set :repo_url,        'git@github.com:gareth-go/blog-website.git'
 set :application,     'blog-website'
@@ -89,8 +89,30 @@ namespace :deploy do
   # after  :finishing,    :restart
 end
 
-set :rvm_map_bins, %w[gem rake ruby rails bundle]
+namespace :sidekiq do
+  task :restart do
+    invoke 'sidekiq:stop'
+    invoke 'sidekiq:start'
+  end
 
-# ps aux | grep puma    # Get puma pid
-# kill -s SIGUSR2 pid   # Restart puma
-# kill -s SIGTERM pid   # Stop puma
+  before 'deploy:finished', 'sidekiq:restart'
+
+  task :stop do
+    on roles(:worker) do
+      within current_path do
+        pid = p capture "ps aux | grep sidekiq | awk '{print $2}' | sed -n 1p"
+        execute("kill -9 #{pid}")
+      end
+    end
+  end
+
+  task :start do
+    on roles(:worker) do
+      within current_path do
+        execute :bundle, "exec sidekiq -e #{fetch(:stage)} &"
+      end
+    end
+  end
+end
+
+set :rvm_map_bins, %w[gem rake ruby rails bundle]

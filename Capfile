@@ -6,8 +6,8 @@ require 'capistrano/rails'
 require 'capistrano/bundler'
 require 'capistrano/rbenv'
 
-# require 'capistrano/sidekiq'
-# install_plugin Capistrano::Sidekiq
+require 'capistrano/sidekiq'
+install_plugin Capistrano::Sidekiq
 
 require 'capistrano/scm/git'
 install_plugin Capistrano::SCM::Git
