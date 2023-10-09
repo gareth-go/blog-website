@@ -5,11 +5,11 @@ class Dashboard::PostsController < ApplicationController
     @posts = if current_user.admin?
                Post.all
                    .order(created_at: :desc)
-                   .includes({ user: { avatar_attachment: :blob } }, :tags)
+                   .includes({ user: { avatar_attachment: :blob } }, :tags, :reactions)
              else
                current_user.posts
                            .order(created_at: :desc)
-                           .includes(%i[tags])
+                           .includes(%i[tags reactions])
              end
 
     @posts = Posts::ListPostsService.call(@posts, params)

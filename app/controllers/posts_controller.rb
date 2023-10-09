@@ -121,6 +121,6 @@ class PostsController < ApplicationController
   end
 
   def send_mail
-    PostMailer.with(post: @post).post_browsed_email.deliver_now
+    SendMailJob.perform_async(@post.id)
   end
 end

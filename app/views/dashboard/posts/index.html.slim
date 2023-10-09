@@ -12,17 +12,23 @@
         = render "dashboard/sidebar"
 
         .dashboard__body__table.col-lg-10.col-md-9.col-sm-12.p-0.ps-md-3.ps-0
-          nav.navbar.navbar-expand-lg.navbar-light.p-0
-            = link_to "All", dashboard_posts_path, class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
-
-            = link_to_unless_current "Accepted", dashboard_posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
-              = link_to "Accepted", dashboard_posts_path(status: :accepted), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
-
-            = link_to_unless_current "Pending", dashboard_posts_path(status: :pending), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
-              = link_to "Pending", dashboard_posts_path(status: :pending), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
-              
-            = link_to_unless_current "Rejected", dashboard_posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary-alter border-0 me-1" do 
-              = link_to "Rejected", dashboard_posts_path(status: :rejected), class: "text-decoration-none btn btn-secondary-alter active border-0 me-1"
+          nav.navbar.navbar-expand-lg.navbar-light.p-0 data-controller="dashboard--posts" data-dashboard--posts-status-value=params[:status]
+            = link_to "All",
+                       dashboard_posts_path,
+                       data: { dashboard__posts_target: "allLink" },
+                       class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
+            = link_to "Accepted",
+                      dashboard_posts_path(status: :accepted),
+                      data: { dashboard__posts_target: "acceptedLink" },
+                      class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
+            = link_to "Pending",
+                      dashboard_posts_path(status: :pending),
+                      data: { dashboard__posts_target: "pendingLink" },
+                      class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
+            = link_to "Rejected",
+                      dashboard_posts_path(status: :rejected),
+                      data: { dashboard__posts_target: "rejectedLink" },
+                      class: "text-decoration-none btn btn-secondary-alter border-0 me-1"
 
           - if @posts.empty? && !params.key?(:status)
             .p-4.mb-2.bg-white.rounded.shadow-sm
