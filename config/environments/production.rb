@@ -45,7 +45,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://blog-web-no66.onrender.com/cable'
-  config.action_cable.allowed_request_origins = [ 'http://blog-web-no66.onrender.com', /http:\/\/blog-web-no66.onrender.*/ ]
+  config.action_cable.allowed_request_origins = ['http://165.22.242.117', /http:\/\/165.22.242.117/]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -64,7 +64,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "blog_website_production"
 
-  config.action_mailer.default_url_options = { host: 'https://blog-web-no66.onrender.com' }
+  config.action_mailer.default_url_options = { host: 'http://165.22.242.117' }
 
   config.action_mailer.perform_caching = false
 
