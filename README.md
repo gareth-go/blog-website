@@ -1,5 +1,5 @@
 # BLOG Community
-https://blog-web-no66.onrender.com/
+https://blog-community.me/
 
 ## Architecture diagram
 
