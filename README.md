@@ -3,7 +3,8 @@ https://blog-web-no66.onrender.com/
 
 ## Architecture diagram
 
-![structure-diagram drawio](https://github.com/gareth-go/blog-website/assets/140365512/60cebd4f-5787-4932-9076-1395a2d5d215)
+![image](https://github.com/gareth-go/blog-website/assets/140365512/8becad4c-b51f-4455-8032-66ae1cb959b4)
+
 
 
 ## Development Guideline
