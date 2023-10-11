@@ -8,13 +8,9 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
     - if flash[:alert]
-      .alert.alert-danger.alert-dismissible.fade.show.position-absolute.start-0.bottom-0.ms-2.d-inline-block.position-fixed role="alert"
-        button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
-        = flash[:alert]
+      = display_alert(flash[:alert], "danger")
 
     - if flash[:notice]
-      .alert.alert-success.alert-dismissible.fade.show.position-absolute.start-0.bottom-0.ms-2.d-inline-block.position-fixed role="alert"
-        button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
-        = flash[:notice]
+      = display_alert(flash[:notice], "success")
 
     = yield

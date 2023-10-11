@@ -1,2 +1,12 @@
-$(".post__option__reaction").replaceWith("<%= j render 'post_reactions', post: @post, reactions: @reactions, reaction: @reaction %>")
-$(".post__main__reactions").replaceWith("<%= j render 'posts/reactions', post: @post %>")
+<% if @reaction.present? %>
+  $(".post__option__reaction").replaceWith("<%= j render 'post_reactions', post: @post, reactions: @reactions, reaction: @reaction %>")
+  $(".post__main__reactions").replaceWith("<%= j render 'posts/reactions', post: @post %>")
+<% end %>
+
+<% if flash[:alert] %>
+  $("body").append("<%= j display_alert(flash[:alert], 'danger') %>")
+
+  setTimeout(function() {
+    $(".alert").alert("close");
+  }, 3500)
+<% end %>

@@ -2,9 +2,12 @@ class ReactionsController < ApplicationController
   before_action :set_post, only: %i[create update destroy]
   before_action :set_reaction, only: %i[update destroy]
 
-  before_action :authenticate_user!
-
   def create
+    unless user_signed_in?
+      flash.now[:alert] = 'You need to signin before react to a post.'
+      return
+    end
+
     if Reaction.reaction_types.include?(params[:reaction_type])
       @reaction = @post.reactions.build(user: current_user, reaction_type: params[:reaction_type])
     else
