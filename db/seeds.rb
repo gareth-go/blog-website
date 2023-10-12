@@ -8,6 +8,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ActiveRecord::Base.transaction do
+  User.create!(username: 'admin',
+               email: 'admin@gmail.com',
+               password: '123456',
+               role: :admin)
+
   100.times.each do
     Tag.create!(name: Faker::Lorem.unique.word)
     User.create!(username: Faker::Internet.unique.username(specifier: nil, separators: %w[_]),
@@ -22,7 +27,8 @@ ActiveRecord::Base.transaction do
     Post.create!(title: Faker::Lorem.unique.sentence,
                  content: Faker::Lorem.paragraph(sentence_count: 10, supplemental: false, random_sentences_to_add: 5),
                  user: users.sample,
-                 tags: tags.sample(4))
+                 tags: tags.sample(4),
+                 status: :accepted)
   end
 
   posts = Post.all

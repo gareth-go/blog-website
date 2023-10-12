@@ -11,7 +11,7 @@
         button.btn.text-secondary.border-0.position-absolute.end-0.h-100 type="submit"
           i.fa.fa-search
     - if params[:search]
-      .row.col-lg-8.col-md-9.col-sm-12.justify-content-center
+      .row.col-lg-6.col-md-6.col-sm-12.justify-content-center.p-0
         .h1.fw-bold.ps-0
           | Search result for "
           = params[:search]
@@ -39,7 +39,7 @@
                   i class="fa-solid fa-chevron-down me-3"
                   | more
 
-        .col-lg-6.col-md-6.col-sm-12.col-12.home-page__main.p-sm-0.p-0 data-controller="home" data-home-sort-value=params[:sort] data-home-filter-value=params[:filter] id="#home-page__main"
+        .col-lg-6.col-md-6.col-sm-12.col-12.home-page__main data-controller="home" data-home-sort-value=params[:sort] data-home-filter-value=params[:filter] id="#home-page__main"
           nav.navbar.navbar-expand.navbar-light.py-1 
             - if params[:search].present?
               = link_to "Lastest",

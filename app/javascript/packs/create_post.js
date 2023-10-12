@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).on('turbo:load', function() {
   $('.form__content__top__tags__selector').select2({
     placeholder: 'Select a least ont tag...',
     maximumSelectionLength: 4
