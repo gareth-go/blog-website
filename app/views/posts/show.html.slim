@@ -39,7 +39,7 @@
             = link_to user_path(@post.user.username), class: "text-decoration-none text-reset" do
               = render partial: "shared/post_username_link", locals: {post: @post}
           - if policy(@post).destroy?
-            = link_to "Delete", @post, method: :delete, class: "btn btn-outline-secondary float-end"
+            = link_to "Delete", @post, method: :delete, data: { confirm: 'Are you sure to delete this post?' }, class: "btn btn-outline-secondary float-end"
           - if policy(@post).update?
             = link_to "Edit", edit_post_path(@post), class: "btn btn-outline-secondary float-end mx-2"
           
