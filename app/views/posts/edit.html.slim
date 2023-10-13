@@ -1,37 +1,30 @@
-- title "Edit Post" 
+= turbo_frame_tag dom_id(@post) do
+  = form_with model: @post, class: "col-lg-6 col-md-8 col-sm-12 mx-auto pb-3 my-3", data: { controller: "post-form" } do |f|
+    .row.bg-white.p-4.rounded.shadow-sm.gap-4.form__content
+      .row.form__content__top
+        .mb-2.form__content__top__cover-image
+          = f.label :cover_image, class: "btn btn-outline-secondary"
+          = f.file_field :cover_image, class: "d-none form__content__top__cover__image__input", data: { post_form_target: "imageInput", action: "change->post-form#previewFile" }
+          div.btn.text-danger.mx-2 data-action="click->post-form#removeFile"
+            | Remove
+            = f.check_box :remove_cover_image, class: "w-100 h-100 d-none form__content__top__cover__image__checkbox", data: { post_form_target: "removeImageCheckbox" }
+          br
+          - if @post.cover_image.attached?
+            = image_tag @post.cover_image, size: "400x200", alt: "", class: "pt-1 object-fit-fill", data: { post_form_target: "imageReview" }
+          - else
+            = image_tag "", size: "400x200", alt: "", class: "pt-1 object-fit-fill", data: { post_form_target: "imageReview" }
 
-= form_with model: @post, class: "col-lg-6 col-md-8 col-sm-12 mx-auto pb-3" do |f|
-  .row.form__header 
-    nav.navbar.navbar-expand-lg.navbar-light.py-2.px-4
-      = link_to "BLOG", root_path, class: "navbar-brand fw-bold text-white bg-dark rounded px-2"
-      .collapse.navbar-collapse
-        | Edit post
-      
-  .row.bg-white.p-4.rounded.shadow-sm.gap-4.form__content
-    .row.form__content__top
-      .mb-2.form__content__top__cover-image
-        = f.label :cover_image, class: "btn btn-outline-secondary"
-        = f.file_field :cover_image, class: "d-none form__content__top__cover__image__input"
-        div.btn.text-danger.mx-2 id="cover-img-review-wrapper" 
-          | Remove
-          = f.check_box :remove_cover_image, class: "w-100 h-100 d-none form__content__top__cover__image__checkbox"
-        br
-        - if @post.cover_image.attached?
-          = image_tag @post.cover_image, size: "400x200", alt: "", class: "pt-1 object-fit-fill", id: "cover-img-review"
-        - else
-          = image_tag "", size: "400x200", alt: "", class: "pt-1 object-fit-fill", id: "cover-img-review"
+        .row.form__content__top__title
+          = f.text_area :title, class: "fs-1 fw-bold", style: "border: none; resize: none; outline: none", placeholder: "New post title here..."
+          - if @post.errors.messages[:title].any?
+            small.text-danger = @post.errors.messages[:title][0]
 
-      .row.form__content__top__title 
-        = f.text_area :title, class: "fs-1 fw-bold", style: "border: none; resize: none; outline: none", placeholder: "New post title here..."
-        - if @post.errors.messages[:title].any?
-          small.text-danger = @post.errors.messages[:title][0]
+        .row.form__content__top__tags
+          = f.select :tags, options_from_collection_for_select(Tag.all, :id, :name, @post.tag_ids), {}, class: "form-control form__content__top__tags__selector", multiple: true, data: { post_form_target: "tagsSelector" }
 
-      .row.form__content__top__tags
-        = f.select :tags, options_from_collection_for_select(Tag.all, :id, :name, @post.tag_ids), {}, class: "form-control form__content__top__tags__selector", multiple: true 
-
-    .row.form__content__body
-      = f.rich_text_area :content, class: "fs-5", style: "border:none; outline: none", placeholder: "Write your post content here..."
-  
-  .mt-4.form__footer
-    = f.submit "Save", class: "btn btn-positive mx-2 px-3"
-    = link_to "Dismiss", :back, class: "btn menu-link text-decoration-none px-3"
+      .row.form__content__body
+        = f.rich_text_area :content, class: "fs-5", style: "border:none; outline: none", placeholder: "Write your post content here..."
+    
+    .mt-4.form__footer
+      = f.submit "Save", class: "btn btn-positive mx-2 px-3"
+      = link_to "Dismiss", :back, class: "btn menu-link text-decoration-none px-3"

@@ -1,12 +1,7 @@
 - title "New Post" 
+= render "shared/navbar"
 
-= form_with model: @post, class: "col-lg-6 col-md-8 col-sm-12 mx-auto pb-3" do |f|
-  .row.form__header
-    nav.navbar.navbar-expand-lg.navbar-light.py-2.px-4
-      = link_to "BLOG", root_path, class: "navbar-brand fw-bold text-white bg-dark px-2 rounded"
-      .collapse.navbar-collapse
-        | New post
-
+= form_with model: @post, class: "col-lg-6 col-md-8 col-sm-12 mx-auto pb-3 my-3" do |f|
   .row.bg-white.p-4.rounded.shadow-sm.gap-4.form__content
     .row.form__content__top
       .mb-2.form__content__top__cover-image

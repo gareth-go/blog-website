@@ -86,7 +86,15 @@ class PostsController < ApplicationController
     authorize @post
 
     @post.destroy
-    redirect_to dashboard_posts_path
+
+    respond_to do |format|
+      if request.referer.include?(post_path(@post))
+        format.html { redirect_to root_path }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(@post) }
+        format.html { redirect_to :back }
+      end
+    end
   end
 
   private
