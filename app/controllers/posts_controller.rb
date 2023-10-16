@@ -48,7 +48,7 @@ class PostsController < ApplicationController
       Notifications::NotifyToFollowerService.call(@post) if @post.accepted?
       redirect_to @post
     else
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
