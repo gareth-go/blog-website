@@ -1,5 +1,5 @@
 = turbo_frame_tag dom_id(@post) do
-  = form_with model: @post, class: "col-lg-6 col-md-8 col-sm-12 mx-auto pb-3 my-3", data: { controller: "post-form" } do |f|
+  = form_with model: @post, class: "col-lg-6 col-md-8 col-sm-12 mx-auto pb-3 my-3", data: { controller: "post-form", post_form_type_value: "edit" } do |f|
     .row.bg-white.p-4.rounded.shadow-sm.gap-4.form__content
       .row.form__content__top
         .mb-2.form__content__top__cover-image

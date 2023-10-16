@@ -20,12 +20,20 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :notifications, as: :notificationable, dependent: :destroy
 
-  enum status: { pending: 0, accepted: 1, rejected: 2 }, _default: 'pending'
+  enum status: { pending: 0, accepted: 1, rejected: 2, drafting: 3 }, _default: 'drafting'
 
   has_rich_text :content
   has_one_attached :cover_image
 
-  validates :title,
-            presence: { message: 'Title can not be blank' },
-            uniqueness: { message: 'This title is already exist' }
+  validate :title_presence_if_publish, :title_unique_if_publish
+
+  private
+
+  def title_presence_if_publish
+    errors.add(:title, 'Title can not be blank') if !drafting? && title.blank?
+  end
+
+  def title_unique_if_publish
+    errors.add(:title, 'This title is already exist') if !drafting? && Post.where.not(id: id).exists?(title: title)
+  end
 end

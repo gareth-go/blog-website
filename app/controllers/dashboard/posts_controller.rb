@@ -12,6 +12,7 @@ class Dashboard::PostsController < ApplicationController
                            .includes(%i[tags reactions])
              end
 
+    @posts = @posts.where.not(status: :drafting)
     @posts = Posts::ListPostsService.call(@posts, params)
 
     @posts_count = @posts.count

@@ -39,7 +39,7 @@
             span.fs-4.fw-bold
               = link_to user_path(@post.user.username), data: { turbo_frame: :_top }, class: "text-decoration-none text-reset" do
                 = render partial: "shared/post_username_link", locals: {post: @post}
-            - if policy(post).destroy?
+            - if policy(@post).destroy?
               = render "shared/post_action", post: @post
             
             br
@@ -79,5 +79,5 @@
             
         - if policy(@post).accept?
           .mt-4
-            = link_to "Accept", accept_post_path(@post), method: :put, class: "btn btn-positive mx-2 px-3"
-            = link_to "Reject", reject_post_path(@post), method: :put, class: "btn btn-danger px-3"
+            = link_to "Accept", accept_post_path(@post), method: :put, data: { turbo_frame: :_top }, class: "btn btn-positive mx-2 px-3"
+            = link_to "Reject", reject_post_path(@post), method: :put, data: { turbo_frame: :_top }, class: "btn btn-danger px-3"

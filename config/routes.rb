@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :posts, except: :index do
+  resources :posts, except: %i[index create] do
     member do
+      put 'publish'
       put 'accept'
       put 'reject'
     end
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create]
   end
 
+  put '/save', to: 'posts#save', as: :autosave
   get '/readinglist', to: 'posts#readinglist', as: :readinglist
 
   resources :comments, only: %i[update destroy] do
