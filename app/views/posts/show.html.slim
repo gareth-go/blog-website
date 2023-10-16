@@ -39,8 +39,8 @@
             span.fs-4.fw-bold
               = link_to user_path(@post.user.username), data: { turbo_frame: :_top }, class: "text-decoration-none text-reset" do
                 = render partial: "shared/post_username_link", locals: {post: @post}
-
-            = render "shared/post_action", post: @post
+            - if policy(post).destroy?
+              = render "shared/post_action", post: @post
             
             br
             small.text-secondary

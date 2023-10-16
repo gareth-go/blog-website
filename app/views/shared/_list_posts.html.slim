@@ -12,7 +12,8 @@
         .fs-6.text-secondary
           = link_to user_path(post.user.username), data: { turbo_frame: :_top }, class: "text-decoration-none text-secondary" do
             = render partial: "shared/post_username_link", locals: { post: post }
-          = render "shared/post_action", post: post
+          - if policy(post).destroy?
+            = render "shared/post_action", post: post
         small.text-secondary
           = post.created_at.to_date.to_s(:long)
       .pb-2.px-4
