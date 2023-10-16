@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  let(:post_record) { FactoryBot.create(:post) }
+  let(:post_record) { FactoryBot.create(:post, status: :pending) }
   let(:valid_attributes) { attributes_for(:post) }
   let(:invalid_attributes) { { title: '' } }
 
@@ -40,31 +40,31 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe 'POST #create' do
+  describe 'PUT #publish' do
+    let(:post_record) { FactoryBot.create(:post, user: controller.current_user, status: :drafting) }
+
     before { login_user }
 
     context 'with valid params' do
-      it 'creates a new post' do
-        expect do
-          post :create, params: { post: valid_attributes }
-        end.to change(Post, :count).by(1)
+      it 'publish a new post' do
+        put :publish, params: { id: post_record.id, post: valid_attributes }
+        expect(post_record.reload.status).to eq('pending')
       end
 
-      it 'redirects to the created post' do
-        post :create, params: { post: valid_attributes }
-        should redirect_to Post.last
+      it 'redirects to the published post' do
+        put :publish, params: { id: post_record.id, post: valid_attributes }
+        should redirect_to post_record
       end
     end
 
     context 'with invalid params' do
-      it 'does not create a new post' do
-        expect do
-          post :create, params: { post: invalid_attributes }
-        end.not_to change(Post, :count)
+      it 'does not publish a new post' do
+        put :publish, params: { id: post_record.id, post: invalid_attributes }
+        expect(post_record.reload.status).not_to eq('pending')
       end
 
       it "render 'new' template" do
-        post :create, params: { post: invalid_attributes }
+        put :publish, params: { id: post_record.id, post: invalid_attributes }
         should render_template 'new'
       end
     end
@@ -73,7 +73,7 @@ RSpec.describe PostsController, type: :controller do
   describe 'PUT #update' do
     before { login_user }
 
-    let(:post_record) { FactoryBot.create(:post, user: controller.current_user) }
+    let(:post_record) { FactoryBot.create(:post, user: controller.current_user, status: :accepted) }
 
     context 'with valid params' do
       let(:new_attributes) { { title: 'new title' } }
@@ -160,6 +160,7 @@ RSpec.describe PostsController, type: :controller do
       let(:post_record) { FactoryBot.create(:post, user: controller.current_user) }
 
       it 'delete post' do
+        request.headers['HTTP_REFERER'] = post_path(post_record)
         delete :destroy, params: { id: post_record.id }
         expect(Post.exists?(post_record.id)).to eq(false)
       end

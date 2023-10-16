@@ -25,15 +25,8 @@ class Post < ApplicationRecord
   has_rich_text :content
   has_one_attached :cover_image
 
-  validate :title_presence_if_publish, :title_unique_if_publish
-
-  private
-
-  def title_presence_if_publish
-    errors.add(:title, 'Title can not be blank') if !drafting? && title.blank?
-  end
-
-  def title_unique_if_publish
-    errors.add(:title, 'This title is already exist') if !drafting? && Post.where.not(id: id).exists?(title: title)
-  end
+  validates :title,
+            presence: { message: 'Title can not be blank' },
+            uniqueness: { message: 'This title is already exist' },
+            unless: :drafting?
 end
