@@ -3,7 +3,6 @@ span.dropdown.text-secondary.float-end
     = image_pack_tag "media/images/option-icon.svg"
   ul class="dropdown-menu dropdown-menu-end"
     - if policy(post).update?
-      = link_to "Edit", edit_post_path(post), class: "menu-link text-decoration-none dropdown-item"
+      = edit_post_link post
     - if policy(post).destroy?
       = link_to "Delete", post, method: :delete, data: { confirm: "Are you sure to delete this post?" }, class: "menu-link text-decoration-none dropdown-item"
-
