@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {  
+$(document).on('turbo:load', function() {  
   $('.post__main__comments').on('click', '.reply__option__show-replies', function(event) {
     var replies = $(event.target.closest('.reply__option').nextSibling.nextSibling)
 

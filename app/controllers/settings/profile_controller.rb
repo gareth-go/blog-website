@@ -12,7 +12,7 @@ class Settings::ProfileController < ApplicationController
       flash[:notice] = 'Your profile has been update'
       redirect_to edit_settings_profile_path(@user.username)
     else
-      render 'edit'
+      render 'edit', status: :unprocessable_entity
     end
   end
 

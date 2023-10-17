@@ -19,7 +19,7 @@ class Settings::PasswordController < ApplicationController
       flash[:notice] = 'Your password has been change'
       redirect_to edit_settings_password_path(@user.username)
     else
-      render 'edit'
+      render 'edit', status: :unprocessable_entity
     end
   end
 

@@ -1,11 +1,12 @@
 doctype html
 html
   head
+    meta[name="viewport" content="width=device-width,initial-scale=1.0"]
     = display_meta_tags site: "BLOG Community", reverse: true
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_pack_tag 'application'
   body
     - if flash[:alert]
       .alert.alert-danger.alert-dismissible.fade.show.position-absolute.start-0.bottom-0.ms-2.d-inline-block.position-fixed role="alert"

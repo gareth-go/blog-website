@@ -25,7 +25,7 @@
                                 class: "rounded-circle border object-fit-cover"
 
           .col.p-0 id="#home-page__main"
-            nav.navbar.navbar-expand-lg.navbar-light.py-1 data-controller="home" data-home-sort-value=params[:sort] data-home-filter-value=params[:filter]
+            nav.navbar.navbar-expand.navbar-light.py-1 data-controller="home" data-home-sort-value=params[:sort] data-home-filter-value=params[:filter]
               = link_to "Lastest",
                         tag_path(@tag.name),
                         data: { home_target: "lastestLink" },

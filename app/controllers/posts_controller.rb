@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_new_post, only: %i[create]
-  before_action :set_post, only: %i[show edit update accept reject destroy]
+  before_action :set_drafting_post, only: %i[new save]
+  before_action :set_post, only: %i[show edit update accept reject destroy publish]
 
   before_action :authenticate_user!, except: %i[show]
 
@@ -26,22 +26,29 @@ class PostsController < ApplicationController
     @posts = @posts.where('title LIKE ?', "%#{params[:search_bookmark]}%") if params[:search_bookmark].present?
   end
 
-  def new
-    @post = Post.new
-  end
-
   def edit
     authorize @post
   end
 
-  def create
+  def save
     values = post_params_tag_ids_to_tags
+
+    @post.cover_image.purge if params.dig(:post, :remove_cover_image) == '1' && !values.key?(:cover_image)
+
+    @post.update(values)
+  end
+
+  def publish
+    values = post_params_tag_ids_to_tags
+
+    @post.cover_image.purge if params.dig(:post, :remove_cover_image) == '1' && !values.key?(:cover_image)
+    @post.status = current_user.admin? ? :accepted : :pending
 
     if @post.update(values)
       Notifications::NotifyToFollowerService.call(@post) if @post.accepted?
-      redirect_to post_path(@post)
+      redirect_to @post
     else
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -50,7 +57,6 @@ class PostsController < ApplicationController
 
     values = post_params_tag_ids_to_tags
 
-    # set cover_image nil if no image is attached
     @post.cover_image.purge if params.dig(:post, :remove_cover_image) == '1' && !values.key?(:cover_image)
 
     if @post.update(values)
@@ -86,15 +92,21 @@ class PostsController < ApplicationController
     authorize @post
 
     @post.destroy
-    redirect_to dashboard_posts_path
+
+    respond_to do |format|
+      if request.referer.include?(post_path(@post))
+        format.html { redirect_to root_path }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(@post) }
+        format.html { redirect_to :back }
+      end
+    end
   end
 
   private
 
-  def set_new_post
-    # set status of new post is accepted if user is admin
-    @post = Post.new(user_id: current_user.id)
-    @post.status = :accepted if current_user.admin?
+  def set_drafting_post
+    @post = Post.find_or_create_by(user: current_user, status: :drafting)
   end
 
   def set_post

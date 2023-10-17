@@ -2,6 +2,7 @@
 
 module ApplicationHelper
   include Pagy::Frontend
+  include Pundit::Authorization
 
   def share_button(url, text, tag_class='')
     content_tag :div, class: "btn-group dropend #{tag_class}", data: { controller: 'share' } do
