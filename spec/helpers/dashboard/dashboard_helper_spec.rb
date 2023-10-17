@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Dashboard::TagsHelper, type: :helper do
+RSpec.describe Dashboard::DashboardHelper, type: :helper do
   describe '#sidebar_tags' do
     context 'when on the tags controller' do
       before do

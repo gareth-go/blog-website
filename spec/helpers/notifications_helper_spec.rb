@@ -5,7 +5,7 @@ RSpec.describe NotificationsHelper, type: :helper do
     context 'when the notificationable_type is "Post"' do
       it 'generates a link to the Post' do
         notification = create(:notification, :post_notification)
-        alert = false
+        alert = true
 
         link = helper.link_to_notificationable(notification, alert)
 
@@ -21,6 +21,17 @@ RSpec.describe NotificationsHelper, type: :helper do
         link = helper.link_to_notificationable(notification, alert)
 
         expect(link).to have_link(notification.content, href: post_path(notification.notificationable.post) + "#comment-#{notification.notificationable.id}")
+      end
+    end
+
+    context 'when the notificationable_type is "Reaction"' do
+      it 'generates a link to the Comment within the Post' do
+        notification = create(:notification, :reaction_notification)
+        alert = true
+
+        link = helper.link_to_notificationable(notification, alert)
+
+        expect(link).to have_link(notification.content, href: post_path(notification.notificationable.post))
       end
     end
   end
