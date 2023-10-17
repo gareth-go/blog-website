@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).on('turbo:load', function() {
   // set auto close alert
   setTimeout(function() {
     $('.alert').alert('close');

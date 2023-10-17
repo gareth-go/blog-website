@@ -2,14 +2,12 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
+import "@hotwired/turbo-rails"
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-
 Rails.start()
-Turbolinks.start()
 ActiveStorage.start()
 
 // require.context('@../images', true);
@@ -23,7 +21,6 @@ import "../stylesheets/dashboard.scss"
 import "@fortawesome/fontawesome-free/js/all";
 import "@fortawesome/fontawesome-free/css/all";
 import "select2" 
-import "./create_post"
 import "./edit_post"
 import "./post"
 import "./home"
@@ -31,4 +28,3 @@ import "controllers"
 require("trix")
 require("@rails/actiontext")
 const images = require.context('../images', true)
-

@@ -1,4 +1,4 @@
 - post.tags.each do |tag|
-  = link_to tag_path(tag.name), class: "p-2 rounded text-reset text-decoration-none btn-negative" do 
+  = link_to tag_path(tag.name), data: { turbo_frame: :_top }, class: "p-2 rounded text-reset text-decoration-none btn-negative" do 
     | #
     = tag.name
