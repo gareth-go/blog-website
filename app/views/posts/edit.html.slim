@@ -1,3 +1,5 @@
+= render "shared/navbar"
+
 = turbo_frame_tag dom_id(@post) do
   = form_with model: @post, class: "col-lg-6 col-md-8 col-sm-12 mx-auto pb-3 my-3", data: { controller: "post-form", post_form_type_value: "edit" } do |f|
     .row.bg-white.p-4.rounded.shadow-sm.gap-4.form__content
@@ -27,4 +29,4 @@
     
     .mt-4.form__footer
       = f.submit "Save", class: "btn btn-positive mx-2 px-3"
-      = link_to "Dismiss", :back, class: "btn menu-link text-decoration-none px-3"
+      = link_to "Dismiss", @post, class: "btn menu-link text-decoration-none px-3"
