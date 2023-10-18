@@ -83,9 +83,19 @@ namespace :deploy do
     end
   end
 
-  before :starting,     :check_revision
-  after  :finishing,    :compile_assets
-  after  :finishing,    :cleanup
+  desc 'Run rake yarn install'
+  task :yarn_install do
+    on roles(:app) do
+      within release_path do
+        execute("cd #{release_path} && yarn install --silent --no-progress --no-audit --no-optional")
+      end
+    end
+  end
+
+  before :starting,       :check_revision
+  before :compile_assets, :yarn_install
+  after  :finishing,      :compile_assets
+  after  :finishing,      :cleanup
   # after  :finishing,    :restart
 end
 
