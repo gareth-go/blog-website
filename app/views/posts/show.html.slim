@@ -45,7 +45,7 @@
             br
             small.text-secondary
               | Post on 
-              = @post.created_at.to_date.to_s(:long)
+              = @post.created_at.to_date.to_fs(:long)
 
           = render "reactions", post: @post
             

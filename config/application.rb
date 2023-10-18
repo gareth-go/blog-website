@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module BlogWebsite
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 7.0
 
     Dotenv::Railtie.load if %w[development test].include? ENV['RAILS_ENV']
 

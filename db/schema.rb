@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_29_091747) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_10_18_064909) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,8 +19,8 @@ ActiveRecord::Schema.define(version: 2023_09_29_091747) do
     t.text "body"
     t.string "record_type", null: false
     t.bigint "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -30,7 +29,7 @@ ActiveRecord::Schema.define(version: 2023_09_29_091747) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -42,8 +41,8 @@ ActiveRecord::Schema.define(version: 2023_09_29_091747) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -64,7 +63,7 @@ ActiveRecord::Schema.define(version: 2023_09_29_091747) do
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id"
     t.text "content"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.integer "comments_count"
     t.bigint "post_id"
     t.bigint "parent_comment_id"
@@ -88,7 +87,7 @@ ActiveRecord::Schema.define(version: 2023_09_29_091747) do
     t.bigint "notificationable_id"
     t.text "content"
     t.boolean "viewed", default: false
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["notificationable_type", "notificationable_id"], name: "index_notifications_on_notificationable"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
@@ -104,7 +103,7 @@ ActiveRecord::Schema.define(version: 2023_09_29_091747) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.bigint "user_id"
     t.integer "status"
     t.string "cover_image"
@@ -117,7 +116,7 @@ ActiveRecord::Schema.define(version: 2023_09_29_091747) do
     t.bigint "user_id"
     t.bigint "post_id"
     t.integer "reaction_type"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["post_id"], name: "index_reactions_on_post_id"
     t.index ["user_id", "post_id"], name: "index_reactions_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_reactions_on_user_id"
@@ -135,8 +134,8 @@ ActiveRecord::Schema.define(version: 2023_09_29_091747) do
     t.integer "status"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "comments_count"
     t.integer "posts_count"
     t.integer "follows_count"
