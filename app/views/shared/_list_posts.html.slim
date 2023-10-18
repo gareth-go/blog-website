@@ -15,7 +15,7 @@
           - if policy(post).destroy?
             = render "shared/post_action", post: post
         small.text-secondary
-          = post.created_at.to_date.to_s(:long)
+          = post.created_at.to_date.to_fs(:long)
       .pb-2.px-4
         = link_to post.title, post, data: { turbo_frame: :_top }, class: "fs-2 text-black fw-bold text-decoration-none"
       .pb-2.px-4

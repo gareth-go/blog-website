@@ -11,7 +11,7 @@
                 = reply.user.username
                 |  •
                 small.ms-2.text-secondary
-                  = reply.created_at.to_date.to_s(:long)
+                  = reply.created_at.to_date.to_fs(:long)
 
               - if current_user
                 = menu_if_owner_or_admin(current_user, @post, reply)

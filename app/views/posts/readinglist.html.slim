@@ -33,7 +33,7 @@
               = link_to post.user.username, user_path(post.user.username), class: "text-reset text-decoration-none"
               span.text-secondary
                 |  • 
-                = post.created_at.to_date.to_s(:long)
+                = post.created_at.to_date.to_fs(:long)
                 |  • 
               = render "shared/post_tags_link", post: post
             
