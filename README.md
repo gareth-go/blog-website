@@ -10,7 +10,7 @@ https://blog-community.me/
 ## Development Guideline
 ***Enviroment***:
 - Ruby 2.7.8
-- Rails 6.1.7.4
+- Rails 7.0.8
 - Nodejs 14.19.3
   
 ***Step to set up this repository***:
