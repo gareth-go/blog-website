@@ -1,1 +1,11 @@
-$(".bookmark-button").replaceWith("<%= escape_javascript(link_to_bookmark(book_mark_path(@book_mark), :delete)) %>")
+<% if @book_mark.present? %>
+  $(".bookmark-button").replaceWith("<%= escape_javascript(link_to_bookmark(book_mark_path(@book_mark), :delete)) %>")
+<% end %>
+
+<% if flash[:alert] %>
+  $("body").append("<%= j display_alert(flash[:alert], 'danger') %>")
+
+  setTimeout(function() {
+    $(".alert").alert("close");
+  }, 3500)
+<% end %>

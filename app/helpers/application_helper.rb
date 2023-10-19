@@ -4,6 +4,19 @@ module ApplicationHelper
   include Pagy::Frontend
   include Pundit::Authorization
 
+  def display_alert(message, type)
+    content_tag(:div,
+                class: "alert alert-#{type} alert-dismissible fade show position-absolute start-0 bottom-0 ms-2 d-inline-block position-fixed",
+                role: 'alert') do
+      concat(button_tag('',
+                        class: 'btn-close',
+                        type: 'button',
+                        data: { bs_dismiss: 'alert' },
+                        aria: { label: 'Close' }))
+      concat(message)
+    end
+  end
+
   def share_button(url, text, tag_class='')
     content_tag :div, class: "btn-group dropend #{tag_class}", data: { controller: 'share' } do
       concat(content_tag(:div,

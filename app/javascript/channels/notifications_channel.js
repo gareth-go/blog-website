@@ -8,6 +8,6 @@ consumer.subscriptions.create("NotificationsChannel", {
 
     setTimeout(function() {
       $(".alert").alert("close");
-    }, 2000)
+    }, 3500)
   }
 });
